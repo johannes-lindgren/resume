@@ -13,6 +13,7 @@ const Root = styled(Box)(({ theme }) => ({
   top: 0,
   right: 0,
   width: '50%',
+  height: '100vh',
 }))
 
 export const ResumeContainer: FunctionComponent<PropsWithChildren> = (

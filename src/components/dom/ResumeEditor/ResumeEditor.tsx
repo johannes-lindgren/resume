@@ -1,14 +1,14 @@
-import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { ResumeContainer } from '@/components/dom/A4'
 // import {PdfDocument} from "@/components/dom/PdfDocument";
 import { ResumeView } from '@/components/pdf/Resume'
 import { Resume } from '@/model/resume'
 import { Font } from '@react-pdf/renderer'
-import { theme } from '@/design/Theme'
 import { useThrottle } from '@/hooks/useThrottle'
 import dynamic from 'next/dynamic'
-import { Box, Stack, styled, TextField, Typography } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import { johannesResume } from '@/tmp/johannesResume'
+import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
 
 // Register font
 Font.register({
@@ -44,7 +44,7 @@ export const ResumeEditor: FunctionComponent = () => {
 
   return (
     <Split>
-      <ResumeInput
+      <ResumeForm
         resume={resume}
         setResume={setResume}
       />
@@ -68,70 +68,3 @@ export const ResumeEditor: FunctionComponent = () => {
     </Split>
   )
 }
-
-const Input = <T,>(props: {
-  label: string
-  value: T
-  propName: keyof T
-  setValue: (getter: (oldValue: T) => T) => void
-}): JSX.Element => {
-  return (
-    <TextField
-      placeholder={props.label}
-      value={props.value[props.propName]}
-      onChange={({ target }) =>
-        props.setValue((oldValue) => ({
-          ...oldValue,
-          name: target.value,
-        }))
-      }
-    />
-  )
-}
-
-const ResumeInput: FunctionComponent<{
-  resume: Resume
-  setResume: Dispatch<SetStateAction<Resume>>
-}> = (props) => (
-  <Stack
-    gap={2}
-    padding={4}
-  >
-    <Typography variant="h2">Personal Details</Typography>
-    <Input
-      label="Name"
-      propName={'name'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <Input
-      label="Email Address"
-      propName={'emailAddress'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-    <Typography>Dummy</Typography>
-  </Stack>
-)
