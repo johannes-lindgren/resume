@@ -1,8 +1,8 @@
-import React, {FunctionComponent} from "react";
-import {Resume} from "@/model/resume";
-import {Image, StyleSheet, Text, View} from "@react-pdf/renderer";
-import {theme} from "@/design/Theme";
-import {ContactDetailsView} from "@/components/pdf/Resume/ContactDetailsView";
+import React, { FunctionComponent } from 'react'
+import { Resume } from '@/model/resume'
+import { Image, StyleSheet, Text, View } from '@react-pdf/renderer'
+import { theme } from '@/design/Theme'
+import { ContactDetailsView } from '@/components/pdf/Resume/ContactDetailsView'
 
 const styles = StyleSheet.create({
   root: {
@@ -28,19 +28,20 @@ const styles = StyleSheet.create({
   title: {
     ...theme.typography.body,
   },
-});
+})
 
 export const Header: FunctionComponent<{
   resume: Resume
 }> = (props) => (
-    <View style={styles.root}>
-      <Image src="/profile.png" style={styles.image} />
-      <View style={styles.textSection}>
-        <Text style={styles.name}>{props.resume.name}</Text>
-        <Text style={styles.title}>{props.resume.jobTitle}</Text>
-      </View>
-      <ContactDetailsView resume={props.resume}/>
+  <View style={styles.root}>
+    <Image
+      src="/profile.png"
+      style={styles.image}
+    />
+    <View style={styles.textSection}>
+      <Text style={styles.name}>{props.resume.name}</Text>
+      <Text style={styles.title}>{props.resume.jobTitle}</Text>
     </View>
+    <ContactDetailsView resume={props.resume} />
+  </View>
 )
-
-

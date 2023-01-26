@@ -1,5 +1,5 @@
-import {ChangeEventHandler, FunctionComponent, ReactNode} from "react";
-import {theme} from "@/design/Theme";
+import { ChangeEventHandler, FunctionComponent, ReactNode } from 'react'
+import { theme } from '@/design/Theme'
 
 export const TextInput: FunctionComponent<{
   placeholder?: string
@@ -9,9 +9,7 @@ export const TextInput: FunctionComponent<{
 }> = (props) => (
   <>
     {/* TODO generate name */}
-    <label htmlFor="name">
-      {props.label}
-    </label>
+    <label htmlFor="name">{props.label}</label>
     <input
       type="text"
       name="name"
@@ -23,6 +21,7 @@ export const TextInput: FunctionComponent<{
         border: theme.border,
         padding: theme.spacing(2),
         backgroundColor: theme.palette.background,
-      }}/>
+      }}
+    />
   </>
 )

@@ -1,6 +1,6 @@
-import {ResumeEditor} from "@/components/dom/ResumeEditor/ResumeEditor";
-import {NextPage} from "next";
-import {Box, Container} from "@mui/material";
+import { ResumeEditor } from '@/components/dom/ResumeEditor/ResumeEditor'
+import { NextPage } from 'next'
+import { Box, Container } from '@mui/material'
 
 const Page: NextPage = () => {
   return (
@@ -13,8 +13,9 @@ const Page: NextPage = () => {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'stretch',
-      }}>
-      <ResumeEditor/>
+      }}
+    >
+      <ResumeEditor />
     </Box>
   )
 }

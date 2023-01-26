@@ -1,25 +1,28 @@
-'use client';
+'use client'
 
-import React from 'react';
-import {Document, Page, Text, View, StyleSheet} from '@react-pdf/renderer';
-import {PDFViewer} from '@react-pdf/renderer';
+import React from 'react'
+import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer'
+import { PDFViewer } from '@react-pdf/renderer'
 import cssStyles from './styles.module.scss'
 
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
-    backgroundColor: '#E4E4E4'
+    backgroundColor: '#E4E4E4',
   },
   section: {
     margin: 10,
     padding: 10,
-    flexGrow: 1
-  }
-});
+    flexGrow: 1,
+  },
+})
 export const PdfExample = () => (
   <PDFViewer className={cssStyles.class}>
     <Document>
-      <Page size="A4" style={styles.page}>
+      <Page
+        size="A4"
+        style={styles.page}
+      >
         <View style={styles.section}>
           <Text>Section #1</Text>
         </View>
@@ -29,4 +32,4 @@ export const PdfExample = () => (
       </Page>
     </Document>
   </PDFViewer>
-);
+)

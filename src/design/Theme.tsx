@@ -1,4 +1,4 @@
-import {Style} from "@react-pdf/types";
+import { Style } from '@react-pdf/types'
 
 export type Theme = {
   spacing: (size: 0 | 1 | 2 | 3 | 4 | 5 | 6) => string
@@ -20,7 +20,7 @@ export type FontStyle = {
   fontFamily: string
   color: string
   fontSize: string
-  fontWeight: number,
+  fontWeight: number
 }
 
 export type Palette = {
@@ -31,7 +31,8 @@ export type Palette = {
   }
 }
 
-const exponentialSpacing = (size: number) => `${Math.floor(Math.pow(4, ((size + 1) / 2)))}pt`
+const exponentialSpacing = (size: number) =>
+  `${Math.floor(Math.pow(4, (size + 1) / 2))}pt`
 
 const bodySize = 12
 
@@ -88,7 +89,7 @@ export const theme: Theme = {
       color: fontColorSecondary,
     },
     caption: {
-      fontSize: `${Math.round(5/6 * bodySize)}pt`,
+      fontSize: `${Math.round((5 / 6) * bodySize)}pt`,
       fontFamily: bodyFont,
       fontWeight: bodyWeight,
       color: fontColor,
@@ -97,5 +98,5 @@ export const theme: Theme = {
       color: linkColor,
       textDecoration: 'none',
     },
-  }
+  },
 }

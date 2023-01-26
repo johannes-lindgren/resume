@@ -1,25 +1,31 @@
 import {
   AnchorHTMLAttributes,
-  ButtonHTMLAttributes, ComponentProps,
+  ButtonHTMLAttributes,
+  ComponentProps,
   createElement,
-  DetailedHTMLProps, ElementType,
-  FunctionComponent, ReactNode,
-} from "react";
-import {theme} from "@/design/Theme";
+  DetailedHTMLProps,
+  ElementType,
+  FunctionComponent,
+  ReactNode,
+} from 'react'
+import { theme } from '@/design/Theme'
 
-export type ButtonComponent = FunctionComponent<{
-  component: 'a'
-  href?: string
-  download?: string
-  children?: ReactNode
-} | {
-  component?: 'button'
-  onClick?: () => void
-  children?: ReactNode
-}>
+export type ButtonComponent = FunctionComponent<
+  | {
+      component: 'a'
+      href?: string
+      download?: string
+      children?: ReactNode
+    }
+  | {
+      component?: 'button'
+      onClick?: () => void
+      children?: ReactNode
+    }
+>
 
 export const Button: ButtonComponent = (props) => {
-  const {component, ...otherProps} = props
+  const { component, ...otherProps } = props
   return createElement(component ?? 'button', {
     ...otherProps,
     style: {
@@ -31,6 +37,6 @@ export const Button: ButtonComponent = (props) => {
       ...theme.typography.body,
       color: theme.palette.primary.contrastText,
       cursor: 'pointer',
-    }
+    },
   })
 }

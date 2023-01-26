@@ -1,11 +1,11 @@
-import React, {FunctionComponent} from "react";
-import {Document, Page, StyleSheet, View, Text} from "@react-pdf/renderer";
-import {Resume} from "@/model/resume";
-import {Header} from "@/components/pdf/Resume/Header";
-import {theme} from "@/design/Theme";
-import {SectionView} from "@/components/pdf/Resume/SectionView";
-import {Stack} from "@/components/pdf/Stack";
-import {SkillSectionView} from "@/components/pdf/Resume/SkillSectionView";
+import React, { FunctionComponent } from 'react'
+import { Document, Page, StyleSheet, View, Text } from '@react-pdf/renderer'
+import { Resume } from '@/model/resume'
+import { Header } from '@/components/pdf/Resume/Header'
+import { theme } from '@/design/Theme'
+import { SectionView } from '@/components/pdf/Resume/SectionView'
+import { Stack } from '@/components/pdf/Stack'
+import { SkillSectionView } from '@/components/pdf/Resume/SkillSectionView'
 
 const styles = StyleSheet.create({
   page: {
@@ -17,27 +17,25 @@ const styles = StyleSheet.create({
     paddingRight: '15vw',
     ...theme.typography.body,
   },
-});
+})
 
 export const ResumeView: FunctionComponent<{
   resume: Resume
 }> = (props) => (
-  <Document >
-    <Page size="A4" style={styles.page}>
+  <Document>
+    <Page
+      size="A4"
+      style={styles.page}
+    >
       <Stack gap={4}>
-        <Header
-          resume={props.resume}
-        />
-        {
-          props.resume.sections.map((section, index) => (
-            <SectionView
-              key={index}
-              section={section}
-            />
-          ))
-        }
+        <Header resume={props.resume} />
+        {props.resume.sections.map((section, index) => (
+          <SectionView
+            key={index}
+            section={section}
+          />
+        ))}
       </Stack>
     </Page>
   </Document>
 )
-
