@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react'
-import { ResumeContainer } from '@/components/dom/A4'
+import { ResumeContainer } from '@/components/dom/ResumeContainer'
 // import {PdfDocument} from "@/components/dom/PdfDocument";
 import { ResumeView } from '@/components/pdf/Resume'
 import { Resume } from '@/model/resume'
@@ -57,12 +57,21 @@ export const ResumeEditor: FunctionComponent = () => {
       >
         <ResumeContainer>
           <DownloadResumeButton resume={resume} />
-          <PdfDocument
-            showToolbar={false}
-            width="100%"
+          <Box
+            sx={{
+              borderRadius: 2,
+              height: 'auto',
+              flex: 1,
+              overflow: 'hidden',
+            }}
           >
-            <ResumeView resume={throttledResume} />
-          </PdfDocument>
+            <PdfDocument
+              showToolbar={false}
+              width="100%"
+            >
+              <ResumeView resume={throttledResume} />
+            </PdfDocument>
+          </Box>
         </ResumeContainer>
       </Box>
     </Split>
