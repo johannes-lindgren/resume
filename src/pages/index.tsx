@@ -9,7 +9,6 @@ const Page: NextPage = () => {
       sx={{
         minHeight: '100vh',
         minWidth: '100vw',
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'stretch',

@@ -1,1 +1,1 @@
-export * from './A4'
+export * from './ResumeContainer'

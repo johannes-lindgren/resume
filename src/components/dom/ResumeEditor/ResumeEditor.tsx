@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
-import { A4 } from '@/components/dom/A4'
+import { ResumeContainer } from '@/components/dom/A4'
 // import {PdfDocument} from "@/components/dom/PdfDocument";
 import { ResumeView } from '@/components/pdf/Resume'
 import { Resume } from '@/model/resume'
@@ -7,7 +7,7 @@ import { Font } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'
 import { useThrottle } from '@/hooks/useThrottle'
 import dynamic from 'next/dynamic'
-import { TextField } from '@mui/material'
+import { Box, Stack, styled, TextField, Typography } from '@mui/material'
 import { johannesResume } from '@/tmp/johannesResume'
 
 // Register font
@@ -33,31 +33,59 @@ const PdfDocument = dynamic(
   },
 )
 
+const Split = styled(Box)(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+}))
+
 export const ResumeEditor: FunctionComponent = () => {
   const [resume, setResume] = useState<Resume>(johannesResume)
   const throttledResume = useThrottle(resume, 500)
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        ...theme.typography.body,
-      }}
-    >
+    <Split>
       <ResumeInput
         resume={resume}
         setResume={setResume}
       />
-      <A4>
-        <DownloadResumeButton resume={resume} />
-        <PdfDocument
-          showToolbar={false}
-          width="100%"
-        >
-          <ResumeView resume={throttledResume} />
-        </PdfDocument>
-      </A4>
-    </div>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+        }}
+      >
+        <ResumeContainer>
+          <DownloadResumeButton resume={resume} />
+          <PdfDocument
+            showToolbar={false}
+            width="100%"
+          >
+            <ResumeView resume={throttledResume} />
+          </PdfDocument>
+        </ResumeContainer>
+      </Box>
+    </Split>
+  )
+}
+
+const Input = <T,>(props: {
+  label: string
+  value: T
+  propName: keyof T
+  setValue: (getter: (oldValue: T) => T) => void
+}): JSX.Element => {
+  return (
+    <TextField
+      placeholder={props.label}
+      value={props.value[props.propName]}
+      onChange={({ target }) =>
+        props.setValue((oldValue) => ({
+          ...oldValue,
+          name: target.value,
+        }))
+      }
+    />
   )
 }
 
@@ -65,20 +93,45 @@ const ResumeInput: FunctionComponent<{
   resume: Resume
   setResume: Dispatch<SetStateAction<Resume>>
 }> = (props) => (
-  <div
-    style={{
-      padding: theme.spacing(2),
-    }}
+  <Stack
+    gap={2}
+    padding={4}
   >
-    <TextField
-      placeholder="Email Address"
-      value={props.resume.emailAddress}
-      onChange={({ target }) =>
-        props.setResume((oldResume) => ({
-          ...oldResume,
-          emailAddress: target.value,
-        }))
-      }
+    <Typography variant="h2">Personal Details</Typography>
+    <Input
+      label="Name"
+      propName={'name'}
+      value={props.resume}
+      setValue={props.setResume}
     />
-  </div>
+    <Input
+      label="Email Address"
+      propName={'emailAddress'}
+      value={props.resume}
+      setValue={props.setResume}
+    />
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+    <Typography>Dummy</Typography>
+  </Stack>
 )
