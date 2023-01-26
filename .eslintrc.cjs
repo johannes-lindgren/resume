@@ -14,6 +14,14 @@ module.exports = {
     React: true,
   },
   rules: {
-    'prettier/prettier': 'warn'
+    'prettier/prettier': 'warn',
+    'no-unused-vars': [
+      'off',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
   },
 }
