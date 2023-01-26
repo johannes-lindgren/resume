@@ -22,8 +22,14 @@ export const DownloadResumeButton: FunctionComponent<{
 
   return (
     <div style={{ padding: theme.spacing(2) }}>
-      <Button onClick={updateInstance}>Update</Button>
       <Button
+        color="inherit"
+        onClick={updateInstance}
+      >
+        Update
+      </Button>
+      <Button
+        color="inherit"
         component="a"
         href={instance.url ?? undefined}
         download="resume.pdf"

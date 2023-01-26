@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import {
   DetailsSection,
   EmploymentHistorySection,
-  Section,
+  ResumeSection,
 } from '@/model/resume'
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 })
 
 export const SectionView: FunctionComponent<{
-  section: Section
+  section: ResumeSection
   style?: Style | Style[] | undefined
 }> = (props) => {
   const { section, ...p } = props

@@ -4,7 +4,7 @@ import { Box } from '@mui/system'
 import { styled } from '@mui/material'
 
 const Root = styled(Box)(({ theme }) => ({
-  background: theme.palette.grey.A100,
+  background: theme.palette.grey.A400,
   padding: theme.spacing(5),
   boxShadow: theme.shadows[6],
   borderRadius: theme.shape.borderRadius,
@@ -14,6 +14,7 @@ const Root = styled(Box)(({ theme }) => ({
   right: 0,
   width: '50%',
   height: '100vh',
+  color: theme.palette.primary.contrastText,
 }))
 
 export const ResumeContainer: FunctionComponent<PropsWithChildren> = (
