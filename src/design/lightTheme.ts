@@ -10,6 +10,7 @@ export const lightTheme = createTheme({
     secondary: {
       main: '#6C6355',
     },
+    divider: '#EDEBE8',
     grey: {
       A100: '#F3F4F6',
       A200: '#B9BECA',
@@ -43,12 +44,26 @@ export const lightTheme = createTheme({
     },
   },
   components: {
+    MuiInput: {
+      defaultProps: {
+        disableUnderline: true,
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard',
+      },
+    },
     MuiFilledInput: {
+      defaultProps: {
+        disableUnderline: true,
+      },
       styleOverrides: {
         root: ({ theme }) => ({
           backgroundColor: theme.palette.grey.A100,
         }),
       },
     },
+    MuiAccordion: {},
   },
 })
