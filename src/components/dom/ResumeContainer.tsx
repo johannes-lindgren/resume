@@ -15,6 +15,7 @@ const Root = styled(Box)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   display: 'flex',
   flexDirection: 'column',
+  gap: theme.spacing(2),
 }))
 
 export const ResumeContainer: FunctionComponent<PropsWithChildren> = (

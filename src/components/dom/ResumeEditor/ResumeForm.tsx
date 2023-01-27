@@ -33,13 +33,7 @@ export const ResumeForm: FunctionComponent<{
   resume: Resume
   setResume: Setter<Resume>
 }> = (props) => (
-  <Stack
-    gap={5}
-    sx={{
-      px: 4,
-      py: 8,
-    }}
-  >
+  <Stack>
     <Stack gap={2}>
       <Stack>
         <PropTextEditor

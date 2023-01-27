@@ -17,7 +17,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
 }))
 
-export const DownloadResumeButton: FunctionComponent<{
+export const DownloadPdfButton: FunctionComponent<{
   document: ReactElement<
     ReactPDF.DocumentProps,
     string | JSXElementConstructor<any>
@@ -34,8 +34,7 @@ export const DownloadResumeButton: FunctionComponent<{
   return (
     <HeaderContainer>
       <LoadingButton
-        variant="text"
-        color="inherit"
+        variant="contained"
         component="a"
         href={instance.url ?? undefined}
         download="resume.pdf"
@@ -46,7 +45,7 @@ export const DownloadResumeButton: FunctionComponent<{
         disabled={!instance.url}
         loading={instance.loading}
       >
-        Download
+        Download PDF
       </LoadingButton>
     </HeaderContainer>
   )

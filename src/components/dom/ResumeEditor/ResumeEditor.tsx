@@ -6,9 +6,10 @@ import { Resume } from '@/model/resume'
 import { Font } from '@react-pdf/renderer'
 import { useThrottle } from '@/hooks/useThrottle'
 import dynamic from 'next/dynamic'
-import { Box, styled } from '@mui/material'
+import { Box, Button, Stack, styled } from '@mui/material'
 import { johannesResume } from '@/tmp/johannesResume'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
+import { DownloadRounded, SaveRounded } from '@mui/icons-material'
 
 // Register font
 Font.register({
@@ -18,9 +19,7 @@ Font.register({
 
 const DownloadResumeButton = dynamic(
   () =>
-    import('../DownloadResumeButton').then(
-      (module) => module.DownloadResumeButton,
-    ),
+    import('../DownloadPdfButton').then((module) => module.DownloadPdfButton),
   {
     ssr: false,
   },
@@ -49,10 +48,22 @@ export const ResumeEditor: FunctionComponent = () => {
 
   return (
     <Split>
-      <ResumeForm
-        resume={resume}
-        setResume={setResume}
-      />
+      <Stack
+        gap={5}
+        sx={{
+          px: 4,
+          py: 8,
+        }}
+      >
+        <Box
+          display="flex"
+          flexDirection="row-reverse"
+        ></Box>
+        <ResumeForm
+          resume={resume}
+          setResume={setResume}
+        />
+      </Stack>
       <Box
         sx={{
           display: 'flex',
@@ -61,7 +72,7 @@ export const ResumeEditor: FunctionComponent = () => {
         }}
       >
         <ResumeContainer>
-          <DownloadResumeButton document={doc} />
+          <Box></Box>
           <Box
             sx={{
               borderRadius: 2,
@@ -76,6 +87,12 @@ export const ResumeEditor: FunctionComponent = () => {
             >
               {doc}
             </PdfDocument>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row-reverse"
+          >
+            <DownloadResumeButton document={doc} />
           </Box>
         </ResumeContainer>
       </Box>
