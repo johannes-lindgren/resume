@@ -33,8 +33,10 @@ const PdfDocument = dynamic(
 )
 
 const Split = styled(Box)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
+  display: 'flex',
+  '& > *': {
+    width: '50%',
+  },
 }))
 
 export const ResumeEditor: FunctionComponent = () => {
@@ -51,51 +53,38 @@ export const ResumeEditor: FunctionComponent = () => {
       <Stack
         gap={5}
         sx={{
-          px: 4,
+          px: 8,
           py: 8,
         }}
       >
-        <Box
-          display="flex"
-          flexDirection="row-reverse"
-        ></Box>
         <ResumeForm
           resume={resume}
           setResume={setResume}
         />
       </Stack>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          position: 'relative',
-        }}
-      >
-        <ResumeContainer>
-          <Box></Box>
-          <Box
-            sx={{
-              borderRadius: 2,
-              height: 'auto',
-              flex: 1,
-              overflow: 'hidden',
-            }}
+      <ResumeContainer>
+        <Box
+          sx={{
+            borderRadius: 2,
+            height: 'auto',
+            flex: 1,
+            overflow: 'hidden',
+          }}
+        >
+          <PdfDocument
+            showToolbar={false}
+            width="100%"
           >
-            <PdfDocument
-              showToolbar={false}
-              width="100%"
-            >
-              {doc}
-            </PdfDocument>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="row-reverse"
-          >
-            <DownloadResumeButton document={doc} />
-          </Box>
-        </ResumeContainer>
-      </Box>
+            {doc}
+          </PdfDocument>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="row-reverse"
+        >
+          <DownloadResumeButton document={doc} />
+        </Box>
+      </ResumeContainer>
     </Split>
   )
 }

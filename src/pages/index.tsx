@@ -7,10 +7,6 @@ const Page: NextPage = () => {
     <Box
       component="main"
       sx={{
-        minHeight: '100vh',
-        maxHeight: '100vh',
-        minWidth: '100vw',
-        maxWidth: '100vw',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'stretch',
