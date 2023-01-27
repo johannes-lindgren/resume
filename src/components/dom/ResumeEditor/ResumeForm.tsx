@@ -294,7 +294,7 @@ export const EmploymentForm: FunctionComponent<{
 
 const SkillSectionForm: FunctionComponent<{
   section: SkillSection
-  setSection: Setter<ResumeSection>
+  setSection: Setter<SkillSection>
 }> = (props) => (
   <Stack gap={2}>
     <PropTextEditor
@@ -302,6 +302,7 @@ const SkillSectionForm: FunctionComponent<{
       value={props.section}
       setValue={props.setSection}
       inputProps={{ sx: { typography: 'h2' } }}
+      placeholder="Skills"
     />
     {props.section.skillCategories.map((skillCategory) => (
       <SkillCategoryForm
@@ -315,7 +316,23 @@ const SkillSectionForm: FunctionComponent<{
       />
     ))}
     <Tooltip title="Add Skill Category">
-      <Button startIcon={<AddOutlined />}></Button>
+      <Button
+        startIcon={<AddOutlined />}
+        onClick={() =>
+          props.setSection({
+            ...props.section,
+            skillCategories: [
+              ...props.section.skillCategories,
+              {
+                // TODO generate
+                header: '',
+                uid: Math.random().toString(10),
+                skills: [],
+              },
+            ],
+          })
+        }
+      ></Button>
     </Tooltip>
   </Stack>
 )
@@ -326,6 +343,7 @@ export const SkillCategoryForm: FunctionComponent<{
 }> = (props) => (
   <Stack>
     <PropTextEditor
+      placeholder="Skill Category"
       propName={'header'}
       value={props.skillCategory}
       setValue={props.setSkillCategory}

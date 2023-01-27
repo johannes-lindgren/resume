@@ -7,18 +7,19 @@ export const PropTextEditor = <T,>(
     value: T
     propName: keyof T
     setValue: Setter<T>
-  } & TextFieldProps,
+  } & Omit<TextFieldProps, 'value' | 'onChange'>,
 ): JSX.Element => {
+  const { value, setValue, propName, ...textFieldProps } = props
   return (
     <TextField
-      {...props}
-      value={props.value[props.propName]}
+      value={value[propName]}
       onChange={({ target }) =>
-        props.setValue({
-          ...props.value,
-          [props.propName]: target.value,
+        setValue({
+          ...value,
+          [propName]: target.value,
         })
       }
+      {...textFieldProps}
     />
   )
 }
