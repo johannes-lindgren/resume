@@ -4,13 +4,22 @@ export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#D1462F',
+      main: '#0097A6',
+      dark: '#006F86',
     },
     secondary: {
-      main: '#C8963E',
+      main: '#6C6355',
     },
     grey: {
+      A100: '#F3F4F6',
+      A200: '#B9BECA',
       A400: '#7D869C',
+      A700: '#464D5D',
+    },
+    text: {
+      primary: '#2E2A24',
+      secondary: '#6C6355',
+      disabled: '#6C6355',
     },
   },
   typography: {
@@ -31,6 +40,15 @@ export const lightTheme = createTheme({
     },
     h6: {
       fontSize: '0.8rem',
+    },
+  },
+  components: {
+    MuiFilledInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.grey.A100,
+        }),
+      },
     },
   },
 })

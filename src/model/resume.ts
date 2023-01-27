@@ -8,11 +8,6 @@ export type Resume = {
   sections: ResumeSection[]
 }
 
-export type SkillCategories = {
-  header: string
-  skills: string[]
-}
-
 export type ResumeSection =
   | DetailsSection
   | EmploymentHistorySection
@@ -36,7 +31,13 @@ export type SkillSection = {
   uid: string
   type: 'skills'
   header: string
-  skillCategories: SkillCategories[]
+  skillCategories: SkillCategory[]
+}
+
+export type SkillCategory = {
+  uid: string
+  header: string
+  skills: string[]
 }
 
 export type Employment = {

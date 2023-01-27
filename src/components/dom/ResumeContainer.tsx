@@ -3,7 +3,7 @@ import { Box } from '@mui/system'
 import { styled } from '@mui/material'
 
 const Root = styled(Box)(({ theme }) => ({
-  background: theme.palette.grey.A400,
+  background: theme.palette.grey.A700,
   padding: theme.spacing(5),
   boxShadow: theme.shadows[6],
   overflow: 'hidden',

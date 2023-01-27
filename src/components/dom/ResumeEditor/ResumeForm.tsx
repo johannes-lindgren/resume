@@ -1,16 +1,23 @@
-import { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { FunctionComponent } from 'react'
 import {
   DetailsSection,
   EmploymentHistorySection,
   Resume,
   ResumeSection,
+  SkillCategory,
   SkillSection,
 } from '@/model/resume'
-import { Box, Divider, Stack, Typography } from '@mui/material'
+import {
+  Autocomplete,
+  Chip,
+  Divider,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material'
 import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
-import { replaced } from '@/utils/replaced'
-
-export type Setter<T> = (newValue: T) => void
+import { arraySetter } from '@/utils/arraySetter'
+import { Setter } from '@/utils/Setter'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -20,69 +27,62 @@ export const ResumeForm: FunctionComponent<{
     gap={5}
     padding={4}
   >
+    <Typography variant="h1">Resume</Typography>
     <Stack gap={2}>
       <Typography variant="h2">Personal Details</Typography>
       <PropTextEditor
+        variant="filled"
         label="Name"
         propName={'name'}
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
+        variant="filled"
         label="Job Title"
         propName={'jobTitle'}
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
+        variant="filled"
         label="Country"
         propName={'location'}
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
+        variant="filled"
         label="Nationality"
         propName={'nationality'}
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
+        variant="filled"
         label="Email Address"
         propName={'emailAddress'}
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
+        variant="filled"
         label="Phone Number"
         propName={'phoneNumber'}
         value={props.resume}
         setValue={props.setResume}
       />
     </Stack>
-    <Divider />
     <Stack gap={4}>
       {props.resume.sections.map((section) => (
-        <SectionForm
-          key={section.uid}
-          section={section}
-          setSection={(newSection) => {
-            console.log(
-              replaced(
-                props.resume.sections,
-                (it) => it.uid === newSection.uid,
-                newSection,
-              ),
-            )
-            props.setResume({
-              ...props.resume,
-              sections: replaced(
-                props.resume.sections,
-                (it) => it.uid === newSection.uid,
-                newSection,
-              ),
-            })
-          }}
-        />
+        <>
+          <Divider />
+          <SectionForm
+            key={section.uid}
+            section={section}
+            setSection={arraySetter(props.resume, props.setResume, 'sections')}
+          />
+        </>
       ))}
     </Stack>
   </Stack>
@@ -122,6 +122,12 @@ const DetailsSectionForm: FunctionComponent<{
   setSection: Setter<ResumeSection>
 }> = (props) => (
   <Stack gap={2}>
+    <Typography
+      variant="h2"
+      sx={{ color: 'text.secondary' }}
+    >
+      {props.section.header}
+    </Typography>
     <PropTextEditor
       label="Header"
       propName={'header'}
@@ -140,9 +146,97 @@ const DetailsSectionForm: FunctionComponent<{
 const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
   setSection: Setter<ResumeSection>
-}> = (props) => <Box>Details</Box>
+}> = (props) => (
+  <Stack gap={2}>
+    <Typography
+      variant="h2"
+      sx={{ color: 'text.secondary' }}
+    >
+      Employment History
+    </Typography>
+    <PropTextEditor
+      label="Header"
+      propName={'header'}
+      value={props.section}
+      setValue={props.setSection}
+    />
+  </Stack>
+)
 
 const SkillSectionForm: FunctionComponent<{
   section: SkillSection
   setSection: Setter<ResumeSection>
-}> = (props) => <Box>Details</Box>
+}> = (props) => (
+  <Stack gap={2}>
+    <Typography
+      variant="h2"
+      sx={{ color: 'text.secondary' }}
+    >
+      Skills
+    </Typography>
+    <PropTextEditor
+      label="Header"
+      propName={'header'}
+      value={props.section}
+      setValue={props.setSection}
+    />
+    {props.section.skillCategories.map((skillCategory) => (
+      <SkillCategoryForm
+        key={skillCategory.uid}
+        skillCategory={skillCategory}
+        setSkillCategory={arraySetter(
+          props.section,
+          props.setSection,
+          'skillCategories',
+        )}
+      />
+    ))}
+  </Stack>
+)
+
+export const SkillCategoryForm: FunctionComponent<{
+  skillCategory: SkillCategory
+  setSkillCategory: Setter<SkillCategory>
+}> = (props) => (
+  <Stack>
+    <PropTextEditor
+      label="Header"
+      propName={'header'}
+      variant="standard"
+      value={props.skillCategory}
+      setValue={props.setSkillCategory}
+    />
+    <Autocomplete
+      multiple
+      options={[]}
+      defaultValue={[]}
+      value={props.skillCategory.skills}
+      onChange={(e, newValue) =>
+        props.setSkillCategory({
+          ...props.skillCategory,
+          skills: newValue,
+        })
+      }
+      freeSolo
+      renderTags={(value: readonly string[], getTagProps) =>
+        value.map((option, index) => (
+          <Chip
+            variant="outlined"
+            color="default"
+            label={option}
+            {...getTagProps({ index })}
+            key={index}
+          />
+        ))
+      }
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant="standard"
+          label="Skills"
+          placeholder="Your skill"
+        />
+      )}
+    />
+  </Stack>
+)

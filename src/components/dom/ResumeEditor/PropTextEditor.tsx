@@ -1,16 +1,17 @@
 import { TextField } from '@mui/material'
-import { Setter } from '@/components/dom/ResumeEditor/ResumeForm'
+import { Setter } from '@/utils/Setter'
+import { TextFieldProps } from '@mui/material/TextField/TextField'
 
-export const PropTextEditor = <T,>(props: {
-  label: string
-  value: T
-  propName: keyof T
-  setValue: Setter<T>
-}): JSX.Element => {
+export const PropTextEditor = <T,>(
+  props: {
+    value: T
+    propName: keyof T
+    setValue: Setter<T>
+  } & TextFieldProps,
+): JSX.Element => {
   return (
     <TextField
-      variant="filled"
-      label={props.label}
+      {...props}
       value={props.value[props.propName]}
       onChange={({ target }) =>
         props.setValue({
