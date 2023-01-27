@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 import {
   DetailsSection,
+  Employment,
   EmploymentHistorySection,
   Resume,
   ResumeSection,
@@ -21,7 +22,8 @@ import {
 import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
-import { ExpandMore } from '@mui/icons-material'
+import { Box } from '@mui/system'
+import { Expand, ExpandMore } from '@mui/icons-material'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -29,25 +31,30 @@ export const ResumeForm: FunctionComponent<{
 }> = (props) => (
   <Stack
     gap={5}
-    padding={4}
+    sx={{
+      px: 4,
+      py: 8,
+    }}
   >
-    <Typography variant="h1">Resume</Typography>
     <Stack gap={2}>
-      <Typography variant="h2">Personal Details</Typography>
-      <PropTextEditor
-        variant="filled"
-        label="Name"
-        propName={'name'}
-        value={props.resume}
-        setValue={props.setResume}
-      />
-      <PropTextEditor
-        variant="filled"
-        label="Job Title"
-        propName={'jobTitle'}
-        value={props.resume}
-        setValue={props.setResume}
-      />
+      <Stack>
+        <PropTextEditor
+          // variant="filled"
+          // label="Name"
+          propName={'name'}
+          value={props.resume}
+          setValue={props.setResume}
+          inputProps={{ sx: { typography: 'h1' } }}
+        />
+        <PropTextEditor
+          // variant="filled"
+          // label="Job Title"
+          propName={'jobTitle'}
+          value={props.resume}
+          setValue={props.setResume}
+          inputProps={{ sx: { typography: 'subtitle1' } }}
+        />
+      </Stack>
       <PropTextEditor
         variant="filled"
         label="Country"
@@ -134,7 +141,6 @@ const DetailsSectionForm: FunctionComponent<{
     />
     <PropTextEditor
       multiline
-      label="Description"
       propName={'description'}
       value={props.section}
       setValue={props.setSection}
@@ -146,13 +152,99 @@ const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
   setSection: Setter<ResumeSection>
 }> = (props) => (
-  <Stack gap={2}>
+  <Stack gap={4}>
     <PropTextEditor
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
       inputProps={{ sx: { typography: 'h2' } }}
     />
+    {props.section.employments.map((employment) => (
+      <Accordion
+        key={employment.uid}
+        variant="outlined"
+        disableGutters
+      >
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Stack>
+            <Typography>{employment.jobTitle}</Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: 'text.secondary' }}
+            >
+              {employment.startDate}&mdash;{employment.endDate}
+            </Typography>
+          </Stack>
+        </AccordionSummary>
+        <AccordionDetails>
+          <EmploymentForm
+            employment={employment}
+            setEmployment={arraySetter(
+              props.section,
+              props.setSection,
+              'employments',
+            )}
+          />
+        </AccordionDetails>
+      </Accordion>
+    ))}
+  </Stack>
+)
+export const EmploymentForm: FunctionComponent<{
+  employment: Employment
+  setEmployment: Setter<Employment>
+}> = (props) => (
+  <Stack gap={2}>
+    <PropTextEditor
+      label="Worked as"
+      propName={'jobTitle'}
+      value={props.employment}
+      setValue={props.setEmployment}
+      inputProps={{ sx: { typography: 'subtitle1' } }}
+      variant="filled"
+    />
+    <Box
+      display="flex"
+      gap={2}
+    >
+      <PropTextEditor
+        label="at"
+        propName={'employer'}
+        value={props.employment}
+        setValue={props.setEmployment}
+        variant="filled"
+        fullWidth
+      />
+      <PropTextEditor
+        label="in"
+        propName={'location'}
+        value={props.employment}
+        setValue={props.setEmployment}
+        variant="filled"
+        fullWidth
+      />
+    </Box>
+    <Box
+      display="flex"
+      gap={2}
+    >
+      <PropTextEditor
+        label="from"
+        propName={'startDate'}
+        value={props.employment}
+        setValue={props.setEmployment}
+        variant="filled"
+        fullWidth
+      />
+      <PropTextEditor
+        label="to"
+        propName={'endDate'}
+        value={props.employment}
+        setValue={props.setEmployment}
+        variant="filled"
+        fullWidth
+      />
+    </Box>
   </Stack>
 )
 
@@ -191,7 +283,7 @@ export const SkillCategoryForm: FunctionComponent<{
       value={props.skillCategory}
       setValue={props.setSkillCategory}
       onClick={(e) => e.preventDefault()}
-      inputProps={{ sx: { typography: 'h3' } }}
+      inputProps={{ sx: { typography: 'subtitle1' } }}
     />
     <Autocomplete
       multiple
@@ -221,6 +313,12 @@ export const SkillCategoryForm: FunctionComponent<{
           {...params}
           variant="standard"
           placeholder="Type & Press Enter"
+          inputProps={{
+            ...params.inputProps,
+            sx: {
+              ml: 1,
+            },
+          }}
         />
       )}
     />

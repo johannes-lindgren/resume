@@ -64,6 +64,13 @@ export const lightTheme = createTheme({
         }),
       },
     },
-    MuiAccordion: {},
+    MuiAccordion: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderRadius: theme.shape.borderRadius * 2,
+          overflow: 'hidden',
+        }),
+      },
+    },
   },
 })
