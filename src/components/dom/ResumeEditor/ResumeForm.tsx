@@ -16,6 +16,7 @@ import {
   Button,
   Chip,
   Divider,
+  InputBase,
   Stack,
   TextField,
   Tooltip,
@@ -294,7 +295,7 @@ export const EmploymentForm: FunctionComponent<{
             component="li"
             key={index}
           >
-            <TextField
+            <InputBase
               value={achievement}
               onChange={({ target }) =>
                 props.setEmployment({
@@ -312,7 +313,15 @@ export const EmploymentForm: FunctionComponent<{
           </Box>
         ))}
         <Tooltip title="Add Achievement">
-          <Button startIcon={<AddOutlined />}></Button>
+          <Button
+            startIcon={<AddOutlined />}
+            onClick={({ target }) =>
+              props.setEmployment({
+                ...props.employment,
+                achievements: [...props.employment.achievements, ''],
+              })
+            }
+          ></Button>
         </Tooltip>
       </Stack>
     </Stack>
