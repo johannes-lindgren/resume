@@ -185,53 +185,44 @@ export const SkillCategoryForm: FunctionComponent<{
   skillCategory: SkillCategory
   setSkillCategory: Setter<SkillCategory>
 }> = (props) => (
-  <Accordion
-    variant="outlined"
-    sx={{ borderRadius: 2, overflow: 'hidden' }}
-  >
-    <AccordionSummary expandIcon={<ExpandMore />}>
-      <PropTextEditor
-        propName={'header'}
-        value={props.skillCategory}
-        setValue={props.setSkillCategory}
-        onClick={(e) => e.preventDefault()}
-      />
-    </AccordionSummary>
-    <AccordionDetails>
-      <Stack gap={2}>
-        <Autocomplete
-          multiple
-          options={[]}
-          defaultValue={[]}
-          value={props.skillCategory.skills}
-          onChange={(e, newValue) =>
-            props.setSkillCategory({
-              ...props.skillCategory,
-              skills: newValue,
-            })
-          }
-          freeSolo
-          renderTags={(value: readonly string[], getTagProps) =>
-            value.map((option, index) => (
-              <Chip
-                variant="filled"
-                color="default"
-                label={option}
-                {...getTagProps({ index })}
-                key={index}
-              />
-            ))
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="standard"
-              label="Skills"
-              placeholder="Your skill"
-            />
-          )}
+  <Stack>
+    <PropTextEditor
+      propName={'header'}
+      value={props.skillCategory}
+      setValue={props.setSkillCategory}
+      onClick={(e) => e.preventDefault()}
+      inputProps={{ sx: { typography: 'h3' } }}
+    />
+    <Autocomplete
+      multiple
+      options={[]}
+      defaultValue={[]}
+      value={props.skillCategory.skills}
+      onChange={(e, newValue) =>
+        props.setSkillCategory({
+          ...props.skillCategory,
+          skills: newValue,
+        })
+      }
+      freeSolo
+      renderTags={(value: readonly string[], getTagProps) =>
+        value.map((option, index) => (
+          <Chip
+            variant="filled"
+            color="default"
+            label={option}
+            {...getTagProps({ index })}
+            key={index}
+          />
+        ))
+      }
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant="standard"
+          placeholder="Type & Press Enter"
         />
-      </Stack>
-    </AccordionDetails>
-  </Accordion>
+      )}
+    />
+  </Stack>
 )
