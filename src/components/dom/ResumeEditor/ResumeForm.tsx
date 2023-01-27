@@ -127,10 +127,10 @@ const DetailsSectionForm: FunctionComponent<{
 }> = (props) => (
   <Stack gap={2}>
     <PropTextEditor
-      label="Details Header"
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
+      inputProps={{ sx: { typography: 'h2' } }}
     />
     <PropTextEditor
       multiline
@@ -148,10 +148,10 @@ const EmploymentHistorySectionForm: FunctionComponent<{
 }> = (props) => (
   <Stack gap={2}>
     <PropTextEditor
-      label="Employment History Header"
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
+      inputProps={{ sx: { typography: 'h2' } }}
     />
   </Stack>
 )
@@ -162,10 +162,10 @@ const SkillSectionForm: FunctionComponent<{
 }> = (props) => (
   <Stack gap={2}>
     <PropTextEditor
-      label="Skills Header"
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
+      inputProps={{ sx: { typography: 'h2' } }}
     />
     {props.section.skillCategories.map((skillCategory) => (
       <SkillCategoryForm
