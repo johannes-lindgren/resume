@@ -1,41 +1,53 @@
-import { FunctionComponent } from 'react'
+import {
+  FunctionComponent,
+  JSXElementConstructor,
+  ReactElement,
+  useEffect,
+} from 'react'
 import { Resume } from '@/model/resume'
-import { usePDF } from '@react-pdf/renderer'
+import ReactPDF, { usePDF } from '@react-pdf/renderer'
 import { ResumeView } from '@/components/pdf/Resume'
 import { theme } from '@/design/Theme'
-import { Button } from '@mui/material'
+import { Alert, Box, Button, CircularProgress, styled } from '@mui/material'
+import { DownloadRounded, ErrorOutlineRounded } from '@mui/icons-material'
+import LoadingButton from '@mui/lab/LoadingButton'
+
+const HeaderContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  gap: theme.spacing(2),
+}))
 
 export const DownloadResumeButton: FunctionComponent<{
-  resume: Resume
+  document: ReactElement<
+    ReactPDF.DocumentProps,
+    string | JSXElementConstructor<any>
+  >
 }> = (props) => {
   const [instance, updateInstance] = usePDF({
-    document: <ResumeView resume={props.resume} />,
+    document: props.document,
   })
 
-  if (instance.loading) {
-    return <div>Loading ...</div>
-  }
-
-  if (instance.error) {
-    return <div>Something went wrong: {instance.error}</div>
-  }
+  useEffect(() => {
+    updateInstance()
+  }, [props.document])
 
   return (
-    <div style={{ padding: theme.spacing(2) }}>
-      <Button
-        color="inherit"
-        onClick={updateInstance}
-      >
-        Update
-      </Button>
-      <Button
+    <HeaderContainer>
+      <LoadingButton
+        variant="text"
         color="inherit"
         component="a"
         href={instance.url ?? undefined}
         download="resume.pdf"
+        startIcon={
+          instance.error ? <ErrorOutlineRounded /> : <DownloadRounded />
+        }
+        loadingPosition="start"
+        disabled={!instance.url}
+        loading={instance.loading}
       >
         Download
-      </Button>
-    </div>
+      </LoadingButton>
+    </HeaderContainer>
   )
 }

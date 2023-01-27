@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useMemo, useState } from 'react'
 import { ResumeContainer } from '@/components/dom/ResumeContainer'
 // import {PdfDocument} from "@/components/dom/PdfDocument";
 import { ResumeView } from '@/components/pdf/Resume'
@@ -40,7 +40,12 @@ const Split = styled(Box)(({ theme }) => ({
 
 export const ResumeEditor: FunctionComponent = () => {
   const [resume, setResume] = useState<Resume>(johannesResume)
-  const throttledResume = useThrottle(resume, 500)
+  const throttledResume = useThrottle(resume, 1500)
+
+  const doc = useMemo(
+    () => <ResumeView resume={throttledResume} />,
+    [throttledResume],
+  )
 
   return (
     <Split>
@@ -56,7 +61,7 @@ export const ResumeEditor: FunctionComponent = () => {
         }}
       >
         <ResumeContainer>
-          <DownloadResumeButton resume={resume} />
+          <DownloadResumeButton document={doc} />
           <Box
             sx={{
               borderRadius: 2,
@@ -69,7 +74,7 @@ export const ResumeEditor: FunctionComponent = () => {
               showToolbar={false}
               width="100%"
             >
-              <ResumeView resume={throttledResume} />
+              {doc}
             </PdfDocument>
           </Box>
         </ResumeContainer>
