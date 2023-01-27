@@ -170,12 +170,14 @@ const EmploymentHistorySectionForm: FunctionComponent<{
       >
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Stack>
-            <Typography>{employment.jobTitle}</Typography>
+            <Typography>{employment.jobTitle}&nbsp;</Typography>
             <Typography
               variant="body2"
               sx={{ color: 'text.secondary' }}
             >
-              {employment.startDate}&mdash;{employment.endDate}
+              {employment.startDate ||
+                (employment.endDate &&
+                  `${employment.startDate} — ${employment.endDate}`)}
             </Typography>
           </Stack>
         </AccordionSummary>
@@ -192,7 +194,27 @@ const EmploymentHistorySectionForm: FunctionComponent<{
       </Accordion>
     ))}
     <Tooltip title="Add Employment">
-      <Button startIcon={<AddOutlined />}></Button>
+      <Button
+        startIcon={<AddOutlined />}
+        onClick={() =>
+          props.setSection({
+            ...props.section,
+            employments: [
+              ...props.section.employments,
+              {
+                // TODO generate uid
+                uid: Math.random().toString(10),
+                jobTitle: '',
+                employer: '',
+                location: '',
+                startDate: '',
+                endDate: '',
+                achievements: [],
+              },
+            ],
+          })
+        }
+      />
     </Tooltip>
   </Stack>
 )
@@ -203,6 +225,7 @@ export const EmploymentForm: FunctionComponent<{
   <Stack gap={2}>
     <PropTextEditor
       label="Worked as"
+      placeholder="Job Title"
       propName={'jobTitle'}
       value={props.employment}
       setValue={props.setEmployment}
@@ -215,6 +238,7 @@ export const EmploymentForm: FunctionComponent<{
     >
       <PropTextEditor
         label="at"
+        placeholder="Employer"
         propName={'employer'}
         value={props.employment}
         setValue={props.setEmployment}
@@ -223,6 +247,7 @@ export const EmploymentForm: FunctionComponent<{
       />
       <PropTextEditor
         label="in"
+        placeholder="Location"
         propName={'location'}
         value={props.employment}
         setValue={props.setEmployment}
@@ -236,6 +261,7 @@ export const EmploymentForm: FunctionComponent<{
     >
       <PropTextEditor
         label="from"
+        placeholder="Start Date"
         propName={'startDate'}
         value={props.employment}
         setValue={props.setEmployment}
@@ -244,6 +270,7 @@ export const EmploymentForm: FunctionComponent<{
       />
       <PropTextEditor
         label="to"
+        placeholder="End Date"
         propName={'endDate'}
         value={props.employment}
         setValue={props.setEmployment}
