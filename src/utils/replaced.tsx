@@ -1,6 +1,6 @@
 export const replaced = <T,>(
   arr: T[],
-  where: (it: T) => boolean,
+  where: (it: T, index: number) => boolean,
   withItem: T,
 ): T[] => {
   const index = arr.findIndex(where)

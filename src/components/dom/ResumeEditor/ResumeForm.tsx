@@ -24,6 +24,7 @@ import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
 import { Box } from '@mui/system'
 import { Expand, ExpandMore } from '@mui/icons-material'
+import { replaced } from '@/utils/replaced'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -245,6 +246,41 @@ export const EmploymentForm: FunctionComponent<{
         fullWidth
       />
     </Box>
+    <Stack>
+      <Typography
+        variant="caption"
+        sx={{ color: 'text.secondary' }}
+      >
+        Achievements
+      </Typography>
+      <Stack
+        component="ul"
+        gap={1}
+      >
+        {props.employment.achievements.map((achievement, index) => (
+          <Box
+            component="li"
+            key={index}
+          >
+            <TextField
+              value={achievement}
+              onChange={({ target }) =>
+                props.setEmployment({
+                  ...props.employment,
+                  achievements: replaced(
+                    props.employment.achievements,
+                    (_, i) => i === index,
+                    target.value,
+                  ),
+                })
+              }
+              multiline
+              fullWidth
+            />
+          </Box>
+        ))}
+      </Stack>
+    </Stack>
   </Stack>
 )
 
