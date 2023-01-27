@@ -8,6 +8,9 @@ import {
   SkillSection,
 } from '@/model/resume'
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Autocomplete,
   Chip,
   Divider,
@@ -18,6 +21,7 @@ import {
 import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
+import { ExpandMore } from '@mui/icons-material'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -122,19 +126,14 @@ const DetailsSectionForm: FunctionComponent<{
   setSection: Setter<ResumeSection>
 }> = (props) => (
   <Stack gap={2}>
-    <Typography
-      variant="h2"
-      sx={{ color: 'text.secondary' }}
-    >
-      {props.section.header}
-    </Typography>
     <PropTextEditor
-      label="Header"
+      label="Details Header"
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
     />
     <PropTextEditor
+      multiline
       label="Description"
       propName={'description'}
       value={props.section}
@@ -148,14 +147,8 @@ const EmploymentHistorySectionForm: FunctionComponent<{
   setSection: Setter<ResumeSection>
 }> = (props) => (
   <Stack gap={2}>
-    <Typography
-      variant="h2"
-      sx={{ color: 'text.secondary' }}
-    >
-      Employment History
-    </Typography>
     <PropTextEditor
-      label="Header"
+      label="Employment History Header"
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
@@ -168,14 +161,8 @@ const SkillSectionForm: FunctionComponent<{
   setSection: Setter<ResumeSection>
 }> = (props) => (
   <Stack gap={2}>
-    <Typography
-      variant="h2"
-      sx={{ color: 'text.secondary' }}
-    >
-      Skills
-    </Typography>
     <PropTextEditor
-      label="Header"
+      label="Skills Header"
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
@@ -198,45 +185,53 @@ export const SkillCategoryForm: FunctionComponent<{
   skillCategory: SkillCategory
   setSkillCategory: Setter<SkillCategory>
 }> = (props) => (
-  <Stack>
-    <PropTextEditor
-      label="Header"
-      propName={'header'}
-      variant="standard"
-      value={props.skillCategory}
-      setValue={props.setSkillCategory}
-    />
-    <Autocomplete
-      multiple
-      options={[]}
-      defaultValue={[]}
-      value={props.skillCategory.skills}
-      onChange={(e, newValue) =>
-        props.setSkillCategory({
-          ...props.skillCategory,
-          skills: newValue,
-        })
-      }
-      freeSolo
-      renderTags={(value: readonly string[], getTagProps) =>
-        value.map((option, index) => (
-          <Chip
-            variant="outlined"
-            color="default"
-            label={option}
-            {...getTagProps({ index })}
-            key={index}
-          />
-        ))
-      }
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          variant="standard"
-          label="Skills"
-          placeholder="Your skill"
+  <Accordion
+    variant="outlined"
+    sx={{ borderRadius: 2, overflow: 'hidden' }}
+  >
+    <AccordionSummary expandIcon={<ExpandMore />}>
+      <PropTextEditor
+        propName={'header'}
+        value={props.skillCategory}
+        setValue={props.setSkillCategory}
+        onClick={(e) => e.preventDefault()}
+      />
+    </AccordionSummary>
+    <AccordionDetails>
+      <Stack gap={2}>
+        <Autocomplete
+          multiple
+          options={[]}
+          defaultValue={[]}
+          value={props.skillCategory.skills}
+          onChange={(e, newValue) =>
+            props.setSkillCategory({
+              ...props.skillCategory,
+              skills: newValue,
+            })
+          }
+          freeSolo
+          renderTags={(value: readonly string[], getTagProps) =>
+            value.map((option, index) => (
+              <Chip
+                variant="filled"
+                color="default"
+                label={option}
+                {...getTagProps({ index })}
+                key={index}
+              />
+            ))
+          }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="Skills"
+              placeholder="Your skill"
+            />
+          )}
         />
-      )}
-    />
-  </Stack>
+      </Stack>
+    </AccordionDetails>
+  </Accordion>
 )
