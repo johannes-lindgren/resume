@@ -13,17 +13,19 @@ import {
   AccordionDetails,
   AccordionSummary,
   Autocomplete,
+  Button,
   Chip,
   Divider,
   Stack,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
 import { Box } from '@mui/system'
-import { Expand, ExpandMore } from '@mui/icons-material'
+import { AddOutlined, ExpandMore } from '@mui/icons-material'
 import { replaced } from '@/utils/replaced'
 
 export const ResumeForm: FunctionComponent<{
@@ -189,6 +191,9 @@ const EmploymentHistorySectionForm: FunctionComponent<{
         </AccordionDetails>
       </Accordion>
     ))}
+    <Tooltip title="Add Employment">
+      <Button startIcon={<AddOutlined />}></Button>
+    </Tooltip>
   </Stack>
 )
 export const EmploymentForm: FunctionComponent<{
@@ -279,6 +284,9 @@ export const EmploymentForm: FunctionComponent<{
             />
           </Box>
         ))}
+        <Tooltip title="Add Achievement">
+          <Button startIcon={<AddOutlined />}></Button>
+        </Tooltip>
       </Stack>
     </Stack>
   </Stack>
@@ -306,6 +314,9 @@ const SkillSectionForm: FunctionComponent<{
         )}
       />
     ))}
+    <Tooltip title="Add Skill Category">
+      <Button startIcon={<AddOutlined />}></Button>
+    </Tooltip>
   </Stack>
 )
 
