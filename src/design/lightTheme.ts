@@ -44,6 +44,16 @@ export const lightTheme = createTheme({
     },
   },
   components: {
+    MuiIconButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          '&:hover': {
+            color: theme.palette.primary.main,
+            background: 'none',
+          },
+        }),
+      },
+    },
     MuiInput: {
       defaultProps: {
         disableUnderline: true,

@@ -16,6 +16,7 @@ import {
   Button,
   Chip,
   Divider,
+  IconButton,
   InputBase,
   Stack,
   TextField,
@@ -26,8 +27,18 @@ import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
 import { Box } from '@mui/system'
-import { AddOutlined, ExpandMore } from '@mui/icons-material'
+import {
+  AddOutlined,
+  DeleteOutlineRounded,
+  ExpandLessRounded,
+  ExpandMore,
+  ExpandMoreRounded,
+} from '@mui/icons-material'
 import { replaced } from '@/utils/replaced'
+import { Hoverable } from '@/components/dom/ResumeEditor/Hoverable'
+import { without } from '@/utils/without'
+import { movedUp } from '@/utils/movedUp'
+import { movedDown } from '@/utils/movedDown'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -334,16 +345,74 @@ const SkillSectionForm: FunctionComponent<{
       inputProps={{ sx: { typography: 'h2' } }}
       placeholder="Skills"
     />
-    {props.section.skillCategories.map((skillCategory) => (
-      <SkillCategoryForm
+    {props.section.skillCategories.map((skillCategory, index) => (
+      <Hoverable
         key={skillCategory.uid}
-        skillCategory={skillCategory}
-        setSkillCategory={arraySetter(
-          props.section,
-          props.setSection,
-          'skillCategories',
-        )}
-      />
+        left={
+          <Stack>
+            <IconButton
+              color="inherit"
+              size="small"
+              disabled={index === 0}
+              onClick={() =>
+                props.setSection({
+                  ...props.section,
+                  skillCategories: movedDown(
+                    props.section.skillCategories,
+                    (it) => it.uid === skillCategory.uid,
+                  ),
+                })
+              }
+            >
+              <ExpandLessRounded fontSize="inherit" />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              size="small"
+              disabled={index === props.section.skillCategories.length - 1}
+              onClick={() =>
+                props.setSection({
+                  ...props.section,
+                  skillCategories: movedUp(
+                    props.section.skillCategories,
+                    (it) => it.uid === skillCategory.uid,
+                  ),
+                })
+              }
+            >
+              <ExpandMoreRounded fontSize="inherit" />
+            </IconButton>
+          </Stack>
+        }
+        right={
+          <IconButton
+            size="small"
+            color="inherit"
+          >
+            <DeleteOutlineRounded
+              fontSize="inherit"
+              onClick={() =>
+                props.setSection({
+                  ...props.section,
+                  skillCategories: without(
+                    props.section.skillCategories,
+                    (it) => it.uid === skillCategory.uid,
+                  ),
+                })
+              }
+            />
+          </IconButton>
+        }
+      >
+        <SkillCategoryForm
+          skillCategory={skillCategory}
+          setSkillCategory={arraySetter(
+            props.section,
+            props.setSection,
+            'skillCategories',
+          )}
+        />
+      </Hoverable>
     ))}
     <Tooltip title="Add Skill Category">
       <Button
@@ -377,7 +446,6 @@ export const SkillCategoryForm: FunctionComponent<{
       propName={'header'}
       value={props.skillCategory}
       setValue={props.setSkillCategory}
-      onClick={(e) => e.preventDefault()}
       inputProps={{ sx: { typography: 'subtitle1' } }}
     />
     <Autocomplete
@@ -400,6 +468,12 @@ export const SkillCategoryForm: FunctionComponent<{
             label={option}
             {...getTagProps({ index })}
             key={index}
+            sx={{
+              mr: (theme) =>
+                `${theme.spacing(
+                  index === props.skillCategory.skills.length - 1 ? 1 : 0,
+                )} !important`,
+            }}
           />
         ))
       }
@@ -410,9 +484,6 @@ export const SkillCategoryForm: FunctionComponent<{
           placeholder="Type & Press Enter"
           inputProps={{
             ...params.inputProps,
-            sx: {
-              ml: 1,
-            },
           }}
         />
       )}
