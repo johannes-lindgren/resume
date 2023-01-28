@@ -1,13 +1,13 @@
 import { Setter } from '@/utils/Setter'
 import { Hoverable } from '@/components/dom/ResumeEditor/Hoverable'
 import { IconButton, Stack } from '@mui/material'
-import { movedDown } from '@/utils/movedDown'
+import { movedLeft } from '@/utils/movedLeft'
 import {
   DeleteOutlineRounded,
   ExpandLessRounded,
   ExpandMoreRounded,
 } from '@mui/icons-material'
-import { movedUp } from '@/utils/movedUp'
+import { movedRight } from '@/utils/movedRight'
 import { without } from '@/utils/without'
 import { arraySetter } from '@/utils/arraySetter'
 import { SkillCategoryForm } from '@/components/dom/ResumeEditor/ResumeForm'
@@ -18,14 +18,14 @@ export const Rearrangeable = <
   Parent extends { [k in Key]: Child[] },
   Child extends { uid: string },
 >(props: {
-  index: number
-  setSection: Setter<Parent>
+  currentIndex: number
+  setParent: Setter<Parent>
   parent: Parent
   propName: string
-  skillCategory: Child
+  current: Child
   children: ReactNode
 }) => {
-  const { index, setSection, parent, skillCategory, propName, children } = props
+  const { currentIndex, setParent, parent, current, propName, children } = props
   return (
     <Hoverable
       left={
@@ -33,13 +33,13 @@ export const Rearrangeable = <
           <IconButton
             color="inherit"
             size="small"
-            disabled={index === 0}
+            disabled={currentIndex === 0}
             onClick={() =>
-              setSection({
+              setParent({
                 ...parent,
-                skillCategories: movedDown(
+                [propName]: movedLeft(
                   parent[propName],
-                  (it) => it.uid === skillCategory.uid,
+                  (it) => it.uid === current.uid,
                 ),
               })
             }
@@ -49,13 +49,13 @@ export const Rearrangeable = <
           <IconButton
             color="inherit"
             size="small"
-            disabled={index === parent[propName].length - 1}
+            disabled={currentIndex === parent[propName].length - 1}
             onClick={() =>
-              setSection({
+              setParent({
                 ...parent,
-                [propName]: movedUp(
+                [propName]: movedRight(
                   parent[propName],
-                  (it) => it.uid === skillCategory.uid,
+                  (it) => it.uid === current.uid,
                 ),
               })
             }
@@ -72,11 +72,11 @@ export const Rearrangeable = <
           <DeleteOutlineRounded
             fontSize="inherit"
             onClick={() =>
-              setSection({
+              setParent({
                 ...parent,
-                skillCategories: without(
+                [propName]: without(
                   parent[propName],
-                  (it) => it.uid === skillCategory.uid,
+                  (it) => it.uid === current.uid,
                 ),
               })
             }

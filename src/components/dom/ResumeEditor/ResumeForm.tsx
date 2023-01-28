@@ -158,36 +158,45 @@ const EmploymentHistorySectionForm: FunctionComponent<{
       setValue={props.setSection}
       inputProps={{ sx: { typography: 'h2' } }}
     />
-    {props.section.employments.map((employment) => (
-      <Accordion
+    {props.section.employments.map((employment, index) => (
+      <Rearrangeable
         key={employment.uid}
-        variant="outlined"
-        disableGutters
+        setParent={props.setSection}
+        parent={props.section}
+        propName="employments"
+        current={employment}
+        currentIndex={index}
       >
-        <AccordionSummary expandIcon={<ExpandMore />}>
-          <Stack>
-            <Typography>{employment.jobTitle}&nbsp;</Typography>
-            <Typography
-              variant="body2"
-              sx={{ color: 'text.secondary' }}
-            >
-              {employment.startDate ||
-                (employment.endDate &&
-                  `${employment.startDate} — ${employment.endDate}`)}
-            </Typography>
-          </Stack>
-        </AccordionSummary>
-        <AccordionDetails>
-          <EmploymentForm
-            employment={employment}
-            setEmployment={arraySetter(
-              props.section,
-              props.setSection,
-              'employments',
-            )}
-          />
-        </AccordionDetails>
-      </Accordion>
+        <Accordion
+          key={employment.uid}
+          variant="outlined"
+          disableGutters
+        >
+          <AccordionSummary expandIcon={<ExpandMore />}>
+            <Stack>
+              <Typography>{employment.jobTitle}&nbsp;</Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: 'text.secondary' }}
+              >
+                {employment.startDate ||
+                  (employment.endDate &&
+                    `${employment.startDate} — ${employment.endDate}`)}
+              </Typography>
+            </Stack>
+          </AccordionSummary>
+          <AccordionDetails>
+            <EmploymentForm
+              employment={employment}
+              setEmployment={arraySetter(
+                props.section,
+                props.setSection,
+                'employments',
+              )}
+            />
+          </AccordionDetails>
+        </Accordion>
+      </Rearrangeable>
     ))}
     <AddButton
       onClick={() =>
@@ -336,12 +345,11 @@ const SkillSectionForm: FunctionComponent<{
     {props.section.skillCategories.map((skillCategory, index) => (
       <Rearrangeable
         key={skillCategory.uid}
-        propName={skillCategory.uid}
-        setSection={props.setSection}
-        skillCategory={skillCategory}
-        index={index}
+        setParent={props.setSection}
         parent={props.section}
         propName="skillCategories"
+        current={skillCategory}
+        currentIndex={index}
       >
         <SkillCategoryForm
           skillCategory={skillCategory}

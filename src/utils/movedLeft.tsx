@@ -1,4 +1,4 @@
-export const movedDown = <T,>(
+export const movedLeft = <T,>(
   arr: T[],
   where: (it: T, index: number) => boolean,
 ): T[] => {
