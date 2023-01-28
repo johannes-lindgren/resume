@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic'
 import { Box, Button, Stack, styled } from '@mui/material'
 import { johannesResume } from '@/tmp/johannesResume'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
-import { DownloadRounded, SaveRounded } from '@mui/icons-material'
+import { DownloadForOffline, SaveRounded } from '@mui/icons-material'
 
 // Register font
 Font.register({
@@ -80,11 +80,50 @@ export const ResumeEditor: FunctionComponent = () => {
         </Box>
         <Box
           display="flex"
-          flexDirection="row-reverse"
+          justifyContent="right"
+          gap={1}
         >
+          <DownloadBlobButton
+            obj={resume}
+            suggestedName={`${resume.name}'s resumé.json`}
+          />
           <DownloadResumeButton document={doc} />
         </Box>
       </ResumeContainer>
     </Split>
+  )
+}
+
+export const DownloadBlobButton: FunctionComponent<{
+  obj: unknown
+  suggestedName: string
+}> = (props) => {
+  const handleClick = async () => {
+    const json = JSON.stringify(props.obj)
+    const blob = new Blob([json], {
+      type: 'text/json;charset=utf-8',
+    })
+    const blobUrl = URL.createObjectURL(blob)
+
+    const anchor = document.createElement('a')
+    anchor.href = blobUrl
+    anchor.target = '_blank'
+    anchor.download = props.suggestedName
+    // Auto click on a element, trigger the file download
+    anchor.click()
+
+    // This is required (and important)
+    URL.revokeObjectURL(blobUrl)
+  }
+
+  return (
+    <Button
+      startIcon={<SaveRounded />}
+      color="inherit"
+      variant="outlined"
+      onClick={handleClick}
+    >
+      Save to file system
+    </Button>
   )
 }
