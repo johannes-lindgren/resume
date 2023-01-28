@@ -9,8 +9,6 @@ import {
 } from '@mui/icons-material'
 import { movedRight } from '@/utils/movedRight'
 import { without } from '@/utils/without'
-import { arraySetter } from '@/utils/arraySetter'
-import { SkillCategoryForm } from '@/components/dom/ResumeEditor/ResumeForm'
 import { ReactNode } from 'react'
 
 export const Rearrangeable = <
