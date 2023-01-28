@@ -4,11 +4,8 @@ import {
   ReactElement,
   useEffect,
 } from 'react'
-import { Resume } from '@/model/resume'
 import ReactPDF, { usePDF } from '@react-pdf/renderer'
-import { ResumeView } from '@/components/pdf/Resume'
-import { theme } from '@/design/Theme'
-import { Alert, Box, Button, CircularProgress, styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import { DownloadRounded, ErrorOutlineRounded } from '@mui/icons-material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
