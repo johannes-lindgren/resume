@@ -39,6 +39,7 @@ import { Hoverable } from '@/components/dom/ResumeEditor/Hoverable'
 import { without } from '@/utils/without'
 import { movedUp } from '@/utils/movedUp'
 import { movedDown } from '@/utils/movedDown'
+import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -346,63 +347,14 @@ const SkillSectionForm: FunctionComponent<{
       placeholder="Skills"
     />
     {props.section.skillCategories.map((skillCategory, index) => (
-      <Hoverable
+      <Rearrangeable
         key={skillCategory.uid}
-        left={
-          <Stack>
-            <IconButton
-              color="inherit"
-              size="small"
-              disabled={index === 0}
-              onClick={() =>
-                props.setSection({
-                  ...props.section,
-                  skillCategories: movedDown(
-                    props.section.skillCategories,
-                    (it) => it.uid === skillCategory.uid,
-                  ),
-                })
-              }
-            >
-              <ExpandLessRounded fontSize="inherit" />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              size="small"
-              disabled={index === props.section.skillCategories.length - 1}
-              onClick={() =>
-                props.setSection({
-                  ...props.section,
-                  skillCategories: movedUp(
-                    props.section.skillCategories,
-                    (it) => it.uid === skillCategory.uid,
-                  ),
-                })
-              }
-            >
-              <ExpandMoreRounded fontSize="inherit" />
-            </IconButton>
-          </Stack>
-        }
-        right={
-          <IconButton
-            size="small"
-            color="inherit"
-          >
-            <DeleteOutlineRounded
-              fontSize="inherit"
-              onClick={() =>
-                props.setSection({
-                  ...props.section,
-                  skillCategories: without(
-                    props.section.skillCategories,
-                    (it) => it.uid === skillCategory.uid,
-                  ),
-                })
-              }
-            />
-          </IconButton>
-        }
+        propName={skillCategory.uid}
+        setSection={props.setSection}
+        skillCategory={skillCategory}
+        index={index}
+        parent={props.section}
+        propName="skillCategories"
       >
         <SkillCategoryForm
           skillCategory={skillCategory}
@@ -412,7 +364,7 @@ const SkillSectionForm: FunctionComponent<{
             'skillCategories',
           )}
         />
-      </Hoverable>
+      </Rearrangeable>
     ))}
     <Tooltip title="Add Skill Category">
       <Button
