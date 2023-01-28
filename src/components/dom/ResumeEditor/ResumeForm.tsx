@@ -179,9 +179,8 @@ const EmploymentHistorySectionForm: FunctionComponent<{
                 variant="body2"
                 sx={{ color: 'text.secondary' }}
               >
-                {employment.startDate ||
-                  (employment.endDate &&
-                    `${employment.startDate} — ${employment.endDate}`)}
+                {(employment.startDate || employment.endDate) &&
+                  `${employment.startDate} — ${employment.endDate}`}
               </Typography>
             </Stack>
           </AccordionSummary>
