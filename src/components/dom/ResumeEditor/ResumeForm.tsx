@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, ReactNode } from 'react'
 import {
   DetailsSection,
   Employment,
@@ -20,25 +20,14 @@ import {
   InputBase,
   Stack,
   TextField,
-  Tooltip,
   Typography,
 } from '@mui/material'
 import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
 import { Box } from '@mui/system'
-import {
-  AddOutlined,
-  DeleteOutlineRounded,
-  ExpandLessRounded,
-  ExpandMore,
-  ExpandMoreRounded,
-} from '@mui/icons-material'
+import { AddOutlined, ExpandMore } from '@mui/icons-material'
 import { replaced } from '@/utils/replaced'
-import { Hoverable } from '@/components/dom/ResumeEditor/Hoverable'
-import { without } from '@/utils/without'
-import { movedUp } from '@/utils/movedUp'
-import { movedDown } from '@/utils/movedDown'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 
 export const ResumeForm: FunctionComponent<{
@@ -200,29 +189,28 @@ const EmploymentHistorySectionForm: FunctionComponent<{
         </AccordionDetails>
       </Accordion>
     ))}
-    <Tooltip title="Add Employment">
-      <Button
-        startIcon={<AddOutlined />}
-        onClick={() =>
-          props.setSection({
-            ...props.section,
-            employments: [
-              ...props.section.employments,
-              {
-                // TODO generate uid
-                uid: Math.random().toString(10),
-                jobTitle: '',
-                employer: '',
-                location: '',
-                startDate: '',
-                endDate: '',
-                achievements: [],
-              },
-            ],
-          })
-        }
-      />
-    </Tooltip>
+    <AddButton
+      onClick={() =>
+        props.setSection({
+          ...props.section,
+          employments: [
+            ...props.section.employments,
+            {
+              // TODO generate uid
+              uid: Math.random().toString(10),
+              jobTitle: '',
+              employer: '',
+              location: '',
+              startDate: '',
+              endDate: '',
+              achievements: [],
+            },
+          ],
+        })
+      }
+    >
+      Add one more employment
+    </AddButton>
   </Stack>
 )
 export const EmploymentForm: FunctionComponent<{
@@ -318,17 +306,16 @@ export const EmploymentForm: FunctionComponent<{
             />
           </Box>
         ))}
-        <Tooltip title="Add Achievement">
-          <Button
-            startIcon={<AddOutlined />}
-            onClick={({ target }) =>
-              props.setEmployment({
-                ...props.employment,
-                achievements: [...props.employment.achievements, ''],
-              })
-            }
-          ></Button>
-        </Tooltip>
+        <AddButton
+          onClick={() =>
+            props.setEmployment({
+              ...props.employment,
+              achievements: [...props.employment.achievements, ''],
+            })
+          }
+        >
+          Add one more achievement
+        </AddButton>
       </Stack>
     </Stack>
   </Stack>
@@ -366,25 +353,24 @@ const SkillSectionForm: FunctionComponent<{
         />
       </Rearrangeable>
     ))}
-    <Tooltip title="Add Skill Category">
-      <Button
-        startIcon={<AddOutlined />}
-        onClick={() =>
-          props.setSection({
-            ...props.section,
-            skillCategories: [
-              ...props.section.skillCategories,
-              {
-                // TODO generate
-                header: '',
-                uid: Math.random().toString(10),
-                skills: [],
-              },
-            ],
-          })
-        }
-      ></Button>
-    </Tooltip>
+    <AddButton
+      onClick={() =>
+        props.setSection({
+          ...props.section,
+          skillCategories: [
+            ...props.section.skillCategories,
+            {
+              // TODO generate
+              header: '',
+              uid: Math.random().toString(10),
+              skills: [],
+            },
+          ],
+        })
+      }
+    >
+      Add one more skill
+    </AddButton>
   </Stack>
 )
 
@@ -441,4 +427,17 @@ export const SkillCategoryForm: FunctionComponent<{
       )}
     />
   </Stack>
+)
+
+const AddButton: FunctionComponent<{
+  children: ReactNode
+  onClick: () => void
+}> = (props) => (
+  <Button
+    sx={{ alignSelf: 'flex-start' }}
+    startIcon={<AddOutlined />}
+    onClick={props.onClick}
+  >
+    {props.children}
+  </Button>
 )

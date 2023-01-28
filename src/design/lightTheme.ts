@@ -42,6 +42,9 @@ export const lightTheme = createTheme({
     h6: {
       fontSize: '0.8rem',
     },
+    button: {
+      textTransform: 'initial',
+    },
   },
   components: {
     MuiIconButton: {
