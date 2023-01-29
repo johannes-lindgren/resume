@@ -1,16 +1,11 @@
 import React, { FunctionComponent } from 'react'
-import {
-  DetailsSection,
-  EmploymentHistorySection,
-  ResumeSection,
-} from '@/model/resume'
-import { StyleSheet, Text, View } from '@react-pdf/renderer'
+import { DetailsSection, ResumeSection } from '@/model/resume'
+import { StyleSheet, Text } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'
 import { Style } from '@react-pdf/types'
-import { joinStyles } from '@/utils/joinStyles'
-import { EmploymentView } from '@/components/pdf/Resume/EmploymentView'
 import { Stack } from '@/components/pdf/Stack'
 import { SkillSectionView } from '@/components/pdf/Resume/SkillSectionView'
+import { EmploymentHistorySectionView } from '@/components/pdf/Resume/EmploymentHistorySectionView'
 
 const styles = StyleSheet.create({
   header: {
@@ -58,26 +53,9 @@ export const DetailsSectionView: FunctionComponent<{
   <Stack
     style={props.style}
     gap={2}
+    wrap={false}
   >
     <Text style={{ ...theme.typography.header2 }}>{props.section.header}</Text>
     <Text>{props.section.description}</Text>
-  </Stack>
-)
-
-export const EmploymentHistorySectionView: FunctionComponent<{
-  section: EmploymentHistorySection
-  style?: Style | Style[] | undefined
-}> = (props) => (
-  <Stack
-    style={props.style}
-    gap={3}
-  >
-    <Text style={{ ...theme.typography.header2 }}>{props.section.header}</Text>
-    {props.section.employments.map((employment, index) => (
-      <EmploymentView
-        key={index}
-        emloyment={employment}
-      />
-    ))}
   </Stack>
 )

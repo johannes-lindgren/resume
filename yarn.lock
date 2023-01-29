@@ -500,20 +500,20 @@
     "@react-pdf/png-js" "^2.2.0"
     cross-fetch "^3.1.5"
 
-"@react-pdf/layout@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.npmjs.org/@react-pdf/layout/-/layout-3.2.1.tgz"
-  integrity sha512-IgWaI89jFyGCTYcQwq2wAk7mOfaewqgpHmUTgb0StMM1ihK8+ESAWjEz+kjOxflMfxb7bx7qUZdn9mPxnN1SjQ==
+"@react-pdf/layout@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@react-pdf/layout/-/layout-3.3.0.tgz#87becc678500d527d2b9d2660d2c72a1fe4cfb7a"
+  integrity sha512-IC6xx7alPV7+Wm5LZfThfWVxtQVnVwWb3WAB/iSiq13esYzLW8VnxnHj0K37ST1u56S7OuFqV2HeMOGL6oQvKA==
   dependencies:
     "@babel/runtime" "^7.16.4"
     "@react-pdf/fns" "2.0.0"
     "@react-pdf/image" "^2.2.0"
     "@react-pdf/pdfkit" "^3.0.0"
     "@react-pdf/primitives" "^3.0.0"
-    "@react-pdf/stylesheet" "^4.0.0"
+    "@react-pdf/stylesheet" "^4.1.0"
     "@react-pdf/textkit" "^4.1.0"
-    "@react-pdf/types" "^2.1.0"
-    "@react-pdf/yoga" "^3.0.0"
+    "@react-pdf/types" "^2.2.0"
+    "@react-pdf/yoga" "^4.0.0"
     cross-fetch "^3.1.5"
     emoji-regex "^8.0.0"
     queue "^6.0.1"
@@ -558,30 +558,32 @@
     parse-svg-path "^0.1.2"
     svg-arc-to-cubic-bezier "^3.2.0"
 
-"@react-pdf/renderer@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@react-pdf/renderer/-/renderer-3.0.2.tgz"
-  integrity sha512-lrYZWEZzt0P0Cdz6/My03+gDs//g++LeHjWzBM8dZYCad3HBa3EFFDZjosD+jyq3VYvetGN9bqzwTg+ODhx+8g==
+"@react-pdf/renderer@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@react-pdf/renderer/-/renderer-3.1.1.tgz#93f51523b65d7b364f75ba5a5c9f3a62f0cfa27b"
+  integrity sha512-ZGoE3V1p5tGLmV5yJcSVN2kew4QXZnPm8wLvPeVbKwO6MOqN8Tsw/SkatVAokF1pEEYyx1nH81rwuzQb8Nf+7A==
   dependencies:
     "@babel/runtime" "^7.16.4"
     "@react-pdf/font" "^2.3.1"
-    "@react-pdf/layout" "^3.2.1"
+    "@react-pdf/layout" "^3.3.0"
     "@react-pdf/pdfkit" "^3.0.1"
     "@react-pdf/primitives" "^3.0.0"
     "@react-pdf/render" "^3.2.1"
-    "@react-pdf/types" "^2.1.1"
+    "@react-pdf/types" "^2.2.0"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
     queue "^6.0.1"
-    react-reconciler "^0.23.0"
     scheduler "^0.17.0"
 
-"@react-pdf/stylesheet@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/@react-pdf/stylesheet/-/stylesheet-4.0.0.tgz"
-  integrity sha512-R+17y/HpSmOBeFPaqH7P8R0Y7AbjM3izVZWYgM5BhQ52PdyTroIkVRMPEPTDSGXPGmsCS3lvyXFnjKOi+LdSgw==
+"@react-pdf/stylesheet@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@react-pdf/stylesheet/-/stylesheet-4.1.0.tgz#bb9b4f4a1e27c5043b0f0ed863d8bf7841a9cbc0"
+  integrity sha512-DqFABbyN4VfikeBiXVS4orXrufJ3zevgHeaCE5FeOBuJ6nerEpvQZc4ulozrqG+yBBnxQZI6H5MnmjCfS03T7w==
   dependencies:
     "@babel/runtime" "^7.16.4"
     "@react-pdf/fns" "2.0.0"
-    "@react-pdf/types" "^2.1.0"
+    "@react-pdf/types" "^2.2.0"
     color-string "^1.5.3"
     hsl-to-hex "^1.0.0"
     media-engine "^1.0.3"
@@ -597,17 +599,20 @@
     hyphen "^1.6.4"
     unicode-properties "^1.4.1"
 
-"@react-pdf/types@^2.0.9", "@react-pdf/types@^2.1.0", "@react-pdf/types@^2.1.1":
+"@react-pdf/types@^2.0.9", "@react-pdf/types@^2.1.0":
   version "2.1.1"
   resolved "https://registry.npmjs.org/@react-pdf/types/-/types-2.1.1.tgz"
   integrity sha512-wMv2FCSyQHMCWeQa/Bwnd3eZc/4HtRrB10HMObPzT6E5fIsmv25tPdqfpuQ1bU9u306q/POKAGEvjCnDLX9B6g==
 
-"@react-pdf/yoga@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/@react-pdf/yoga/-/yoga-3.0.0.tgz"
-  integrity sha512-vGgvriAIH1Tk1RO6xtQeHc3iPM1pAz+Vz1WZ9wRlsXsuBAk7ZhtbHxrf9F7O3sFPORcMryihdtqpBeq2ZzMtNQ==
-  dependencies:
-    "@types/yoga-layout" "^1.9.3"
+"@react-pdf/types@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@react-pdf/types/-/types-2.2.0.tgz#4fe4481abc20b9b1366515f063f387a6f8488ce2"
+  integrity sha512-sJDzaeTVcwmZId1uaTHxW0CT5BKUHP5yzvjAAsEqur+kFD/qGZB02ahi5RQuvscnqDofcks3QR0sB78dR0Pp0g==
+
+"@react-pdf/yoga@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@react-pdf/yoga/-/yoga-4.0.0.tgz#736257322e2628b54382d345161d97ff5a748090"
+  integrity sha512-MoYkG7I06IVerl6lrT/T8kLjagDNY4+rlsNugyGhKjgzNt1QD0XgRtDBbH4PkSS7ym20i0xij270itSORgYoNQ==
 
 "@rushstack/eslint-patch@^1.1.3":
   version "1.2.0"
@@ -675,11 +680,6 @@
   version "0.16.2"
   resolved "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.2.tgz"
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
-
-"@types/yoga-layout@^1.9.3":
-  version "1.9.4"
-  resolved "https://registry.npmjs.org/@types/yoga-layout/-/yoga-layout-1.9.4.tgz"
-  integrity sha512-RRHc1+8Hc5mf/2lZKnom6kCnqcNS07s8keahniWTOva0KELF6RgDJmaEcvGEKUUJgN4UgessmEsWuidaOycIOw==
 
 "@typescript-eslint/parser@^5.42.0":
   version "5.48.1"
@@ -2558,16 +2558,6 @@ react-is@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
-
-react-reconciler@^0.23.0:
-  version "0.23.0"
-  resolved "https://registry.npmjs.org/react-reconciler/-/react-reconciler-0.23.0.tgz"
-  integrity sha512-vV0KlLimP9a/NuRcM6GRVakkmT6MKSzhfo8K72fjHMnlXMOhz9GlPe+/tCp5CWBkg+lsMUt/CR1nypJBTPfwuw==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.17.0"
 
 react-transition-group@^4.4.5:
   version "4.4.5"

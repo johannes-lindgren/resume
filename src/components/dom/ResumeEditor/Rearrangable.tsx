@@ -24,6 +24,7 @@ export const Rearrangeable = <
   children: ReactNode
 }) => {
   const { currentIndex, setParent, parent, current, propName, children } = props
+  // const currentIndex =
   return (
     <Hoverable
       left={

@@ -27,6 +27,7 @@ export const EmploymentView: FunctionComponent<{
   <Stack
     style={props.style}
     gap={2}
+    wrap={false}
   >
     <Stack gap={1}>
       <Text style={styles.header}>

@@ -7,7 +7,10 @@ import { theme } from '@/design/Theme'
 export const ContactDetailsView: FunctionComponent<{
   resume: Resume
 }> = (props) => (
-  <Stack style={theme.typography.caption}>
+  <Stack
+    style={theme.typography.caption}
+    wrap={false}
+  >
     {/*<Text style={{...theme.typography.header2}}>Contact Details</Text>*/}
     <Link src={`mailto:${props.resume.emailAddress}`}>
       <Text style={theme.typography.link}>{props.resume.emailAddress}</Text>

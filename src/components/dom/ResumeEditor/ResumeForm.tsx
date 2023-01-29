@@ -65,7 +65,6 @@ export const ResumeForm: FunctionComponent<{
         <Divider />
         <Rearrangeable
           key={section.uid}
-          key={section.uid}
           setParent={props.setResume}
           parent={props.resume}
           propName="sections"
