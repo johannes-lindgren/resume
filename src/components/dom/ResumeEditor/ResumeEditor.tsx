@@ -1,9 +1,7 @@
 import { FunctionComponent, useMemo, useState } from 'react'
 import { ResumeContainer } from '@/components/dom/ResumeContainer'
-// import {PdfDocument} from "@/components/dom/PdfDocument";
 import { ResumeView } from '@/components/pdf/Resume'
 import { Resume } from '@/model/resume'
-import { Font } from '@react-pdf/renderer'
 import { useThrottle } from '@/hooks/useThrottle'
 import dynamic from 'next/dynamic'
 import { Box, Stack, styled } from '@mui/material'

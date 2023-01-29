@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react'
-import { Document, Page, StyleSheet, View, Text } from '@react-pdf/renderer'
+import { Document, Page, StyleSheet } from '@react-pdf/renderer'
 import { Resume } from '@/model/resume'
 import { Header } from '@/components/pdf/Resume/Header'
 import { theme } from '@/design/Theme'
 import { SectionView } from '@/components/pdf/Resume/SectionView'
 import { Stack } from '@/components/pdf/Stack'
-import { SkillSectionView } from '@/components/pdf/Resume/SkillSectionView'
+import { PageCount } from '@/components/pdf/Resume/PageCount'
 
 const styles = StyleSheet.create({
   page: {
@@ -36,6 +36,7 @@ export const ResumeView: FunctionComponent<{
           />
         ))}
       </Stack>
+      <PageCount />
     </Page>
   </Document>
 )
