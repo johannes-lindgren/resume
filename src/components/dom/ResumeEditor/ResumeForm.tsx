@@ -55,71 +55,89 @@ export const ResumeForm: FunctionComponent<{
   resume: Resume
   setResume: Setter<Resume>
 }> = (props) => (
-  <Stack>
-    <Stack gap={2}>
-      <Stack>
-        <PropTextEditor
-          // variant="filled"
-          // label="Name"
-          propName={'name'}
-          value={props.resume}
-          setValue={props.setResume}
-          inputProps={{ sx: { typography: 'h1' } }}
-        />
-        <PropTextEditor
-          // variant="filled"
-          // label="Job Title"
-          propName={'jobTitle'}
-          value={props.resume}
-          setValue={props.setResume}
-          inputProps={{ sx: { typography: 'subtitle1' } }}
-        />
-      </Stack>
-      <PropTextEditor
-        variant="filled"
-        label="Country"
-        propName={'location'}
-        value={props.resume}
-        setValue={props.setResume}
-      />
-      <PropTextEditor
-        variant="filled"
-        label="Nationality"
-        propName={'nationality'}
-        value={props.resume}
-        setValue={props.setResume}
-      />
-      <PropTextEditor
-        variant="filled"
-        label="Email Address"
-        propName={'emailAddress'}
-        value={props.resume}
-        setValue={props.setResume}
-      />
-      <PropTextEditor
-        variant="filled"
-        label="Phone Number"
-        propName={'phoneNumber'}
-        value={props.resume}
-        setValue={props.setResume}
-      />
-    </Stack>
-    <Stack gap={4}>
-      {props.resume.sections.map((section) => (
-        <>
-          <Divider />
+  <Stack gap={4}>
+    <PersonalDetailsForm
+      resume={props.resume}
+      setResume={props.setResume}
+    />
+    {props.resume.sections.map((section, index) => (
+      <>
+        <Divider />
+        <Rearrangeable
+          key={section.uid}
+          key={section.uid}
+          setParent={props.setResume}
+          parent={props.resume}
+          propName="sections"
+          current={section}
+          currentIndex={index}
+        >
           <SectionForm
-            key={section.uid}
             section={section}
             setSection={arraySetter(props.resume, props.setResume, 'sections')}
           />
-        </>
-      ))}
-      <AddSectionsPanel
-        resume={props.resume}
-        setResume={props.setResume}
+        </Rearrangeable>
+      </>
+    ))}
+    <Divider />
+    <AddSectionsPanel
+      resume={props.resume}
+      setResume={props.setResume}
+    />
+  </Stack>
+)
+
+const PersonalDetailsForm: FunctionComponent<{
+  resume: Resume
+  setResume: Setter<Resume>
+}> = (props) => (
+  <Stack gap={2}>
+    <Stack>
+      <PropTextEditor
+        // label="Name"
+        placeholder="Full name"
+        propName={'name'}
+        value={props.resume}
+        setValue={props.setResume}
+        inputProps={{ sx: { typography: 'h1' } }}
+      />
+      <PropTextEditor
+        // label="Job Title"
+        placeholder="Job title"
+        propName={'jobTitle'}
+        value={props.resume}
+        setValue={props.setResume}
+        inputProps={{ sx: { typography: 'subtitle1' } }}
       />
     </Stack>
+    <PropTextEditor
+      variant="filled"
+      label="Country"
+      propName={'location'}
+      value={props.resume}
+      setValue={props.setResume}
+    />
+    <PropTextEditor
+      variant="filled"
+      label="Nationality"
+      propName={'nationality'}
+      value={props.resume}
+      setValue={props.setResume}
+    />
+    <PropTextEditor
+      variant="filled"
+      label="Email Address"
+      propName={'emailAddress'}
+      value={props.resume}
+      setValue={props.setResume}
+    />
+    <PropTextEditor
+      variant="filled"
+      label="Phone Number"
+      propName={'phoneNumber'}
+      value={props.resume}
+      setValue={props.setResume}
+    />
   </Stack>
 )
 

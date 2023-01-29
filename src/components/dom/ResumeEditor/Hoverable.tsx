@@ -14,37 +14,38 @@ export const Root = styled(Stack)(({ theme }) => ({
     transition: theme.transitions.create('opacity'),
   },
 }))
-const StyledBox = styled(Box)(({ theme }) => ({
+const HoverContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
   left: '0',
-  top: '50%',
+  top: '0',
   paddingLeft: theme.spacing(1),
   paddingRight: theme.spacing(1),
 }))
+
 export const Hoverable: FunctionComponent<{
   children?: ReactNode
   left?: ReactNode
   right?: ReactNode
 }> = (props) => (
   <Root>
-    <StyledBox
+    <HoverContainer
       className="Hoverable-left Hoverable-child"
       sx={{
         left: '0',
-        transform: 'translate(-100%, -50%)',
+        transform: 'translate(-100%, 0%)',
       }}
     >
       {props.left}
-    </StyledBox>
-    <StyledBox
+    </HoverContainer>
+    <HoverContainer
       className="Hoverable-right Hoverable-child"
       sx={{
         right: '0',
-        transform: 'translate(100%, -50%)',
+        transform: 'translate(100%, 0%)',
       }}
     >
       {props.right}
-    </StyledBox>
+    </HoverContainer>
     {props.children}
   </Root>
 )
