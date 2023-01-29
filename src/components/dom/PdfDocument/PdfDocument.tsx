@@ -33,6 +33,7 @@ Font.register({
     },
   ],
 })
+Font.registerHyphenationCallback((w) => [w])
 
 export const PdfDocument: FunctionComponent<
   ComponentProps<typeof PDFViewer>

@@ -11,12 +11,6 @@ import { johannesResume } from '@/tmp/johannesResume'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
 import { DownloadBlobButton } from '@/components/dom/DownloadBlobButton'
 
-// Register font
-Font.register({
-  family: 'Roboto',
-  src: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap',
-})
-
 const DownloadResumeButton = dynamic(
   () =>
     import('../DownloadPdfButton').then((module) => module.DownloadPdfButton),

@@ -16,12 +16,10 @@ export type Theme = {
   }
 }
 
-export type FontStyle = {
-  fontFamily: string
-  color: string
-  fontSize: string
-  fontWeight: number
-}
+export type FontStyle = Pick<
+  Style,
+  'fontFamily' | 'color' | 'fontSize' | 'fontWeight' | 'textAlign'
+>
 
 export type Palette = {
   background: string
@@ -81,6 +79,7 @@ export const theme: Theme = {
       fontFamily: bodyFont,
       fontWeight: bodyWeight,
       color: fontColor,
+      textAlign: 'justify',
     },
     details: {
       fontSize: `${bodySize}pt`,
