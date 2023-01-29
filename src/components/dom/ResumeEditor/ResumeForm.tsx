@@ -16,6 +16,7 @@ import {
   Button,
   Chip,
   Divider,
+  Grid,
   IconButton,
   InputBase,
   Stack,
@@ -26,9 +27,29 @@ import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
 import { Box } from '@mui/system'
-import { AddOutlined, ExpandMore } from '@mui/icons-material'
+import {
+  AddOutlined,
+  Assessment,
+  BusinessCenterOutlined,
+  ExpandMore,
+  HistoryEduRounded,
+  SchoolOutlined,
+  SchoolRounded,
+  Work,
+  WorkHistory,
+  WorkOutlineRounded,
+} from '@mui/icons-material'
 import { replaced } from '@/utils/replaced'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
+import Grid2 from '@mui/material/Unstable_Grid2'
+import { uid } from '@/utils/uid'
+import {
+  newEducationHistorySection,
+  newEmployment,
+  newSkillCategory,
+  newSkillsSection,
+  newSummarySection,
+} from '@/model/defaults'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -94,8 +115,88 @@ export const ResumeForm: FunctionComponent<{
           />
         </>
       ))}
+      <AddSectionsPanel
+        resume={props.resume}
+        setResume={props.setResume}
+      />
     </Stack>
   </Stack>
+)
+
+const AddSectionsPanel: FunctionComponent<{
+  resume: Resume
+  setResume: Setter<Resume>
+}> = (props) => (
+  <Grid
+    container
+    spacing={2}
+    columns={2}
+  >
+    <Grid
+      item
+      xs={1}
+    >
+      <Button
+        startIcon={<WorkHistory />}
+        onClick={() =>
+          props.setResume({
+            ...props.resume,
+            sections: [...props.resume.sections, newEducationHistorySection()],
+          })
+        }
+      >
+        Add Employments
+      </Button>
+    </Grid>
+    <Grid
+      item
+      xs={1}
+    >
+      <Button
+        startIcon={<SchoolOutlined />}
+        onClick={() =>
+          props.setResume({
+            ...props.resume,
+            sections: [...props.resume.sections, newEducationHistorySection()],
+          })
+        }
+      >
+        Add Educations
+      </Button>
+    </Grid>
+    <Grid
+      item
+      xs={1}
+    >
+      <Button
+        startIcon={<Assessment />}
+        onClick={() =>
+          props.setResume({
+            ...props.resume,
+            sections: [...props.resume.sections, newSkillsSection()],
+          })
+        }
+      >
+        Add Skills
+      </Button>
+    </Grid>
+    <Grid
+      item
+      xs={1}
+    >
+      <Button
+        startIcon={<HistoryEduRounded />}
+        onClick={() =>
+          props.setResume({
+            ...props.resume,
+            sections: [...props.resume.sections, newSummarySection()],
+          })
+        }
+      >
+        Add Summary
+      </Button>
+    </Grid>
+  </Grid>
 )
 
 const SectionForm: FunctionComponent<{
@@ -201,19 +302,7 @@ const EmploymentHistorySectionForm: FunctionComponent<{
       onClick={() =>
         props.setSection({
           ...props.section,
-          employments: [
-            ...props.section.employments,
-            {
-              // TODO generate uid
-              uid: Math.random().toString(10),
-              jobTitle: '',
-              employer: '',
-              location: '',
-              startDate: '',
-              endDate: '',
-              achievements: [],
-            },
-          ],
+          employments: [...props.section.employments, newEmployment()],
         })
       }
     >
@@ -366,12 +455,7 @@ const SkillSectionForm: FunctionComponent<{
           ...props.section,
           skillCategories: [
             ...props.section.skillCategories,
-            {
-              // TODO generate
-              header: '',
-              uid: Math.random().toString(10),
-              skills: [],
-            },
+            newSkillCategory(),
           ],
         })
       }
