@@ -16,10 +16,6 @@ export type ResumeAppState =
       resume: Resume
     }
   | {
-      type: 'saving'
-      resume: Resume
-    }
-  | {
       type: 'saved'
       resume: Resume
     }

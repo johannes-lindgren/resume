@@ -24,6 +24,8 @@ import {
   CheckCircleOutlined,
   CheckCircleOutlineRounded,
   DeleteOutlineRounded,
+  DriveFolderUploadOutlined,
+  DriveFolderUploadRounded,
   NoteAddRounded,
   SaveOutlined,
 } from '@mui/icons-material'
@@ -86,6 +88,7 @@ export const ResumeApp = () => {
           resume={state.resume}
           setResume={actions.setResume}
           removeResume={actions.removeResume}
+          saved={state.type === 'saved'}
         />
       )
   }
@@ -95,15 +98,9 @@ export const ResumeEditor: FunctionComponent<{
   resume: Resume
   setResume: Setter<Resume>
   removeResume: () => void
+  saved: boolean
 }> = (props) => {
   const { resume, setResume, removeResume } = props
-
-  const throttledResume = useThrottledState(resume, 1500)
-
-  const doc = useMemo(
-    () => <ResumeView resume={throttledResume} />,
-    [throttledResume],
-  )
 
   return (
     <Split>
@@ -126,20 +123,25 @@ export const ResumeEditor: FunctionComponent<{
             gap={1}
             sx={{ color: 'success.main' }}
           >
-            <CheckCircleOutlineRounded />
+            {props.saved ? (
+              <CheckCircleOutlineRounded fontSize="inherit" />
+            ) : (
+              <CircularProgress size="1em" />
+            )}
             <Typography variant="caption">Saved</Typography>
           </Box>
           <Button
-            startIcon={<SaveOutlined />}
-            color="success"
-            variant="outlined"
+            startIcon={<DriveFolderUploadOutlined />}
+            color="secondary"
+            size="small"
           >
-            Save to file system
+            Load from file system
           </Button>
           <Button
             startIcon={<DeleteOutlineRounded />}
             color="secondary"
             onClick={removeResume}
+            size="small"
           >
             Start over
           </Button>
@@ -150,33 +152,50 @@ export const ResumeEditor: FunctionComponent<{
         />
       </Stack>
       <ResumeContainer>
-        <Box
-          sx={{
-            borderRadius: 2,
-            height: 'auto',
-            flex: 1,
-            overflow: 'hidden',
-          }}
-        >
-          <PdfDocument
-            showToolbar={false}
-            width="100%"
-          >
-            {doc}
-          </PdfDocument>
-        </Box>
-        <Box
-          display="flex"
-          justifyContent="right"
-          gap={1}
-        >
-          <DownloadBlobButton
-            obj={resume}
-            suggestedName={`${resume.name}'s résumé.json`}
-          />
-          <DownloadResumeButton document={doc} />
-        </Box>
+        <ResumePreview resume={resume} />
       </ResumeContainer>
     </Split>
+  )
+}
+
+export const ResumePreview: FunctionComponent<{
+  resume: Resume
+}> = ({ resume }) => {
+  const throttledResume = useThrottledState(resume, 1500)
+
+  const doc = useMemo(
+    () => <ResumeView resume={throttledResume} />,
+    [throttledResume],
+  )
+
+  return (
+    <>
+      <Box
+        sx={{
+          borderRadius: 2,
+          height: 'auto',
+          flex: 1,
+          overflow: 'hidden',
+        }}
+      >
+        <PdfDocument
+          showToolbar={false}
+          width="100%"
+        >
+          {doc}
+        </PdfDocument>
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="right"
+        gap={1}
+      >
+        <DownloadBlobButton
+          obj={resume}
+          suggestedName={`${resume.name}'s résumé.json`}
+        />
+        <DownloadResumeButton document={doc} />
+      </Box>
+    </>
   )
 }
