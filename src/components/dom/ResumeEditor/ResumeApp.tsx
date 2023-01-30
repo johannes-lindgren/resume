@@ -12,7 +12,7 @@ import { NoteAddRounded } from '@mui/icons-material'
 import { blankResume, resumeTemplate } from '@/model/defaults'
 import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
 import { ResumeEditor } from '@/components/dom/ResumeEditor/ResumeEditor'
-import { useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { getRandomElement } from '@/utils/getRandomElement'
 
 const gloriousWords = [
@@ -43,48 +43,52 @@ export const ResumeApp = () => {
       return <CircularProgress />
     case 'uninitialized':
       return (
-        <Container
-          maxWidth="xs"
-          sx={{ py: 5 }}
-        >
-          <Stack gap={6}>
-            <Typography
-              variant="h1"
-              textAlign="center"
-              sx={{ color: 'secondary.main' }}
-            >
-              {createWord} Your {gloriousWord} Résumé
-            </Typography>
-            <Stack
-              gap={4}
-              maxWidth="xs"
-            >
-              <Tooltip title="Pssst! Try the template instead">
+        <Container maxWidth="xs">
+          <Stack
+            gap={6}
+            justifyContent="space-between"
+            sx={{ minHeight: '100vh', pt: 10, pb: 5, maxWidth: 'xs' }}
+          >
+            <Stack gap={10}>
+              <Typography
+                variant="h1"
+                textAlign="center"
+                sx={{ color: 'secondary.main' }}
+              >
+                {createWord} Your {gloriousWord} Résumé
+              </Typography>
+              <Stack
+                gap={4}
+                maxWidth="xs"
+              >
+                <Tooltip title="Pssst! Try the template instead">
+                  <Button
+                    size="large"
+                    variant="outlined"
+                    color="secondary"
+                    startIcon={<NoteAddRounded />}
+                    onClick={() => actions.setResume(blankResume())}
+                  >
+                    Start from scratch
+                  </Button>
+                </Tooltip>
                 <Button
                   size="large"
-                  variant="outlined"
-                  color="secondary"
+                  variant="contained"
                   startIcon={<NoteAddRounded />}
-                  onClick={() => actions.setResume(blankResume())}
+                  onClick={() => actions.setResume(resumeTemplate())}
                 >
-                  Start from scratch
+                  Use the template
                 </Button>
-              </Tooltip>
-              <Button
-                size="large"
-                variant="contained"
-                startIcon={<NoteAddRounded />}
-                onClick={() => actions.setResume(resumeTemplate())}
-              >
-                Create from template
-              </Button>
-              <UploadResumeButton
-                size="large"
-                variant="contained"
-                color="secondary"
-                onChange={actions.setResume}
-              />
+                <UploadResumeButton
+                  size="large"
+                  variant="contained"
+                  color="secondary"
+                  onChange={actions.setResume}
+                />
+              </Stack>
             </Stack>
+            <Footer />
           </Stack>
         </Container>
       )
@@ -99,3 +103,17 @@ export const ResumeApp = () => {
       )
   }
 }
+
+export const Footer: FunctionComponent = () => (
+  <Stack>
+    <Typography>
+      Created by{' '}
+      <Box
+        component="span"
+        sx={{ color: 'secondary.main' }}
+      >
+        Johannes Lindgren
+      </Box>
+    </Typography>
+  </Stack>
+)
