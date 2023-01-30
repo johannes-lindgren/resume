@@ -252,12 +252,14 @@ const DetailsSectionForm: FunctionComponent<{
   <Stack gap={2}>
     <PropTextEditor
       propName={'header'}
+      placeholder="Profile"
       value={props.section}
       setValue={props.setSection}
       inputProps={{ sx: { typography: 'h2' } }}
     />
     <PropTextEditor
       multiline
+      placeholder="A brief description of my profile..."
       propName={'description'}
       value={props.section}
       setValue={props.setSection}
@@ -271,6 +273,7 @@ const EmploymentHistorySectionForm: FunctionComponent<{
 }> = (props) => (
   <Stack gap={4}>
     <PropTextEditor
+      placeholder="Employment History"
       propName={'header'}
       value={props.section}
       setValue={props.setSection}
@@ -405,6 +408,7 @@ export const EmploymentForm: FunctionComponent<{
           >
             <InputBase
               value={achievement}
+              placeholder="The value I brought, and how I achieved it."
               onChange={({ target }) =>
                 props.setEmployment({
                   ...props.employment,
@@ -527,7 +531,7 @@ export const SkillCategoryForm: FunctionComponent<{
         <TextField
           {...params}
           variant="standard"
-          placeholder="Type & Press Enter"
+          placeholder="Type a skill & Press Enter"
           inputProps={{
             ...params.inputProps,
           }}
