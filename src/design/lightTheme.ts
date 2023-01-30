@@ -10,6 +10,15 @@ export const lightTheme = createTheme({
     secondary: {
       main: '#6C6355',
     },
+    success: {
+      main: '#52AA5E',
+    },
+    error: {
+      main: '#C7434E',
+    },
+    info: {
+      main: '#3AAED8',
+    },
     divider: '#EDEBE8',
     grey: {
       A100: '#F3F4F6',
@@ -47,6 +56,11 @@ export const lightTheme = createTheme({
     },
   },
   components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
         root: ({ theme }) => ({

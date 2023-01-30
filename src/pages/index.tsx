@@ -1,4 +1,4 @@
-import { ResumeEditor } from '@/components/dom/ResumeEditor/ResumeEditor'
+import { ResumeApp } from '@/components/dom/ResumeEditor/ResumeEditor'
 import { NextPage } from 'next'
 import { Box, Container } from '@mui/material'
 
@@ -12,7 +12,7 @@ const Page: NextPage = () => {
         alignItems: 'stretch',
       }}
     >
-      <ResumeEditor />
+      <ResumeApp />
     </Box>
   )
 }

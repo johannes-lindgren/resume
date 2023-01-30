@@ -2,6 +2,7 @@ import {
   DetailsSection,
   Employment,
   EmploymentHistorySection,
+  Resume,
   SkillCategory,
   SkillSection,
 } from '@/model/resume'
@@ -12,6 +13,16 @@ export const newSkillCategory = (): SkillCategory => ({
   header: '',
   uid: uid(),
   skills: [],
+})
+
+export const newResume = (): Resume => ({
+  name: '',
+  jobTitle: '',
+  emailAddress: '',
+  location: '',
+  phoneNumber: '',
+  nationality: '',
+  sections: [],
 })
 
 export const newEmployment = (): Employment => ({

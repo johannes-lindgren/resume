@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: theme.palette.background,
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingTop: '7vh',
+    paddingBottom: '7vh',
     paddingLeft: '15vw',
     paddingRight: '15vw',
     ...theme.typography.body,
