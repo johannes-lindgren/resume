@@ -1,6 +1,11 @@
 import { Reducer, useCallback, useEffect, useReducer, useState } from 'react'
 import { Resume } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
+import {
+  readFromLocalStorage,
+  localStorage,
+  saveToLocalStorage,
+} from '@/localStorage'
 
 export type ResumeAppState =
   | {
@@ -62,27 +67,6 @@ export type ResumeActions = {
   removeResume: () => void
 }
 
-const readFromLocalStorage = (key: string): unknown => {
-  try {
-    const item = window.localStorage.getItem(key)
-    if (item === null) {
-      return undefined
-    }
-    return JSON.parse(item)
-  } catch (error) {
-    return error
-  }
-}
-const saveToLocalStorage = (key: string, value: unknown) => {
-  try {
-    window.localStorage.setItem(key, JSON.stringify(value))
-  } catch (error) {
-    return error
-  }
-}
-
-const localStorageKey = 'resume'
-
 export const useResumeApp = (
   throttleDelayMs: number,
 ): [ResumeAppState, ResumeActions] => {
@@ -90,6 +74,9 @@ export const useResumeApp = (
     type: 'loading',
     resume: undefined,
   })
+
+  const { resume } = state
+
   const setResume = useCallback<Setter<Resume>>(
     (resume) => {
       dispatch({
@@ -101,7 +88,7 @@ export const useResumeApp = (
   )
 
   useEffect(() => {
-    const storedValue = readFromLocalStorage(localStorageKey)
+    const storedValue = readFromLocalStorage()
     if (typeof storedValue === 'undefined') {
       dispatch({
         type: 'unsetResume',
@@ -112,20 +99,20 @@ export const useResumeApp = (
   }, [setResume])
 
   const removeResume = useCallback(() => {
-    localStorage.removeItem(localStorageKey)
+    localStorage()
     dispatch({
       type: 'unsetResume',
     })
   }, [])
 
-  const saveResume = useCallback(() => {
-    saveToLocalStorage(localStorageKey, state.resume)
+  const saveResume = useCallback((throttledResume: Resume | undefined) => {
+    saveToLocalStorage(throttledResume)
     dispatch({
       type: 'saveResume',
     })
-  }, [state])
+  }, [])
 
-  useThrottle(state, throttleDelayMs, saveResume)
+  useThrottle(resume, throttleDelayMs, saveResume)
 
   return [state, { setResume, removeResume }]
 }
@@ -133,9 +120,12 @@ export const useResumeApp = (
 export const useThrottledState = <T>(initialValue: T, delayMs: number): T => {
   const [throttledValue, setThrottledValue] = useState<T>(initialValue)
 
-  const onUpdate = (newValue: T) => {
-    setThrottledValue(newValue)
-  }
+  const onUpdate = useCallback(
+    (newValue: T) => {
+      setThrottledValue(newValue)
+    },
+    [setThrottledValue],
+  )
 
   useThrottle(initialValue, delayMs, onUpdate)
 
@@ -145,7 +135,7 @@ export const useThrottledState = <T>(initialValue: T, delayMs: number): T => {
 export const useThrottle = <T>(
   value: T,
   delayMs: number,
-  callback: (arg: T) => void,
+  callback: (throttledValue: T) => void,
 ) => {
   useEffect(() => {
     const handleTimeout = () => {
@@ -155,5 +145,5 @@ export const useThrottle = <T>(
     return () => {
       clearTimeout(timeoutHandle)
     }
-  }, [delayMs, value])
+  }, [callback, delayMs, value])
 }

@@ -1,15 +1,13 @@
-import { FunctionComponent, useMemo, useState } from 'react'
+import { FunctionComponent, useMemo } from 'react'
 import { ResumeContainer } from '@/components/dom/ResumeContainer'
 import { ResumeView } from '@/components/pdf/Resume'
 import { Resume } from '@/model/resume'
-import { useResumeApp, useThrottledState } from '@/hooks/useThrottledState'
+import { useThrottledState } from '@/hooks/useThrottledState'
 import dynamic from 'next/dynamic'
 import {
   Box,
   Button,
-  Chip,
   CircularProgress,
-  Container,
   Stack,
   styled,
   Typography,
@@ -20,9 +18,7 @@ import { Setter } from '@/utils/Setter'
 import {
   CheckCircleOutlineRounded,
   DeleteOutlineRounded,
-  NoteAddRounded,
 } from '@mui/icons-material'
-import { newResume } from '@/model/defaults'
 import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
 
 const DownloadPdfButton = dynamic(
@@ -46,53 +42,6 @@ const Split = styled(Box)(({ theme }) => ({
     width: '50%',
   },
 }))
-
-export const ResumeApp = () => {
-  const [state, actions] = useResumeApp(1500)
-
-  switch (state.type) {
-    case 'loading':
-      return <CircularProgress />
-    case 'uninitialized':
-      return (
-        <Container
-          maxWidth="xs"
-          sx={{ py: 5 }}
-        >
-          <Stack gap={4}>
-            <Typography
-              variant="h1"
-              textAlign="center"
-            >
-              Uninitialized
-            </Typography>
-            <Button
-              variant="contained"
-              startIcon={<NoteAddRounded />}
-              onClick={() => actions.setResume(newResume())}
-            >
-              Create a new résumé
-            </Button>
-            <UploadResumeButton
-              color="inherit"
-              variant="outlined"
-              onChange={actions.setResume}
-            />
-          </Stack>
-        </Container>
-      )
-    default:
-      console.log('reusme', state.resume)
-      return (
-        <ResumeEditor
-          resume={state.resume}
-          setResume={actions.setResume}
-          removeResume={actions.removeResume}
-          saved={state.type === 'saved'}
-        />
-      )
-  }
-}
 
 export const ResumeEditor: FunctionComponent<{
   resume: Resume
@@ -159,7 +108,7 @@ export const ResumePreview: FunctionComponent<{
   resume: Resume
   setResume: Setter<Resume>
 }> = (props) => {
-  const { resume, setResume } = props
+  const { resume } = props
   const throttledResume = useThrottledState(resume, 1500)
 
   const doc = useMemo(

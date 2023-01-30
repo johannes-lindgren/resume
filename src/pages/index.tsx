@@ -1,6 +1,6 @@
-import { ResumeApp } from '@/components/dom/ResumeEditor/ResumeEditor'
 import { NextPage } from 'next'
 import { Box, Container } from '@mui/material'
+import { ResumeApp } from '@/components/dom/ResumeEditor/ResumeApp'
 
 const Page: NextPage = () => {
   return (
