@@ -1,13 +1,17 @@
 import { FunctionComponent } from 'react'
-import { Button } from '@mui/material'
-import { SaveRounded } from '@mui/icons-material'
+import { Button, ButtonProps } from '@mui/material'
+import { DownloadRounded } from '@mui/icons-material'
+import { Resume } from '@/model/resume'
 
-export const DownloadBlobButton: FunctionComponent<{
-  obj: unknown
-  suggestedName: string
-}> = (props) => {
+export const DownloadResumeButton: FunctionComponent<
+  {
+    resume: Resume
+    suggestedName: string
+  } & ButtonProps
+> = (props) => {
+  const { resume, suggestedName, ...buttonProps } = props
   const handleClick = async () => {
-    const json = JSON.stringify(props.obj)
+    const json = JSON.stringify(resume)
     const blob = new Blob([json], {
       type: 'text/json;charset=utf-8',
     })
@@ -16,7 +20,7 @@ export const DownloadBlobButton: FunctionComponent<{
     const anchor = document.createElement('a')
     anchor.href = blobUrl
     anchor.target = '_blank'
-    anchor.download = props.suggestedName
+    anchor.download = `${suggestedName}.cv`
     // Auto click on a element, trigger the file download
     anchor.click()
 
@@ -26,12 +30,11 @@ export const DownloadBlobButton: FunctionComponent<{
 
   return (
     <Button
-      startIcon={<SaveRounded />}
-      color="inherit"
-      variant="outlined"
+      startIcon={<DownloadRounded />}
       onClick={handleClick}
+      {...buttonProps}
     >
-      Save to file system
+      Save file
     </Button>
   )
 }

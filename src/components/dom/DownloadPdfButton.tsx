@@ -15,10 +15,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
 }))
 
 export const DownloadPdfButton: FunctionComponent<{
-  document: ReactElement<
-    ReactPDF.DocumentProps,
-    string | JSXElementConstructor<any>
-  >
+  document: ReactElement<ReactPDF.DocumentProps>
 }> = (props) => {
   const [instance, updateInstance] = usePDF({
     document: props.document,

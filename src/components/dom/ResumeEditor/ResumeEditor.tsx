@@ -14,24 +14,18 @@ import {
   styled,
   Typography,
 } from '@mui/material'
-import { johannesResume } from '@/tmp/johannesResume'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
-import { DownloadBlobButton } from '@/components/dom/DownloadBlobButton'
+import { DownloadResumeButton } from '@/components/dom/DownloadResumeButton'
 import { Setter } from '@/utils/Setter'
 import {
-  CheckCircle,
-  CheckCircleOutline,
-  CheckCircleOutlined,
   CheckCircleOutlineRounded,
   DeleteOutlineRounded,
-  DriveFolderUploadOutlined,
-  DriveFolderUploadRounded,
   NoteAddRounded,
-  SaveOutlined,
 } from '@mui/icons-material'
 import { newResume } from '@/model/defaults'
+import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
 
-const DownloadResumeButton = dynamic(
+const DownloadPdfButton = dynamic(
   () =>
     import('../DownloadPdfButton').then((module) => module.DownloadPdfButton),
   {
@@ -79,10 +73,16 @@ export const ResumeApp = () => {
             >
               Create a new résumé
             </Button>
+            <UploadResumeButton
+              color="inherit"
+              variant="outlined"
+              onChange={actions.setResume}
+            />
           </Stack>
         </Container>
       )
     default:
+      console.log('reusme', state.resume)
       return (
         <ResumeEditor
           resume={state.resume}
@@ -113,6 +113,7 @@ export const ResumeEditor: FunctionComponent<{
       >
         <Box
           display="flex"
+          flexWrap="wrap"
           justifyContent="end"
           gap={2}
         >
@@ -131,13 +132,6 @@ export const ResumeEditor: FunctionComponent<{
             <Typography variant="caption">Saved</Typography>
           </Box>
           <Button
-            startIcon={<DriveFolderUploadOutlined />}
-            color="secondary"
-            size="small"
-          >
-            Load from file system
-          </Button>
-          <Button
             startIcon={<DeleteOutlineRounded />}
             color="secondary"
             onClick={removeResume}
@@ -152,7 +146,10 @@ export const ResumeEditor: FunctionComponent<{
         />
       </Stack>
       <ResumeContainer>
-        <ResumePreview resume={resume} />
+        <ResumePreview
+          resume={resume}
+          setResume={setResume}
+        />
       </ResumeContainer>
     </Split>
   )
@@ -160,7 +157,9 @@ export const ResumeEditor: FunctionComponent<{
 
 export const ResumePreview: FunctionComponent<{
   resume: Resume
-}> = ({ resume }) => {
+  setResume: Setter<Resume>
+}> = (props) => {
+  const { resume, setResume } = props
   const throttledResume = useThrottledState(resume, 1500)
 
   const doc = useMemo(
@@ -190,11 +189,18 @@ export const ResumePreview: FunctionComponent<{
         justifyContent="right"
         gap={1}
       >
-        <DownloadBlobButton
-          obj={resume}
-          suggestedName={`${resume.name}'s résumé.json`}
+        <UploadResumeButton
+          color="inherit"
+          variant="outlined"
+          onChange={props.setResume}
         />
-        <DownloadResumeButton document={doc} />
+        <DownloadResumeButton
+          color="inherit"
+          variant="outlined"
+          resume={resume}
+          suggestedName={`${resume.name}'s resumé`}
+        />
+        <DownloadPdfButton document={doc} />
       </Box>
     </>
   )
