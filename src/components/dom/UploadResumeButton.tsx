@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FunctionComponent, useRef } from 'react'
-import { Button, ButtonProps } from '@mui/material'
+import { Button, ButtonProps, Tooltip } from '@mui/material'
 import { UploadRounded } from '@mui/icons-material'
 import { Resume } from '@/model/resume'
 
@@ -37,19 +37,21 @@ export const UploadResumeButton: FunctionComponent<
     }
   }
   return (
-    <Button
-      startIcon={<UploadRounded />}
-      component="label"
-      {...buttonProps}
-    >
-      Open file
-      <input
-        ref={hiddenFileInput}
-        onChange={handleChange}
-        hidden
-        accept=".cv"
-        type="file"
-      />
-    </Button>
+    <Tooltip title="I hope you saved your work last time...">
+      <Button
+        startIcon={<UploadRounded />}
+        component="label"
+        {...buttonProps}
+      >
+        Open file
+        <input
+          ref={hiddenFileInput}
+          onChange={handleChange}
+          hidden
+          accept=".cv"
+          type="file"
+        />
+      </Button>
+    </Tooltip>
   )
 }

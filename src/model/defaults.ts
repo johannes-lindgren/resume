@@ -15,7 +15,7 @@ export const newSkillCategory = (): SkillCategory => ({
   skills: [],
 })
 
-export const newResume = (): Resume => ({
+export const blankResume = (): Resume => ({
   name: '',
   jobTitle: '',
   emailAddress: '',
@@ -23,6 +23,41 @@ export const newResume = (): Resume => ({
   phoneNumber: '',
   nationality: '',
   sections: [],
+})
+
+export const resumeTemplate = (): Resume => ({
+  name: '',
+  jobTitle: '',
+  emailAddress: '',
+  location: '',
+  phoneNumber: '',
+  nationality: '',
+  sections: [
+    {
+      uid: uid(),
+      type: 'details',
+      header: 'Profile',
+      description: '',
+    },
+    {
+      uid: uid(),
+      type: 'employmentHistory',
+      header: 'Employment History',
+      employments: [],
+    },
+    {
+      uid: uid(),
+      type: 'employmentHistory',
+      header: 'Education',
+      employments: [],
+    },
+    {
+      uid: uid(),
+      type: 'skills',
+      header: 'Skills',
+      skillCategories: [],
+    },
+  ],
 })
 
 export const newEmployment = (): Employment => ({
