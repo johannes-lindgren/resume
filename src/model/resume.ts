@@ -1,4 +1,5 @@
 export type Resume = {
+  image: string | undefined
   name: string
   jobTitle: string
   nationality: string

@@ -16,6 +16,7 @@ export const newSkillCategory = (): SkillCategory => ({
 })
 
 export const blankResume = (): Resume => ({
+  image: undefined,
   name: '',
   jobTitle: '',
   emailAddress: '',
@@ -26,6 +27,7 @@ export const blankResume = (): Resume => ({
 })
 
 export const resumeTemplate = (): Resume => ({
+  image: undefined,
   name: '',
   jobTitle: '',
   emailAddress: '',

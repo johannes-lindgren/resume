@@ -35,7 +35,7 @@ export const Header: FunctionComponent<{
 }> = (props) => (
   <View style={styles.root}>
     <Image
-      src="/profile.png"
+      src={props.resume.image}
       style={styles.image}
     />
     <View style={styles.textSection}>

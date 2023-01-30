@@ -17,7 +17,6 @@ import {
   Chip,
   Divider,
   Grid,
-  IconButton,
   InputBase,
   Stack,
   TextField,
@@ -30,19 +29,13 @@ import { Box } from '@mui/system'
 import {
   AddOutlined,
   Assessment,
-  BusinessCenterOutlined,
   ExpandMore,
   HistoryEduRounded,
   SchoolOutlined,
-  SchoolRounded,
-  Work,
   WorkHistory,
-  WorkOutlineRounded,
 } from '@mui/icons-material'
 import { replaced } from '@/utils/replaced'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
-import Grid2 from '@mui/material/Unstable_Grid2'
-import { uid } from '@/utils/uid'
 import {
   newEducationHistorySection,
   newEmployment,
@@ -50,6 +43,7 @@ import {
   newSkillsSection,
   newSummarySection,
 } from '@/model/defaults'
+import { PersonalDetailsForm } from '@/components/dom/ResumeEditor/PersonalDetailsForm'
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -82,60 +76,6 @@ export const ResumeForm: FunctionComponent<{
     <AddSectionsPanel
       resume={props.resume}
       setResume={props.setResume}
-    />
-  </Stack>
-)
-
-const PersonalDetailsForm: FunctionComponent<{
-  resume: Resume
-  setResume: Setter<Resume>
-}> = (props) => (
-  <Stack gap={2}>
-    <Stack>
-      <PropTextEditor
-        // label="Name"
-        placeholder="Full name"
-        propName={'name'}
-        value={props.resume}
-        setValue={props.setResume}
-        inputProps={{ sx: { typography: 'h1' } }}
-      />
-      <PropTextEditor
-        // label="Job Title"
-        placeholder="Job title"
-        propName={'jobTitle'}
-        value={props.resume}
-        setValue={props.setResume}
-        inputProps={{ sx: { typography: 'subtitle1' } }}
-      />
-    </Stack>
-    <PropTextEditor
-      variant="filled"
-      label="Country"
-      propName={'location'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <PropTextEditor
-      variant="filled"
-      label="Nationality"
-      propName={'nationality'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <PropTextEditor
-      variant="filled"
-      label="Email Address"
-      propName={'emailAddress'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <PropTextEditor
-      variant="filled"
-      label="Phone Number"
-      propName={'phoneNumber'}
-      value={props.resume}
-      setValue={props.setResume}
     />
   </Stack>
 )
