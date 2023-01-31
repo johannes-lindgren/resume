@@ -15,13 +15,18 @@ export const SaveStatusBox: FunctionComponent<{
 }> = (props) => (
   <Root sx={{ color: props.isSaved ? 'success.main' : 'inherit' }}>
     {props.isSaved ? (
-      <CheckCircleOutlineRounded fontSize="inherit" />
+      <>
+        <CheckCircleOutlineRounded fontSize="inherit" />
+        <Typography variant="caption">Saved</Typography>
+      </>
     ) : (
-      <CircularProgress
-        size="1em"
-        color="inherit"
-      />
+      <>
+        <CircularProgress
+          size="1em"
+          color="inherit"
+        />
+        <Typography variant="caption">Saving...</Typography>
+      </>
     )}
-    <Typography variant="caption">Saved</Typography>
   </Root>
 )
