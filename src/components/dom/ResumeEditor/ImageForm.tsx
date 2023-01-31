@@ -11,6 +11,7 @@ const Root = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   width: '100px',
   height: '100px',
+  overflow: 'hidden',
   borderRadius: theme.shape.borderRadius * 2,
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.secondary.main,
@@ -75,7 +76,6 @@ export const ImageForm: FunctionComponent<
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              overflow: 'hidden',
             }}
             {...props}
           />
