@@ -11,13 +11,16 @@ export const lightTheme = createTheme({
       main: '#6C6355',
     },
     success: {
-      main: '#52AA5E',
-    },
-    error: {
-      main: '#C7434E',
+      main: '#68B672',
     },
     info: {
       main: '#3AAED8',
+    },
+    warning: {
+      main: '#FFCF56',
+    },
+    error: {
+      main: '#C7434E',
     },
     divider: '#EDEBE8',
     grey: {
