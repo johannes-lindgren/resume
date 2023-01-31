@@ -64,9 +64,10 @@ export const lightTheme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: ({ theme }) => ({
+          transition: theme.transitions.create(['opacity', 'color']),
           '&:hover': {
             color: theme.palette.primary.main,
-            background: 'none',
+            background: 'inherit',
           },
         }),
       },

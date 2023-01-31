@@ -1,10 +1,9 @@
-import { FunctionComponent, useCallback, useState } from 'react'
+import { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
-import { Box, BoxProps, IconButton, Stack } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
-import { SelectFileButton } from '@/components/dom/SelectFileButton'
-import { AddAPhotoRounded, Delete } from '@mui/icons-material'
+import { ImageForm } from '@/components/dom/ResumeEditor/ImageForm'
 
 export const PersonalDetailsForm: FunctionComponent<{
   resume: Resume
@@ -13,19 +12,18 @@ export const PersonalDetailsForm: FunctionComponent<{
   <Stack gap={2}>
     <Box
       display="flex"
+      flexWrap="wrap"
       gap={2}
     >
-      <Box>
-        <ImageForm
-          image={props.resume.image}
-          setImage={(image) =>
-            props.setResume({
-              ...props.resume,
-              image,
-            })
-          }
-        />
-      </Box>
+      <ImageForm
+        image={props.resume.image}
+        setImage={(image) =>
+          props.setResume({
+            ...props.resume,
+            image,
+          })
+        }
+      />
       <Stack>
         <PropTextEditor
           // label="Name"
@@ -75,68 +73,3 @@ export const PersonalDetailsForm: FunctionComponent<{
     />
   </Stack>
 )
-
-const ImageForm: FunctionComponent<
-  {
-    image: string | undefined
-    setImage: Setter<string | undefined>
-  } & BoxProps<'img'>
-> = (props) => {
-  const { image, setImage } = props
-  const handleFile = useCallback((file: File) => {
-    const reader = new FileReader()
-    reader.onloadend = (e) => {
-      if (typeof e.target?.result !== 'string') {
-        //   TODO show error message popup
-        console.error('Failed to load the image')
-        return
-      }
-      setImage(e.target.result)
-    }
-    reader.readAsDataURL(file)
-  }, [])
-
-  return (
-    <SelectFileButton
-      accept="image/*"
-      onChange={handleFile}
-      sx={{
-        width: '100px',
-        height: '100px',
-        borderRadius: 1,
-        overflow: 'hidden',
-        bgcolor: 'grey.A100',
-        color: 'secondary.main',
-      }}
-    >
-      {image ? (
-        <>
-          <Box
-            component="img"
-            src={image}
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              overflow: 'hidden',
-            }}
-            {...props}
-          />
-          {/* TODO */}
-          {/*<IconButton*/}
-          {/*  sx={{*/}
-          {/*    position: 'absolute',*/}
-          {/*    top: 0,*/}
-          {/*    right: 0,*/}
-          {/*    bgColor: 'background.paper',*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  <Delete />*/}
-          {/*</IconButton>*/}
-        </>
-      ) : (
-        <AddAPhotoRounded />
-      )}
-    </SelectFileButton>
-  )
-}
