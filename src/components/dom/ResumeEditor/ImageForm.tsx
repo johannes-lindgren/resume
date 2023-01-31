@@ -11,10 +11,10 @@ const Root = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   width: '100px',
   height: '100px',
-  borderRadius: theme.shape.borderRadius,
-  overflow: 'hidden',
+  borderRadius: theme.shape.borderRadius * 2,
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.secondary.main,
+  border: `1px solid ${theme.palette.divider}`,
   '& .visibleOnHover': {
     opacity: 0,
     transition: theme.transitions.create('opacity'),
