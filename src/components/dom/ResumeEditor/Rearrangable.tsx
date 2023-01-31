@@ -13,13 +13,13 @@ import { ReactNode } from 'react'
 
 export const Rearrangeable = <
   Key extends string,
-  Parent extends { [k in Key]: Child[] },
   Child extends { uid: string },
+  Parent extends Record<Key, Child[]>,
 >(props: {
   currentIndex: number
   setParent: Setter<Parent>
   parent: Parent
-  propName: string
+  propName: Key
   current: Child
   children: ReactNode
 }) => {
