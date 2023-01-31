@@ -1,14 +1,7 @@
 'use client'
 
 import React, { ComponentProps, FunctionComponent } from 'react'
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Font,
-} from '@react-pdf/renderer'
+import { Font } from '@react-pdf/renderer'
 import { PDFViewer } from '@react-pdf/renderer'
 import cssStyles from './styles.module.scss'
 

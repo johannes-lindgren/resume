@@ -28,7 +28,7 @@ export const UploadResumeButton: FunctionComponent<
       }
       // TODO validate with Typia
       const resume = JSON.parse(json) as Resume
-      props.onChange?.(resume)
+      onChange?.(resume)
     })
     reader.readAsText(file, 'UTF-8')
     // Clear the value from the input, so that if the user selects the same file again, the event will be triggered

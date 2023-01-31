@@ -1,13 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react'
-import { Document, StyleSheet, View, Text } from '@react-pdf/renderer'
+import { View } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'
 import { Style } from '@react-pdf/types'
-
-const styles = StyleSheet.create({
-  child: {
-    marginTop: '10pt',
-  },
-})
 
 export const Stack: FunctionComponent<{
   children: ReactNode

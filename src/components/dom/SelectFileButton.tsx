@@ -4,9 +4,7 @@ import {
   InputHTMLAttributes,
   useRef,
 } from 'react'
-import { Button, ButtonBase, ButtonProps, Tooltip } from '@mui/material'
-import { UploadRounded } from '@mui/icons-material'
-import { Resume } from '@/model/resume'
+import { ButtonBase, ButtonProps } from '@mui/material'
 
 export const SelectFileButton: FunctionComponent<
   {
@@ -25,7 +23,7 @@ export const SelectFileButton: FunctionComponent<
       // No file selected
       return
     }
-    props.onChange?.(file)
+    onChange?.(file)
     // // Clear the value from the input, so that if the user selects the same file again, the event will be triggered
     if (hiddenFileInput.current) {
       hiddenFileInput.current.value = ''

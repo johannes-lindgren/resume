@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
 import { Stack } from '@/components/pdf/Stack'
-import { StyleSheet, Text, Link } from '@react-pdf/renderer'
+import { Text, Link } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'
 
 export const ContactDetailsView: FunctionComponent<{

@@ -13,15 +13,8 @@ import {
   DialogContentText,
   DialogTitle,
   styled,
-  TextField,
 } from '@mui/material'
-import {
-  DeleteForeverRounded,
-  DeleteOutlineRounded,
-  DownloadRounded,
-  SaveRounded,
-  SentimentDissatisfied,
-} from '@mui/icons-material'
+import { DeleteForeverRounded, DeleteOutlineRounded } from '@mui/icons-material'
 import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
 import { DownloadResumeButton } from '@/components/dom/DownloadResumeButton'
 import dynamic from 'next/dynamic'

@@ -1,9 +1,4 @@
-import {
-  FunctionComponent,
-  JSXElementConstructor,
-  ReactElement,
-  useEffect,
-} from 'react'
+import { FunctionComponent, ReactElement, useEffect } from 'react'
 import ReactPDF, { usePDF } from '@react-pdf/renderer'
 import { Box, styled } from '@mui/material'
 import { DownloadRounded, ErrorOutlineRounded } from '@mui/icons-material'
@@ -23,7 +18,7 @@ export const DownloadPdfButton: FunctionComponent<{
 
   useEffect(() => {
     updateInstance()
-  }, [props.document])
+  }, [props.document, updateInstance])
 
   return (
     <HeaderContainer>

@@ -3,7 +3,6 @@ import { Employment } from '@/model/resume'
 import { Style } from '@react-pdf/types'
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'
-import { joinStyles } from '@/utils/joinStyles'
 import { Stack } from '@/components/pdf/Stack'
 
 const styles = StyleSheet.create({

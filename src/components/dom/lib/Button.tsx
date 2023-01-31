@@ -1,13 +1,4 @@
-import {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  ComponentProps,
-  createElement,
-  DetailedHTMLProps,
-  ElementType,
-  FunctionComponent,
-  ReactNode,
-} from 'react'
+import { createElement, FunctionComponent, ReactNode } from 'react'
 import { theme } from '@/design/Theme'
 
 export type ButtonComponent = FunctionComponent<

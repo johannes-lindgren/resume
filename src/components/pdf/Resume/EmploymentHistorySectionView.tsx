@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { EmploymentHistorySection } from '@/model/resume'
 import { Style } from '@react-pdf/types'
 import { Stack } from '@/components/pdf/Stack'
-import { Text, View } from '@react-pdf/renderer'
+import { Text } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'
 import { EmploymentView } from '@/components/pdf/Resume/EmploymentView'
 

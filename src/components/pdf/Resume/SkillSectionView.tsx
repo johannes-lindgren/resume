@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Resume, SkillCategory, SkillSection } from '@/model/resume'
+import { SkillCategory, SkillSection } from '@/model/resume'
 import { Stack } from '@/components/pdf/Stack'
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { theme } from '@/design/Theme'

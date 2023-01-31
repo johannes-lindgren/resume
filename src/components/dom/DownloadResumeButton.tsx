@@ -10,7 +10,7 @@ export const DownloadResumeButton: FunctionComponent<
   } & ButtonProps
 > = (props) => {
   const { resume, suggestedName, ...buttonProps } = props
-  const handleClick = async () => {
+  const handleClick = () => {
     const json = JSON.stringify(resume)
     const blob = new Blob([json], {
       type: 'text/json;charset=utf-8',
