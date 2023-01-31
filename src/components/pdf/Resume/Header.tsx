@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
     width: theme.spacing(5),
     height: theme.spacing(5),
     borderRadius: theme.spacing(1),
+    marginRight: theme.spacing(3),
   },
   textSection: {
     display: 'flex',
     flexDirection: 'column',
-    marginLeft: theme.spacing(3),
     flex: 1,
   },
   name: {
@@ -34,10 +34,12 @@ export const Header: FunctionComponent<{
   resume: Resume
 }> = (props) => (
   <View style={styles.root}>
-    <Image
-      src={props.resume.image}
-      style={styles.image}
-    />
+    {props.resume.image && (
+      <Image
+        src={props.resume.image}
+        style={styles.image}
+      />
+    )}
     <View style={styles.textSection}>
       <Text style={styles.name}>{props.resume.name}</Text>
       <Text style={styles.title}>{props.resume.jobTitle}</Text>
