@@ -105,6 +105,9 @@ export const ResumePreview: FunctionComponent<{
   )
 }
 
+const aspectRatio = 1.4142135624
+const aspectRatioInv = 0.7071067812
+
 const PreviewLayout: FunctionComponent<{
   children?: ReactNode
   header?: ReactNode
@@ -116,8 +119,8 @@ const PreviewLayout: FunctionComponent<{
   }
   const ref = useRef<HTMLDivElement>(null)
   const [dim, setDim] = useState<Dimension>({
-    width: 0,
-    height: 0,
+    width: 400,
+    height: aspectRatio * 400,
   })
   useLayoutEffect(() => {
     if (!ref.current) {
@@ -126,9 +129,6 @@ const PreviewLayout: FunctionComponent<{
     const element = ref.current
     const handleResize = () => {
       const { clientWidth, clientHeight } = element
-      console.log(clientWidth, clientHeight)
-      const aspectRatio = 1.4142135624
-      const aspectRatioInv = 0.7071067812
       const v1: Dimension = {
         width: clientWidth,
         height: clientWidth * aspectRatio,
@@ -137,21 +137,11 @@ const PreviewLayout: FunctionComponent<{
         width: clientHeight * aspectRatioInv,
         height: clientHeight,
       }
-      console.log('v1', v1)
-      console.log('v2', v2)
       setDim(v1.height > clientHeight ? v2 : v1)
     }
     window.addEventListener('resize', handleResize)
-    const observer = new MutationObserver(handleResize)
-    observer.observe(window.document, {
-      attributes: true,
-      childList: true,
-      characterData: true,
-      subtree: true,
-    })
     return () => {
       window.removeEventListener('resize', handleResize)
-      observer.disconnect()
     }
   }, [setDim])
   return (
