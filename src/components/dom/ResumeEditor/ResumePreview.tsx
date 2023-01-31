@@ -79,18 +79,18 @@ export const ResumePreview: FunctionComponent<{
         <PreviewToolbar justifyContent="left">
           <SaveStatusBox isSaved={props.isSaved} />
           <Box flex={1} />
-          <DeleteButton
-            removeResume={props.removeResume}
+          <DownloadResumeButton
+            color="inherit"
             resume={resume}
+            suggestedName={`${resume.name}'s resumé`}
           />
           <UploadResumeButton
             color="inherit"
             onChange={props.setResume}
           />
-          <DownloadResumeButton
-            color="inherit"
+          <DeleteButton
+            removeResume={props.removeResume}
             resume={resume}
-            suggestedName={`${resume.name}'s resumé`}
           />
         </PreviewToolbar>
       }
