@@ -9,7 +9,7 @@ export const PersonalDetailsForm: FunctionComponent<{
   resume: Resume
   setResume: Setter<Resume>
 }> = (props) => (
-  <Stack gap={2}>
+  <Stack gap={4}>
     <Box
       display="flex"
       flexWrap="wrap"
@@ -43,33 +43,35 @@ export const PersonalDetailsForm: FunctionComponent<{
         />
       </Stack>
     </Box>
-    <PropTextEditor
-      variant="filled"
-      label="Country"
-      propName={'location'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <PropTextEditor
-      variant="filled"
-      label="Nationality"
-      propName={'nationality'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <PropTextEditor
-      variant="filled"
-      label="Email Address"
-      propName={'emailAddress'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
-    <PropTextEditor
-      variant="filled"
-      label="Phone Number"
-      propName={'phoneNumber'}
-      value={props.resume}
-      setValue={props.setResume}
-    />
+    <Stack gap={2}>
+      <PropTextEditor
+        variant="filled"
+        label="Country"
+        propName={'location'}
+        value={props.resume}
+        setValue={props.setResume}
+      />
+      <PropTextEditor
+        variant="filled"
+        label="Nationality"
+        propName={'nationality'}
+        value={props.resume}
+        setValue={props.setResume}
+      />
+      <PropTextEditor
+        variant="filled"
+        label="Email Address"
+        propName={'emailAddress'}
+        value={props.resume}
+        setValue={props.setResume}
+      />
+      <PropTextEditor
+        variant="filled"
+        label="Phone Number"
+        propName={'phoneNumber'}
+        value={props.resume}
+        setValue={props.setResume}
+      />
+    </Stack>
   </Stack>
 )
