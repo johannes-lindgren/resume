@@ -24,7 +24,7 @@ export const SkillSectionView: FunctionComponent<{
       <Text style={{ ...theme.typography.header2 }}>
         {props.section.header}
       </Text>
-      {props.section.skillCategories.slice(1).map((skillCategory, index) => (
+      {props.section.skillCategories.slice(0, 1).map((skillCategory, index) => (
         <SkillCategoryView
           key={index}
           skillCategory={skillCategory}
