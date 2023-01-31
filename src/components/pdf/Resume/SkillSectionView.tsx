@@ -48,7 +48,7 @@ export const SkillCategoryView: FunctionComponent<{
     wrap={false}
   >
     <Text style={{ ...theme.typography.header3 }}>{skillCategory.header}</Text>
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
       {skillCategory.skills.map((skill, index) => (
         <Text
           key={index}
