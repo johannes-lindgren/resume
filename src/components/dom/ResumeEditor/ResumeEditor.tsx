@@ -104,6 +104,13 @@ export const ResumeEditor: FunctionComponent<{
   )
 }
 
+const PdfRoot = styled(PdfDocument)(({ theme }) => ({
+  aspectRatio: '0.707107 / 1',
+  border: 'none',
+  overflow: 'hidden',
+  borderRadius: theme.shape.borderRadius * 2,
+}))
+
 export const ResumePreview: FunctionComponent<{
   resume: Resume
   setResume: Setter<Resume>
@@ -118,21 +125,7 @@ export const ResumePreview: FunctionComponent<{
 
   return (
     <>
-      <Box
-        sx={{
-          borderRadius: 2,
-          height: 'auto',
-          flex: 1,
-          overflow: 'hidden',
-        }}
-      >
-        <PdfDocument
-          showToolbar={false}
-          width="100%"
-        >
-          {doc}
-        </PdfDocument>
-      </Box>
+      <PdfRoot showToolbar={false}>{doc}</PdfRoot>
       <Box
         display="flex"
         justifyContent="right"

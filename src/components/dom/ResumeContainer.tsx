@@ -3,6 +3,9 @@ import { Box } from '@mui/system'
 import { styled } from '@mui/material'
 
 const Root = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
   background: theme.palette.grey.A700,
   padding: theme.spacing(5),
   boxShadow: theme.shadows[6],
@@ -13,8 +16,6 @@ const Root = styled(Box)(({ theme }) => ({
   width: '50%',
   height: '100vh',
   color: theme.palette.primary.contrastText,
-  display: 'flex',
-  flexDirection: 'column',
   gap: theme.spacing(2),
 }))
 
