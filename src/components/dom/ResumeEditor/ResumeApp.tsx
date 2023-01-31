@@ -47,16 +47,29 @@ export const ResumeApp = () => {
           <Stack
             gap={6}
             justifyContent="space-between"
-            sx={{ minHeight: '100vh', pt: 10, pb: 5, maxWidth: 'xs' }}
+            sx={{
+              minHeight: '100vh',
+              pt: 10,
+              pb: 5,
+              maxWidth: 'xs',
+              typography: 'h1',
+            }}
           >
             <Stack gap={10}>
-              <Typography
-                variant="h1"
+              <Stack
+                component="h1"
                 textAlign="center"
-                sx={{ color: 'secondary.main' }}
+                sx={{ color: 'secondary.main', typography: 'h1' }}
+                gap={2}
               >
-                {createWord} Your {gloriousWord} Résumé
-              </Typography>
+                <Box component="span">{createWord} Your</Box>
+                <Box
+                  component="span"
+                  fontSize="3rem"
+                >
+                  {gloriousWord} Résumé
+                </Box>
+              </Stack>
               <Stack
                 gap={4}
                 maxWidth="xs"
@@ -106,7 +119,7 @@ export const ResumeApp = () => {
 
 export const Footer: FunctionComponent = () => (
   <Stack>
-    <Typography>
+    <Typography textAlign="center">
       Created by{' '}
       <Box
         component="span"

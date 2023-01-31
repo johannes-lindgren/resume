@@ -8,7 +8,7 @@ import { lightTheme } from '@/design/lightTheme'
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider theme={lightTheme}>
     <Head>
-      <title>Easy Resume</title>
+      <title>Brilliant Resume</title>
       <meta
         name="viewport"
         content="initial-scale=1, width=device-width"
