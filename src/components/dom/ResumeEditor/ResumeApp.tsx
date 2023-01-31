@@ -55,7 +55,7 @@ export const ResumeApp = () => {
               typography: 'h1',
             }}
           >
-            <Stack gap={10}>
+            <Stack gap={4}>
               <Stack
                 component="h1"
                 textAlign="center"
@@ -70,36 +70,31 @@ export const ResumeApp = () => {
                   {gloriousWord} Résumé
                 </Box>
               </Stack>
-              <Stack
-                gap={4}
-                maxWidth="xs"
-              >
-                <Tooltip title="Pssst! Try the template instead">
-                  <Button
-                    size="large"
-                    variant="outlined"
-                    color="secondary"
-                    startIcon={<NoteAddRounded />}
-                    onClick={() => actions.setResume(blankResume())}
-                  >
-                    Start from scratch
-                  </Button>
-                </Tooltip>
+              <Tooltip title="Pssst! Try the template instead">
                 <Button
                   size="large"
-                  variant="contained"
-                  startIcon={<NoteAddRounded />}
-                  onClick={() => actions.setResume(resumeTemplate())}
-                >
-                  Use the template
-                </Button>
-                <UploadResumeButton
-                  size="large"
-                  variant="contained"
+                  variant="outlined"
                   color="secondary"
-                  onChange={actions.setResume}
-                />
-              </Stack>
+                  startIcon={<NoteAddRounded />}
+                  onClick={() => actions.setResume(blankResume())}
+                >
+                  Start from scratch
+                </Button>
+              </Tooltip>
+              <Button
+                size="large"
+                variant="contained"
+                startIcon={<NoteAddRounded />}
+                onClick={() => actions.setResume(resumeTemplate())}
+              >
+                Use the template
+              </Button>
+              <UploadResumeButton
+                size="large"
+                variant="contained"
+                color="secondary"
+                onChange={actions.setResume}
+              />
             </Stack>
             <Footer />
           </Stack>

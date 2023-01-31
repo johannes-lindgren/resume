@@ -63,6 +63,11 @@ export const lightTheme = createTheme({
       defaultProps: {
         disableElevation: true,
       },
+      styleOverrides: {
+        sizeLarge: ({ theme }) => ({
+          padding: theme.spacing(2),
+        }),
+      },
     },
     MuiIconButton: {
       styleOverrides: {
