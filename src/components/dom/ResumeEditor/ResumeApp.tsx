@@ -40,7 +40,7 @@ export const ResumeApp = () => {
 
   switch (state.type) {
     case 'loading':
-      return <CircularProgress />
+      return <></>
     case 'uninitialized':
       return (
         <Container maxWidth="xs">
