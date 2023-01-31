@@ -140,6 +140,7 @@ const PreviewLayout: FunctionComponent<{
       setDim(v1.height > clientHeight ? v2 : v1)
     }
     window.addEventListener('resize', handleResize)
+    handleResize() // Trigger initially
     return () => {
       window.removeEventListener('resize', handleResize)
     }
