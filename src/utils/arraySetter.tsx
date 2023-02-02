@@ -5,7 +5,7 @@ export const arraySetter =
   <
     Key extends string,
     Child extends { uid: string },
-    Parent extends { [k in Key]: Child[] },
+    Parent extends Record<Key, Child[]>,
   >(
     parent: Parent,
     setParent: Setter<Parent>,
