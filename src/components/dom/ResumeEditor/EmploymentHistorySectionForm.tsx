@@ -41,7 +41,6 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
         parent={props.section}
         propName="employments"
         current={employment}
-        currentIndex={index}
       >
         <Accordion
           key={employment.uid}

@@ -16,15 +16,16 @@ export const Rearrangeable = <
   Child extends { uid: string },
   Parent extends Record<Key, Child[]>,
 >(props: {
-  currentIndex: number
   setParent: Setter<Parent>
   parent: Parent
   propName: Key
   current: Child
   children: ReactNode
 }) => {
-  const { currentIndex, setParent, parent, current, propName, children } = props
-  // const currentIndex =
+  const { setParent, parent, current, propName, children } = props
+  const currentIndex = parent[propName].findIndex(
+    (it) => it.uid === current.uid,
+  )
   return (
     <Hoverable
       left={

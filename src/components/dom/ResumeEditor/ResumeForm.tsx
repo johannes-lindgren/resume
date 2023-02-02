@@ -28,7 +28,6 @@ export const ResumeForm: FunctionComponent<{
           parent={props.resume}
           propName="sections"
           current={section}
-          currentIndex={index}
         >
           <SectionForm
             section={section}

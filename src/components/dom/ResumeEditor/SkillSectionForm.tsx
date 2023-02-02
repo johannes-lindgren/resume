@@ -27,7 +27,6 @@ export const SkillSectionForm: FunctionComponent<{
         parent={props.section}
         propName="skillCategories"
         current={skillCategory}
-        currentIndex={index}
       >
         <SkillCategoryForm
           skillCategory={skillCategory}
