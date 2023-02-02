@@ -19,7 +19,7 @@ export const ResumeForm: FunctionComponent<{
       resume={props.resume}
       setResume={props.setResume}
     />
-    {props.resume.sections.map((section, index) => (
+    {props.resume.sections.map((section) => (
       <>
         <Divider />
         <Rearrangeable

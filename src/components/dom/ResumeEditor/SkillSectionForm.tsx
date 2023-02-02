@@ -20,7 +20,7 @@ export const SkillSectionForm: FunctionComponent<{
       inputProps={{ sx: { typography: 'h2' } }}
       placeholder="Skills"
     />
-    {props.section.skillCategories.map((skillCategory, index) => (
+    {props.section.skillCategories.map((skillCategory) => (
       <Rearrangeable
         key={skillCategory.uid}
         setParent={props.setSection}

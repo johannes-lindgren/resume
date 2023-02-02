@@ -34,7 +34,7 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
       setValue={props.setSection}
       inputProps={{ sx: { typography: 'h2' } }}
     />
-    {props.section.employments.map((employment, index) => (
+    {props.section.employments.map((employment) => (
       <Rearrangeable
         key={employment.uid}
         setParent={props.setSection}
