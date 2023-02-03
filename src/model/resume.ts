@@ -38,7 +38,12 @@ export type SkillSection = {
 export type SkillCategory = {
   uid: string
   header: string
-  skills: string[]
+  skills: Skill[]
+}
+
+export type Skill = {
+  uid: string
+  label: string
 }
 
 export type Employment = {

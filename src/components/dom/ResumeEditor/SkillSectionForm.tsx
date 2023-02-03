@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { SkillCategory, SkillSection } from '@/model/resume'
+import { Skill, SkillCategory, SkillSection } from '@/model/resume'
 import { Setter2, setter22setter } from '@/utils/Setter'
 import { Autocomplete, Chip, Stack, TextField } from '@mui/material'
 import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
@@ -7,6 +7,7 @@ import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 import { arraySetter2 } from '@/utils/arraySetter'
 import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
 import { newSkillCategory } from '@/model/defaults'
+import { uid } from '@/utils/uid'
 
 export const SkillSectionForm: FunctionComponent<{
   section: SkillSection
@@ -31,7 +32,7 @@ export const SkillSectionForm: FunctionComponent<{
         <SkillCategoryForm
           skillCategory={skillCategory}
           setSkillCategory={arraySetter2(
-            props.section.uid,
+            skillCategory.uid,
             props.setSection,
             'skillCategories',
           )}
@@ -70,18 +71,20 @@ export const SkillCategoryForm: FunctionComponent<{
       onChange={(e, newValue) =>
         props.setSkillCategory((skillCategory) => ({
           ...skillCategory,
-          skills: newValue,
+          skills: newValue.map((v) =>
+            typeof v === 'string' ? { uid: uid(), label: v } : v,
+          ),
         }))
       }
       freeSolo
-      renderTags={(value: readonly string[], getTagProps) =>
+      renderTags={(value: Skill[], getTagProps) =>
         value.map((option, index) => (
           <Chip
             variant="filled"
             color="default"
-            label={option}
+            label={option.label}
             {...getTagProps({ index })}
-            key={index}
+            key={option.uid}
             sx={{
               mr: (theme) =>
                 `${theme.spacing(

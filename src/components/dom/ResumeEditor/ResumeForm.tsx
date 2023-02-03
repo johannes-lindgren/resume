@@ -102,7 +102,7 @@ const SectionForm: FunctionComponent<{
       return (
         <SkillSectionForm
           section={section}
-          setSection={setSection1}
+          setSection={setSection}
         />
       )
     case 'employmentHistory':

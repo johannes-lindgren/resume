@@ -31,6 +31,7 @@ export const arraySetter2 =
     setParent((parent) => {
       const oldChild = parent[key].find((child) => child.uid === childUid)
       if (!oldChild) {
+        // Handle!
         return parent
       }
       const newChild = getNewChild(oldChild)

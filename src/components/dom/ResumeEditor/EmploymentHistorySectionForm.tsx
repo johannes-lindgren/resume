@@ -4,7 +4,7 @@ import {
   EmploymentHistorySection,
   ResumeSection,
 } from '@/model/resume'
-import { Setter } from '@/utils/Setter'
+import { Setter, Setter2 } from '@/utils/Setter'
 import {
   Accordion,
   AccordionDetails,
@@ -24,7 +24,7 @@ import { newEmployment } from '@/model/defaults'
 
 export const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
-  setSection: Setter<ResumeSection>
+  setSection: Setter2<ResumeSection>
 }> = (props) => (
   <Stack gap={4}>
     <PropTextEditor
