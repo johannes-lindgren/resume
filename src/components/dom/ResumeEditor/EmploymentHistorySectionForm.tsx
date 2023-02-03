@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Employment, EmploymentHistorySection } from '@/model/resume'
-import { Setter2, setter22setter } from '@/utils/Setter'
+import { Setter2 } from '@/utils/Setter'
 import {
   Accordion,
   AccordionDetails,

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Skill, SkillCategory, SkillSection } from '@/model/resume'
-import { Setter2, setter22setter } from '@/utils/Setter'
+import { Setter2 } from '@/utils/Setter'
 import { Autocomplete, Chip, Stack, TextField } from '@mui/material'
 import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'

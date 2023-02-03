@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback } from 'react'
-import { Setter, Setter2 } from '@/utils/Setter'
+import { Setter2 } from '@/utils/Setter'
 import { Box, BoxProps, IconButton, styled } from '@mui/material'
 import { SelectFileButton } from '@/components/dom/SelectFileButton'
 import { AddAPhotoRounded, DeleteOutlineRounded } from '@mui/icons-material'

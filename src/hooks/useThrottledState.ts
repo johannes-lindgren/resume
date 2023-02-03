@@ -1,6 +1,6 @@
-import { Reducer, useCallback, useEffect, useReducer, useState } from 'react'
+import { Reducer, useCallback, useEffect, useState } from 'react'
 import { Resume } from '@/model/resume'
-import { Setter, Setter2, setter22setter } from '@/utils/Setter'
+import { Setter2 } from '@/utils/Setter'
 import {
   readFromLocalStorage,
   localStorage,

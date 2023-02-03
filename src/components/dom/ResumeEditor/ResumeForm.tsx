@@ -1,8 +1,8 @@
-import { FunctionComponent, memo, useCallback, useEffect } from 'react'
+import { FunctionComponent, memo, useCallback } from 'react'
 import { Resume, ResumeSection } from '@/model/resume'
 import { Box, Divider, Stack } from '@mui/material'
 import { arraySetter2 } from '@/utils/arraySetter'
-import { Setter, Setter2, setter22setter } from '@/utils/Setter'
+import { Setter2 } from '@/utils/Setter'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 import { PersonalDetailsForm } from '@/components/dom/ResumeEditor/PersonalDetailsForm'
 import { EmploymentHistorySectionForm } from '@/components/dom/ResumeEditor/EmploymentHistorySectionForm'
@@ -85,10 +85,6 @@ const SectionForm: FunctionComponent<{
   setSection: Setter2<ResumeSection>
 }> = memo((props) => {
   const { section, setSection } = props
-  const setSection1 = useCallback<Setter<ResumeSection>>(
-    setter22setter(setSection),
-    [setSection],
-  )
   switch (section.type) {
     case 'details':
       return (
