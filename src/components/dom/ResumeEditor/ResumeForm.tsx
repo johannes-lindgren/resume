@@ -109,7 +109,7 @@ const SectionForm: FunctionComponent<{
       return (
         <EmploymentHistorySectionForm
           section={section}
-          setSection={setSection1}
+          setSection={setSection}
         />
       )
   }

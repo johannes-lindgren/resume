@@ -32,6 +32,9 @@ export const arraySetter2 =
       const oldChild = parent[key].find((child) => child.uid === childUid)
       if (!oldChild) {
         // Handle!
+        console.warn(
+          `Could not find an element under the property "${key}" with the uid "${childUid}"`,
+        )
         return parent
       }
       const newChild = getNewChild(oldChild)

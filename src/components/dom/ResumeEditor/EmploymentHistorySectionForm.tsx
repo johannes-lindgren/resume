@@ -1,10 +1,6 @@
 import { FunctionComponent } from 'react'
-import {
-  Employment,
-  EmploymentHistorySection,
-  ResumeSection,
-} from '@/model/resume'
-import { Setter, Setter2 } from '@/utils/Setter'
+import { Employment, EmploymentHistorySection } from '@/model/resume'
+import { Setter2, setter22setter } from '@/utils/Setter'
 import {
   Accordion,
   AccordionDetails,
@@ -13,22 +9,22 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
+import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { Box } from '@mui/system'
 import { replaced } from '@/utils/replaced'
 import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 import { ExpandMore } from '@mui/icons-material'
-import { arraySetter } from '@/utils/arraySetter'
+import { arraySetter2 } from '@/utils/arraySetter'
 import { newEmployment } from '@/model/defaults'
 import { uid } from '@/utils/uid'
 
 export const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
-  setSection: Setter<ResumeSection>
+  setSection: Setter2<EmploymentHistorySection>
 }> = (props) => (
   <Stack gap={4}>
-    <PropTextEditor
+    <PropTextEditor2
       placeholder="Employment History"
       propName={'header'}
       value={props.section}
@@ -38,7 +34,7 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
     {props.section.employments.map((employment) => (
       <Rearrangeable
         key={employment.uid}
-        setParent={props.setSection}
+        setParent={setter22setter(props.setSection)}
         parent={props.section}
         propName="employments"
         current={employment}
@@ -63,8 +59,8 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
           <AccordionDetails>
             <EmploymentForm
               employment={employment}
-              setEmployment={arraySetter(
-                props.section,
+              setEmployment={arraySetter2(
+                employment.uid,
                 props.setSection,
                 'employments',
               )}
@@ -75,10 +71,10 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
     ))}
     <AddButton
       onClick={() =>
-        props.setSection({
-          ...props.section,
-          employments: [...props.section.employments, newEmployment()],
-        })
+        props.setSection((section) => ({
+          ...section,
+          employments: [...section.employments, newEmployment()],
+        }))
       }
     >
       Add one more employment
@@ -87,10 +83,10 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
 )
 export const EmploymentForm: FunctionComponent<{
   employment: Employment
-  setEmployment: Setter<Employment>
+  setEmployment: Setter2<Employment>
 }> = (props) => (
   <Stack gap={2}>
-    <PropTextEditor
+    <PropTextEditor2
       label="Worked as"
       placeholder="Job Title"
       propName={'jobTitle'}
@@ -103,7 +99,7 @@ export const EmploymentForm: FunctionComponent<{
       display="flex"
       gap={2}
     >
-      <PropTextEditor
+      <PropTextEditor2
         label="at"
         placeholder="Employer"
         propName={'employer'}
@@ -112,7 +108,7 @@ export const EmploymentForm: FunctionComponent<{
         variant="filled"
         fullWidth
       />
-      <PropTextEditor
+      <PropTextEditor2
         label="in"
         placeholder="Location"
         propName={'location'}
@@ -126,7 +122,7 @@ export const EmploymentForm: FunctionComponent<{
       display="flex"
       gap={2}
     >
-      <PropTextEditor
+      <PropTextEditor2
         label="from"
         placeholder="Start Date"
         propName={'startDate'}
@@ -135,7 +131,7 @@ export const EmploymentForm: FunctionComponent<{
         variant="filled"
         fullWidth
       />
-      <PropTextEditor
+      <PropTextEditor2
         label="to"
         placeholder="End Date"
         propName={'endDate'}
@@ -165,17 +161,17 @@ export const EmploymentForm: FunctionComponent<{
               value={achievement.description}
               placeholder="The value I brought, and how I achieved it."
               onChange={({ target }) =>
-                props.setEmployment({
-                  ...props.employment,
+                props.setEmployment((employment) => ({
+                  ...employment,
                   achievements: replaced(
-                    props.employment.achievements,
+                    employment.achievements,
                     ({ uid }) => achievement.uid === uid,
                     {
                       uid: achievement.uid,
                       description: target.value,
                     },
                   ),
-                })
+                }))
               }
               multiline
               fullWidth
@@ -184,16 +180,16 @@ export const EmploymentForm: FunctionComponent<{
         ))}
         <AddButton
           onClick={() =>
-            props.setEmployment({
-              ...props.employment,
+            props.setEmployment((employment) => ({
+              ...employment,
               achievements: [
-                ...props.employment.achievements,
+                ...employment.achievements,
                 {
                   uid: uid(),
                   description: '',
                 },
               ],
-            })
+            }))
           }
         >
           Add one more achievement
