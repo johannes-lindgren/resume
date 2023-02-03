@@ -53,5 +53,10 @@ export type Employment = {
   location: string
   startDate: string
   endDate: string
-  achievements: string[]
+  achievements: Achievement[]
+}
+
+export type Achievement = {
+  uid: string
+  description: string
 }

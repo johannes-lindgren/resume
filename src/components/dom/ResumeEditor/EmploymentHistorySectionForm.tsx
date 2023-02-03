@@ -21,10 +21,11 @@ import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 import { ExpandMore } from '@mui/icons-material'
 import { arraySetter } from '@/utils/arraySetter'
 import { newEmployment } from '@/model/defaults'
+import { uid } from '@/utils/uid'
 
 export const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
-  setSection: Setter2<ResumeSection>
+  setSection: Setter<ResumeSection>
 }> = (props) => (
   <Stack gap={4}>
     <PropTextEditor
@@ -161,15 +162,18 @@ export const EmploymentForm: FunctionComponent<{
             key={index}
           >
             <InputBase
-              value={achievement}
+              value={achievement.description}
               placeholder="The value I brought, and how I achieved it."
               onChange={({ target }) =>
                 props.setEmployment({
                   ...props.employment,
                   achievements: replaced(
                     props.employment.achievements,
-                    (_, i) => i === index,
-                    target.value,
+                    ({ uid }) => achievement.uid === uid,
+                    {
+                      uid: achievement.uid,
+                      description: target.value,
+                    },
                   ),
                 })
               }
@@ -182,7 +186,13 @@ export const EmploymentForm: FunctionComponent<{
           onClick={() =>
             props.setEmployment({
               ...props.employment,
-              achievements: [...props.employment.achievements, ''],
+              achievements: [
+                ...props.employment.achievements,
+                {
+                  uid: uid(),
+                  description: '',
+                },
+              ],
             })
           }
         >

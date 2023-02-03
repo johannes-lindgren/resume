@@ -39,15 +39,15 @@ export const EmploymentView: FunctionComponent<{
       </Text>
     </Stack>
     <Stack gap={1}>
-      {props.emloyment.achievements.map((achievement, index) => (
+      {props.emloyment.achievements.map((achievement) => (
         <View
-          key={index}
+          key={achievement.uid}
           style={{
             flexDirection: 'row',
           }}
         >
           <Text>•</Text>
-          <Text style={styles.achievement}>{achievement}</Text>
+          <Text style={styles.achievement}>{achievement.description}</Text>
         </View>
       ))}
     </Stack>
