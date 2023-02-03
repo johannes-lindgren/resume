@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback } from 'react'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import { Box, BoxProps, IconButton, styled } from '@mui/material'
 import { SelectFileButton } from '@/components/dom/SelectFileButton'
 import { AddAPhotoRounded, DeleteOutlineRounded } from '@mui/icons-material'
@@ -38,7 +38,7 @@ const HoverIconButton = styled(IconButton)(({ theme }) => ({
 export const ImageForm: FunctionComponent<
   {
     image: string | undefined
-    setImage: Setter2<string | undefined>
+    setImage: Setter<string | undefined>
   } & BoxProps<'img'>
 > = (props) => {
   const { image, setImage } = props

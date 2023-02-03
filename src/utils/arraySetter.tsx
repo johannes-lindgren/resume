@@ -1,16 +1,16 @@
 import { replaced } from '@/utils/replaced'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 
-export const arraySetter2 =
+export const arraySetter =
   <
     Key extends string,
     Child extends { uid: string },
     Parent extends Record<Key, Child[]>,
   >(
     childUid: string,
-    setParent: Setter2<Parent>,
+    setParent: Setter<Parent>,
     key: Key,
-  ): Setter2<Child> =>
+  ): Setter<Child> =>
   (getNewChild) =>
     setParent((parent) => {
       const oldChild = parent[key].find((child) => child.uid === childUid)

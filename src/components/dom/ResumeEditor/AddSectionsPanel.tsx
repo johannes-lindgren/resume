@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import { Button, Grid } from '@mui/material'
 import {
   Assessment,
@@ -16,7 +16,7 @@ import {
 
 export const AddSectionsPanel: FunctionComponent<{
   resume: Resume
-  setResume: Setter2<Resume>
+  setResume: Setter<Resume>
 }> = (props) => (
   <Grid
     container

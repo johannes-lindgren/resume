@@ -1,17 +1,17 @@
 import { FunctionComponent } from 'react'
 import { Skill, SkillCategory, SkillSection } from '@/model/resume'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import { Autocomplete, Chip, Stack, TextField } from '@mui/material'
 import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
-import { arraySetter2 } from '@/utils/arraySetter'
+import { arraySetter } from '@/utils/arraySetter'
 import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
 import { newSkillCategory } from '@/model/defaults'
 import { uid } from '@/utils/uid'
 
 export const SkillSectionForm: FunctionComponent<{
   section: SkillSection
-  setSection: Setter2<SkillSection>
+  setSection: Setter<SkillSection>
 }> = (props) => (
   <Stack gap={2}>
     <PropTextEditor2
@@ -31,7 +31,7 @@ export const SkillSectionForm: FunctionComponent<{
       >
         <SkillCategoryForm
           skillCategory={skillCategory}
-          setSkillCategory={arraySetter2(
+          setSkillCategory={arraySetter(
             skillCategory.uid,
             props.setSection,
             'skillCategories',
@@ -53,7 +53,7 @@ export const SkillSectionForm: FunctionComponent<{
 )
 export const SkillCategoryForm: FunctionComponent<{
   skillCategory: SkillCategory
-  setSkillCategory: Setter2<SkillCategory>
+  setSkillCategory: Setter<SkillCategory>
 }> = (props) => (
   <Stack>
     <PropTextEditor2

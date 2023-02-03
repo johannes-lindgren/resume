@@ -1,12 +1,12 @@
 import { TextField } from '@mui/material'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import { TextFieldProps } from '@mui/material/TextField/TextField'
 
 export const PropTextEditor2 = <T,>(
   props: {
     value: T
     propName: keyof T
-    setValue: Setter2<T>
+    setValue: Setter<T>
   } & Omit<TextFieldProps, 'value' | 'onChange'>,
 ): JSX.Element => {
   const { value, setValue, propName, ...textFieldProps } = props

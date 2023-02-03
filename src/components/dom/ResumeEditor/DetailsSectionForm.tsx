@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react'
 import { DetailsSection } from '@/model/resume'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import { Stack } from '@mui/material'
 import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
 
 export const DetailsSectionForm: FunctionComponent<{
   section: DetailsSection
-  setSection: Setter2<DetailsSection>
+  setSection: Setter<DetailsSection>
 }> = (props) => (
   <Stack gap={2}>
     <PropTextEditor2

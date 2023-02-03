@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react'
 import { Resume } from '@/model/resume'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import { useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeView } from '@/components/pdf/Resume'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
@@ -60,7 +60,7 @@ const PreviewToolbar = styled(Box)(({ theme }) => ({
 
 export const ResumePreview: FunctionComponent<{
   resume: Resume
-  setResume: Setter2<Resume>
+  setResume: Setter<Resume>
   isSaved: boolean
   removeResume: () => void
 }> = (props) => {

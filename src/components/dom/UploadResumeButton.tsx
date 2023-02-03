@@ -2,11 +2,11 @@ import { ChangeEventHandler, FunctionComponent, useRef } from 'react'
 import { Button, ButtonProps, Tooltip } from '@mui/material'
 import { UploadRounded } from '@mui/icons-material'
 import { Resume } from '@/model/resume'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 
 export const UploadResumeButton: FunctionComponent<
   {
-    onChange?: Setter2<Resume>
+    onChange?: Setter<Resume>
   } & Omit<ButtonProps<'label'>, 'onChange'>
 > = (props) => {
   const { onChange, ...buttonProps } = props

@@ -1,8 +1,8 @@
 import { FunctionComponent, memo, useCallback } from 'react'
 import { Resume, ResumeSection } from '@/model/resume'
 import { Box, Divider, Stack } from '@mui/material'
-import { arraySetter2 } from '@/utils/arraySetter'
-import { Setter2 } from '@/utils/Setter'
+import { arraySetter } from '@/utils/arraySetter'
+import { Setter } from '@/utils/Setter'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 import { PersonalDetailsForm } from '@/components/dom/ResumeEditor/PersonalDetailsForm'
 import { EmploymentHistorySectionForm } from '@/components/dom/ResumeEditor/EmploymentHistorySectionForm'
@@ -12,7 +12,7 @@ import { AddSectionsPanel } from '@/components/dom/ResumeEditor/AddSectionsPanel
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
-  setResume: Setter2<Resume>
+  setResume: Setter<Resume>
 }> = (props) => {
   console.log(props.resume.sections)
   return (
@@ -38,7 +38,7 @@ export const ResumeForm: FunctionComponent<{
   )
 }
 export const RearrangeableSectionForm: FunctionComponent<{
-  setResume: Setter2<Resume>
+  setResume: Setter<Resume>
   resume: Resume
   section: ResumeSection
 }> = (props) => {
@@ -52,8 +52,8 @@ export const RearrangeableSectionForm: FunctionComponent<{
   // useEffect(() => {
   //   console.log('changed sections')
   // }, [section])
-  const setSection2 = useCallback<Setter2<ResumeSection>>(
-    arraySetter2(section.uid, setResume, 'sections'),
+  const setSection = useCallback<Setter<ResumeSection>>(
+    arraySetter(section.uid, setResume, 'sections'),
     [section.uid, setResume],
   )
   return (
@@ -74,7 +74,7 @@ export const RearrangeableSectionForm: FunctionComponent<{
       >
         <SectionForm
           section={section}
-          setSection={setSection2}
+          setSection={setSection}
         />
       </Rearrangeable>
     </Box>
@@ -82,7 +82,7 @@ export const RearrangeableSectionForm: FunctionComponent<{
 }
 const SectionForm: FunctionComponent<{
   section: ResumeSection
-  setSection: Setter2<ResumeSection>
+  setSection: Setter<ResumeSection>
 }> = memo((props) => {
   const { section, setSection } = props
   switch (section.type) {

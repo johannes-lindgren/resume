@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Employment, EmploymentHistorySection } from '@/model/resume'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import {
   Accordion,
   AccordionDetails,
@@ -15,13 +15,13 @@ import { replaced } from '@/utils/replaced'
 import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
 import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 import { ExpandMore } from '@mui/icons-material'
-import { arraySetter2 } from '@/utils/arraySetter'
+import { arraySetter } from '@/utils/arraySetter'
 import { newEmployment } from '@/model/defaults'
 import { uid } from '@/utils/uid'
 
 export const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
-  setSection: Setter2<EmploymentHistorySection>
+  setSection: Setter<EmploymentHistorySection>
 }> = (props) => (
   <Stack gap={4}>
     <PropTextEditor2
@@ -59,7 +59,7 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
           <AccordionDetails>
             <EmploymentForm
               employment={employment}
-              setEmployment={arraySetter2(
+              setEmployment={arraySetter(
                 employment.uid,
                 props.setSection,
                 'employments',
@@ -83,7 +83,7 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
 )
 export const EmploymentForm: FunctionComponent<{
   employment: Employment
-  setEmployment: Setter2<Employment>
+  setEmployment: Setter<Employment>
 }> = (props) => (
   <Stack gap={2}>
     <PropTextEditor2

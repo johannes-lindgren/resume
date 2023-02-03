@@ -1,6 +1,6 @@
 import { Reducer, useCallback, useEffect, useState } from 'react'
 import { Resume } from '@/model/resume'
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import {
   readFromLocalStorage,
   localStorage,
@@ -63,7 +63,7 @@ const reducer: Reducer<ResumeAppState, Actions> = (prevState, action) => {
 }
 
 export type AllResumeActions = {
-  setResume: Setter2<Resume>
+  setResume: Setter<Resume>
   newResume: (resume: Resume) => void
   removeResume: () => void
 }
@@ -98,7 +98,7 @@ export const useResumeApp = (
     [setState],
   )
 
-  const setResume = useCallback<Setter2<Resume>>((getNewResume) => {
+  const setResume = useCallback<Setter<Resume>>((getNewResume) => {
     setState((prevState) => {
       // TODO return actions that are consistent with the state
       if (!prevState.resume) {

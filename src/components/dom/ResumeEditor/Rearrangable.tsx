@@ -1,4 +1,4 @@
-import { Setter2 } from '@/utils/Setter'
+import { Setter } from '@/utils/Setter'
 import { Hoverable } from '@/components/dom/ResumeEditor/Hoverable'
 import { IconButton, Stack } from '@mui/material'
 import { movedLeft } from '@/utils/movedLeft'
@@ -16,7 +16,7 @@ export const Rearrangeable = <
   Child extends { uid: string },
   Parent extends Record<Key, Child[]>,
 >(props: {
-  setParent: Setter2<Parent>
+  setParent: Setter<Parent>
   parent: Parent
   propName: Key
   current: Child
