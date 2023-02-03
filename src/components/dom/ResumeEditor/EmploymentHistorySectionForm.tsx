@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, memo, useCallback } from 'react'
 import { Employment, EmploymentHistorySection } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
 import {
@@ -22,69 +22,86 @@ import { uid } from '@/utils/uid'
 export const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
   setSection: Setter<EmploymentHistorySection>
-}> = (props) => (
-  <Stack gap={4}>
-    <PropTextEditor2
-      placeholder="Employment History"
-      propName={'header'}
-      value={props.section}
-      setValue={props.setSection}
-      inputProps={{ sx: { typography: 'h2' } }}
-    />
-    {props.section.employments.map((employment) => (
-      <Rearrangeable
-        key={employment.uid}
-        setParent={props.setSection}
-        parent={props.section}
-        propName="employments"
-        current={employment}
-      >
-        <Accordion
+}> = (props) => {
+  const { section, setSection } = props
+  return (
+    <Stack gap={4}>
+      <PropTextEditor2
+        placeholder="Employment History"
+        propName={'header'}
+        value={section}
+        setValue={setSection}
+        inputProps={{ sx: { typography: 'h2' } }}
+      />
+      {props.section.employments.map((employment) => (
+        <RearrangeableEmploymentForm
           key={employment.uid}
-          variant="outlined"
-          disableGutters
-        >
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            <Stack>
-              <Typography>{employment.jobTitle}&nbsp;</Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: 'text.secondary' }}
-              >
-                {(employment.startDate || employment.endDate) &&
-                  `${employment.startDate} — ${employment.endDate}`}
-              </Typography>
-            </Stack>
-          </AccordionSummary>
-          <AccordionDetails>
-            <EmploymentForm
-              employment={employment}
-              setEmployment={arraySetter(
-                employment.uid,
-                props.setSection,
-                'employments',
-              )}
-            />
-          </AccordionDetails>
-        </Accordion>
-      </Rearrangeable>
-    ))}
-    <AddButton
-      onClick={() =>
-        props.setSection((section) => ({
-          ...section,
-          employments: [...section.employments, newEmployment()],
-        }))
-      }
+          employment={employment}
+          section={section}
+          setSection={setSection}
+        />
+      ))}
+      <AddButton
+        onClick={() =>
+          setSection((section) => ({
+            ...section,
+            employments: [...section.employments, newEmployment()],
+          }))
+        }
+      >
+        Add one more employment
+      </AddButton>
+    </Stack>
+  )
+}
+const RearrangeableEmploymentForm: FunctionComponent<{
+  section: EmploymentHistorySection
+  setSection: Setter<EmploymentHistorySection>
+  employment: Employment
+}> = (props) => {
+  const { employment, section, setSection } = props
+  const setEmployment = useCallback<Setter<Employment>>(
+    arraySetter(employment.uid, setSection, 'employments'),
+    [employment.uid, setSection],
+  )
+  return (
+    <Rearrangeable
+      setParent={setSection}
+      parent={section}
+      propName="employments"
+      current={employment}
     >
-      Add one more employment
-    </AddButton>
-  </Stack>
-)
+      <Accordion
+        key={employment.uid}
+        variant="outlined"
+        disableGutters
+      >
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Stack>
+            <Typography>{employment.jobTitle}&nbsp;</Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: 'text.secondary' }}
+            >
+              {(employment.startDate || employment.endDate) &&
+                `${employment.startDate} — ${employment.endDate}`}
+            </Typography>
+          </Stack>
+        </AccordionSummary>
+        <AccordionDetails>
+          <EmploymentForm
+            employment={employment}
+            setEmployment={setEmployment}
+          />
+        </AccordionDetails>
+      </Accordion>
+    </Rearrangeable>
+  )
+}
 export const EmploymentForm: FunctionComponent<{
   employment: Employment
   setEmployment: Setter<Employment>
-}> = (props) => (
+}> = memo((props) => (
   <Stack gap={2}>
     <PropTextEditor2
       label="Worked as"
@@ -197,4 +214,4 @@ export const EmploymentForm: FunctionComponent<{
       </Stack>
     </Stack>
   </Stack>
-)
+))

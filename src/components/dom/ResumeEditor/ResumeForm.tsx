@@ -38,8 +38,8 @@ export const ResumeForm: FunctionComponent<{
   )
 }
 export const RearrangeableSectionForm: FunctionComponent<{
-  setResume: Setter<Resume>
   resume: Resume
+  setResume: Setter<Resume>
   section: ResumeSection
 }> = (props) => {
   const { resume, setResume, section } = props
