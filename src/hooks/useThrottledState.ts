@@ -1,6 +1,6 @@
 import { Reducer, useCallback, useEffect, useReducer, useState } from 'react'
 import { Resume } from '@/model/resume'
-import { Setter } from '@/utils/Setter'
+import { Setter, Setter2, setter22setter } from '@/utils/Setter'
 import {
   readFromLocalStorage,
   localStorage,
@@ -64,28 +64,42 @@ const reducer: Reducer<ResumeAppState, Actions> = (prevState, action) => {
 
 export type ResumeActions = {
   setResume: Setter<Resume>
+  setResume2: Setter2<Resume>
   removeResume: () => void
 }
 
 export const useResumeApp = (
   throttleDelayMs: number,
 ): [ResumeAppState, ResumeActions] => {
-  const [state, dispatch] = useReducer(reducer, {
+  // const [state, dispatch] = useReducer(reducer, {
+  //   type: 'loading',
+  //   resume: undefined,
+  // })
+  const [state, setState] = useState<ResumeAppState>({
     type: 'loading',
     resume: undefined,
   })
+  const dispatch = useCallback(
+    (action: Actions) => {
+      setState((prevState) => reducer(prevState, action))
+    },
+    [setState],
+  )
 
   const { resume } = state
 
-  const setResume = useCallback<Setter<Resume>>(
-    (resume) => {
-      dispatch({
-        type: 'setResume',
-        resume,
-      })
-    },
-    [dispatch],
-  )
+  const setResume2 = useCallback<Setter2<Resume>>((getNewResume) => {
+    setState((prevState) => {
+      return {
+        type: 'unsaved',
+        resume: getNewResume(prevState.resume),
+      }
+    })
+  }, [])
+
+  const setResume = useCallback<Setter<Resume>>(setter22setter(setResume2), [
+    dispatch,
+  ])
 
   useEffect(() => {
     const storedValue = readFromLocalStorage()
@@ -96,25 +110,28 @@ export const useResumeApp = (
     } else {
       setResume(storedValue as Resume)
     }
-  }, [setResume])
+  }, [setResume, dispatch])
 
   const removeResume = useCallback(() => {
     localStorage()
     dispatch({
       type: 'unsetResume',
     })
-  }, [])
+  }, [dispatch])
 
-  const saveResume = useCallback((throttledResume: Resume | undefined) => {
-    saveToLocalStorage(throttledResume)
-    dispatch({
-      type: 'saveResume',
-    })
-  }, [])
+  const saveResume = useCallback(
+    (throttledResume: Resume | undefined) => {
+      saveToLocalStorage(throttledResume)
+      dispatch({
+        type: 'saveResume',
+      })
+    },
+    [dispatch],
+  )
 
   useThrottle(resume, throttleDelayMs, saveResume)
 
-  return [state, { setResume, removeResume }]
+  return [state, { setResume, setResume2, removeResume }]
 }
 
 export const useThrottledState = <T>(initialValue: T, delayMs: number): T => {

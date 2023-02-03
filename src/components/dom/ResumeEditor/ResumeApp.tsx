@@ -104,7 +104,7 @@ export const ResumeApp = () => {
       return (
         <ResumeEditor
           resume={state.resume}
-          setResume={actions.setResume}
+          setResume={actions.setResume2}
           removeResume={actions.removeResume}
           saved={state.type === 'saved'}
         />

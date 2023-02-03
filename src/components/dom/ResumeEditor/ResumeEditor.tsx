@@ -3,7 +3,7 @@ import { ResumeContainer } from '@/components/dom/ResumeContainer'
 import { Resume } from '@/model/resume'
 import { Box, Stack, styled } from '@mui/material'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
-import { Setter } from '@/utils/Setter'
+import { Setter, Setter2, setter22setter } from '@/utils/Setter'
 import { ResumePreview } from '@/components/dom/ResumeEditor/ResumePreview'
 
 const Split = styled(Box)(({ theme }) => ({
@@ -15,7 +15,7 @@ const Split = styled(Box)(({ theme }) => ({
 
 export const ResumeEditor: FunctionComponent<{
   resume: Resume
-  setResume: Setter<Resume>
+  setResume: Setter2<Resume>
   removeResume: () => void
   saved: boolean
 }> = (props) => {
@@ -38,7 +38,7 @@ export const ResumeEditor: FunctionComponent<{
       <ResumeContainer>
         <ResumePreview
           resume={resume}
-          setResume={setResume}
+          setResume={setter22setter(setResume)}
           isSaved={props.saved}
           removeResume={removeResume}
         />
