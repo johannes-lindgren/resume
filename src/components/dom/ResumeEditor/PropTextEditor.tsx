@@ -35,15 +35,12 @@ export const PropTextEditor2 = <T,>(
   return (
     <TextField
       value={value[propName]}
-      onChange={({ target }) => {
-        console.log('setting', target.value)
-        setValue((oldValue) => {
-          return {
-            ...oldValue,
-            [propName]: target.value,
-          }
-        })
-      }}
+      onChange={({ target }) =>
+        setValue((oldValue) => ({
+          ...oldValue,
+          [propName]: target.value,
+        }))
+      }
       {...textFieldProps}
     />
   )
