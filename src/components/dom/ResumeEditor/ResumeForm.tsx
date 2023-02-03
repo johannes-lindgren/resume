@@ -13,32 +13,28 @@ import { AddSectionsPanel } from '@/components/dom/ResumeEditor/AddSectionsPanel
 export const ResumeForm: FunctionComponent<{
   resume: Resume
   setResume: Setter2<Resume>
-}> = (props) => {
-  const setResume = useCallback(setter22setter(props.setResume), [
-    props.setResume,
-  ])
-  return (
-    <Stack gap={4}>
-      <PersonalDetailsForm
+}> = (props) => (
+  <Stack gap={4}>
+    <PersonalDetailsForm
+      resume={props.resume}
+      setResume={props.setResume}
+    />
+    {props.resume.sections.map((section) => (
+      <RearrangeableSectionForm
+        key={section.uid}
+        setResume={props.setResume}
         resume={props.resume}
-        setResume={setResume}
+        section={section}
       />
-      {props.resume.sections.map((section) => (
-        <RearrangeableSectionForm
-          key={section.uid}
-          setResume={props.setResume}
-          resume={props.resume}
-          section={section}
-        />
-      ))}
-      <Divider />
-      <AddSectionsPanel
-        resume={props.resume}
-        setResume={setResume}
-      />
-    </Stack>
-  )
-}
+    ))}
+    <Divider />
+    <AddSectionsPanel
+      resume={props.resume}
+      setResume={props.setResume}
+    />
+  </Stack>
+)
+
 export const RearrangeableSectionForm: FunctionComponent<{
   setResume: Setter2<Resume>
   resume: Resume

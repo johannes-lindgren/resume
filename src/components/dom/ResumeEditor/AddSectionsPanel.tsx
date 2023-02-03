@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
-import { Setter } from '@/utils/Setter'
+import { Setter2 } from '@/utils/Setter'
 import { Button, Grid } from '@mui/material'
 import {
   Assessment,
@@ -16,7 +16,7 @@ import {
 
 export const AddSectionsPanel: FunctionComponent<{
   resume: Resume
-  setResume: Setter<Resume>
+  setResume: Setter2<Resume>
 }> = (props) => (
   <Grid
     container
@@ -30,10 +30,10 @@ export const AddSectionsPanel: FunctionComponent<{
       <Button
         startIcon={<WorkHistory />}
         onClick={() =>
-          props.setResume({
-            ...props.resume,
-            sections: [...props.resume.sections, newEducationHistorySection()],
-          })
+          props.setResume((resume) => ({
+            ...resume,
+            sections: [...resume.sections, newEducationHistorySection()],
+          }))
         }
       >
         Add Employments
@@ -46,10 +46,10 @@ export const AddSectionsPanel: FunctionComponent<{
       <Button
         startIcon={<SchoolOutlined />}
         onClick={() =>
-          props.setResume({
-            ...props.resume,
-            sections: [...props.resume.sections, newEducationHistorySection()],
-          })
+          props.setResume((resume) => ({
+            ...resume,
+            sections: [...resume.sections, newEducationHistorySection()],
+          }))
         }
       >
         Add Educations
@@ -62,10 +62,10 @@ export const AddSectionsPanel: FunctionComponent<{
       <Button
         startIcon={<Assessment />}
         onClick={() =>
-          props.setResume({
-            ...props.resume,
-            sections: [...props.resume.sections, newSkillsSection()],
-          })
+          props.setResume((resume) => ({
+            ...resume,
+            sections: [...resume.sections, newSkillsSection()],
+          }))
         }
       >
         Add Skills
@@ -78,10 +78,10 @@ export const AddSectionsPanel: FunctionComponent<{
       <Button
         startIcon={<HistoryEduRounded />}
         onClick={() =>
-          props.setResume({
-            ...props.resume,
-            sections: [...props.resume.sections, newSummarySection()],
-          })
+          props.setResume((resume) => ({
+            ...resume,
+            sections: [...resume.sections, newSummarySection()],
+          }))
         }
       >
         Add Summary

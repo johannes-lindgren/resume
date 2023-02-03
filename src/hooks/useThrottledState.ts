@@ -63,8 +63,7 @@ const reducer: Reducer<ResumeAppState, Actions> = (prevState, action) => {
 }
 
 export type ResumeActions = {
-  setResume: Setter<Resume>
-  setResume2: Setter2<Resume>
+  setResume: Setter2<Resume>
   removeResume: () => void
 }
 
@@ -88,7 +87,7 @@ export const useResumeApp = (
 
   const { resume } = state
 
-  const setResume2 = useCallback<Setter2<Resume>>((getNewResume) => {
+  const setResume = useCallback<Setter2<Resume>>((getNewResume) => {
     setState((prevState) => {
       return {
         type: 'unsaved',
@@ -97,10 +96,6 @@ export const useResumeApp = (
     })
   }, [])
 
-  const setResume = useCallback<Setter<Resume>>(setter22setter(setResume2), [
-    dispatch,
-  ])
-
   useEffect(() => {
     const storedValue = readFromLocalStorage()
     if (typeof storedValue === 'undefined') {
@@ -108,7 +103,7 @@ export const useResumeApp = (
         type: 'unsetResume',
       })
     } else {
-      setResume(storedValue as Resume)
+      setResume(() => storedValue as Resume)
     }
   }, [setResume, dispatch])
 
@@ -131,7 +126,7 @@ export const useResumeApp = (
 
   useThrottle(resume, throttleDelayMs, saveResume)
 
-  return [state, { setResume, setResume2, removeResume }]
+  return [state, { setResume, removeResume }]
 }
 
 export const useThrottledState = <T>(initialValue: T, delayMs: number): T => {

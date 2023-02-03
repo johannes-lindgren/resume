@@ -76,7 +76,7 @@ export const ResumeApp = () => {
                   variant="outlined"
                   color="secondary"
                   startIcon={<NoteAddRounded />}
-                  onClick={() => actions.setResume(blankResume())}
+                  onClick={() => actions.setResume(() => blankResume())}
                 >
                   Start from scratch
                 </Button>
@@ -85,7 +85,7 @@ export const ResumeApp = () => {
                 size="large"
                 variant="contained"
                 startIcon={<NoteAddRounded />}
-                onClick={() => actions.setResume(resumeTemplate())}
+                onClick={() => actions.setResume(() => resumeTemplate())}
               >
                 Use the template
               </Button>
@@ -104,7 +104,7 @@ export const ResumeApp = () => {
       return (
         <ResumeEditor
           resume={state.resume}
-          setResume={actions.setResume2}
+          setResume={actions.setResume}
           removeResume={actions.removeResume}
           saved={state.type === 'saved'}
         />
