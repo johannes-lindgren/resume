@@ -14,7 +14,7 @@ export const ResumeForm: FunctionComponent<{
   resume: Resume
   setResume: Setter2<Resume>
 }> = (props) => (
-  <Stack gap={4}>
+  <Stack>
     <PersonalDetailsForm
       resume={props.resume}
       setResume={props.setResume}
@@ -27,7 +27,7 @@ export const ResumeForm: FunctionComponent<{
         section={section}
       />
     ))}
-    <Divider />
+    <Divider sx={{ my: 4 }} />
     <AddSectionsPanel
       resume={props.resume}
       setResume={props.setResume}
@@ -59,7 +59,14 @@ export const RearrangeableSectionForm: FunctionComponent<{
   ])
   return (
     <Box>
-      <Divider />
+      <Divider sx={{ my: 4 }}>
+        {/*<Fab*/}
+        {/*  size="small"*/}
+        {/*  color="secondary"*/}
+        {/*>*/}
+        {/*  <AddOutlined />*/}
+        {/*</Fab>*/}
+      </Divider>
       <Rearrangeable
         setParent={setResume1}
         parent={resume}
