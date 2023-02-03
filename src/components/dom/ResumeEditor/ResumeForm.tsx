@@ -13,28 +13,30 @@ import { AddSectionsPanel } from '@/components/dom/ResumeEditor/AddSectionsPanel
 export const ResumeForm: FunctionComponent<{
   resume: Resume
   setResume: Setter2<Resume>
-}> = (props) => (
-  <Stack>
-    <PersonalDetailsForm
-      resume={props.resume}
-      setResume={props.setResume}
-    />
-    {props.resume.sections.map((section) => (
-      <RearrangeableSectionForm
-        key={section.uid}
-        setResume={props.setResume}
+}> = (props) => {
+  console.log(props.resume.sections)
+  return (
+    <Stack>
+      <PersonalDetailsForm
         resume={props.resume}
-        section={section}
+        setResume={props.setResume}
       />
-    ))}
-    <Divider sx={{ my: 4 }} />
-    <AddSectionsPanel
-      resume={props.resume}
-      setResume={props.setResume}
-    />
-  </Stack>
-)
-
+      {props.resume.sections.map((section) => (
+        <RearrangeableSectionForm
+          key={section.uid}
+          setResume={props.setResume}
+          resume={props.resume}
+          section={section}
+        />
+      ))}
+      <Divider sx={{ my: 4 }} />
+      <AddSectionsPanel
+        resume={props.resume}
+        setResume={props.setResume}
+      />
+    </Stack>
+  )
+}
 export const RearrangeableSectionForm: FunctionComponent<{
   setResume: Setter2<Resume>
   resume: Resume
@@ -54,9 +56,6 @@ export const RearrangeableSectionForm: FunctionComponent<{
     arraySetter2(section.uid, setResume, 'sections'),
     [section.uid, setResume],
   )
-  const setResume1 = useCallback<Setter<Resume>>(setter22setter(setResume), [
-    setResume,
-  ])
   return (
     <Box>
       <Divider sx={{ my: 4 }}>
@@ -68,7 +67,7 @@ export const RearrangeableSectionForm: FunctionComponent<{
         {/*</Fab>*/}
       </Divider>
       <Rearrangeable
-        setParent={setResume1}
+        setParent={setResume}
         parent={resume}
         propName="sections"
         current={section}

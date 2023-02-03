@@ -34,7 +34,7 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
     {props.section.employments.map((employment) => (
       <Rearrangeable
         key={employment.uid}
-        setParent={setter22setter(props.setSection)}
+        setParent={props.setSection}
         parent={props.section}
         propName="employments"
         current={employment}

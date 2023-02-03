@@ -24,7 +24,7 @@ export const SkillSectionForm: FunctionComponent<{
     {props.section.skillCategories.map((skillCategory) => (
       <Rearrangeable
         key={skillCategory.uid}
-        setParent={setter22setter(props.setSection)}
+        setParent={props.setSection}
         parent={props.section}
         propName="skillCategories"
         current={skillCategory}

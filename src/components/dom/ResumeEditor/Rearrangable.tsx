@@ -1,4 +1,4 @@
-import { Setter } from '@/utils/Setter'
+import { Setter2 } from '@/utils/Setter'
 import { Hoverable } from '@/components/dom/ResumeEditor/Hoverable'
 import { IconButton, Stack } from '@mui/material'
 import { movedLeft } from '@/utils/movedLeft'
@@ -16,7 +16,7 @@ export const Rearrangeable = <
   Child extends { uid: string },
   Parent extends Record<Key, Child[]>,
 >(props: {
-  setParent: Setter<Parent>
+  setParent: Setter2<Parent>
   parent: Parent
   propName: Key
   current: Child
@@ -26,6 +26,7 @@ export const Rearrangeable = <
   const currentIndex = parent[propName].findIndex(
     (it) => it.uid === current.uid,
   )
+  const lastIndex = parent[propName].length - 1
   return (
     <Hoverable
       left={
@@ -35,13 +36,13 @@ export const Rearrangeable = <
             size="small"
             disabled={currentIndex === 0}
             onClick={() =>
-              setParent({
+              setParent((parent) => ({
                 ...parent,
                 [propName]: movedLeft(
                   parent[propName],
                   (it) => it.uid === current.uid,
                 ),
-              })
+              }))
             }
           >
             <ExpandLessRounded fontSize="inherit" />
@@ -49,15 +50,15 @@ export const Rearrangeable = <
           <IconButton
             color="inherit"
             size="small"
-            disabled={currentIndex === parent[propName].length - 1}
+            disabled={currentIndex === lastIndex}
             onClick={() =>
-              setParent({
+              setParent((parent) => ({
                 ...parent,
                 [propName]: movedRight(
                   parent[propName],
                   (it) => it.uid === current.uid,
                 ),
-              })
+              }))
             }
           >
             <ExpandMoreRounded fontSize="inherit" />
@@ -72,13 +73,13 @@ export const Rearrangeable = <
           <DeleteOutlineRounded
             fontSize="inherit"
             onClick={() =>
-              setParent({
+              setParent((parent) => ({
                 ...parent,
                 [propName]: without(
                   parent[propName],
                   (it) => it.uid === current.uid,
                 ),
-              })
+              }))
             }
           />
         </IconButton>
