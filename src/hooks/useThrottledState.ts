@@ -62,14 +62,15 @@ const reducer: Reducer<ResumeAppState, Actions> = (prevState, action) => {
   }
 }
 
-export type ResumeActions = {
+export type AllResumeActions = {
   setResume: Setter2<Resume>
+  newResume: (resume: Resume) => void
   removeResume: () => void
 }
 
 export const useResumeApp = (
   throttleDelayMs: number,
-): [ResumeAppState, ResumeActions] => {
+): [ResumeAppState, AllResumeActions] => {
   // const [state, dispatch] = useReducer(reducer, {
   //   type: 'loading',
   //   resume: undefined,
@@ -87,8 +88,27 @@ export const useResumeApp = (
 
   const { resume } = state
 
+  const newResume = useCallback(
+    (resume: Resume) => {
+      setState({
+        type: 'unsaved',
+        resume,
+      })
+    },
+    [setState],
+  )
+
   const setResume = useCallback<Setter2<Resume>>((getNewResume) => {
     setState((prevState) => {
+      // TODO return actions that are consistent with the state
+      if (!prevState.resume) {
+        console.warn(
+          'Cannot setResume() when it has not been initialized. To initialize, use newResume().',
+        )
+        return {
+          type: 'uninitialized',
+        }
+      }
       return {
         type: 'unsaved',
         resume: getNewResume(prevState.resume),
@@ -126,7 +146,7 @@ export const useResumeApp = (
 
   useThrottle(resume, throttleDelayMs, saveResume)
 
-  return [state, { setResume, removeResume }]
+  return [state, { newResume, setResume, removeResume }]
 }
 
 export const useThrottledState = <T>(initialValue: T, delayMs: number): T => {
