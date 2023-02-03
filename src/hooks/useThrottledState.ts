@@ -123,9 +123,9 @@ export const useResumeApp = (
         type: 'unsetResume',
       })
     } else {
-      setResume(() => storedValue as Resume)
+      newResume(storedValue as Resume)
     }
-  }, [setResume, dispatch])
+  }, [newResume, dispatch])
 
   const removeResume = useCallback(() => {
     localStorage()

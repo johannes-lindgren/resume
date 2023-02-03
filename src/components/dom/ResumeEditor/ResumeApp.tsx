@@ -93,7 +93,7 @@ export const ResumeApp = () => {
                 size="large"
                 variant="contained"
                 color="secondary"
-                onChange={actions.setResume}
+                onChange={actions.newResume}
               />
             </Stack>
             <Footer />
@@ -107,6 +107,7 @@ export const ResumeApp = () => {
           setResume={actions.setResume}
           removeResume={actions.removeResume}
           saved={state.type === 'saved'}
+          newResume={actions.newResume}
         />
       )
   }

@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { Resume } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
-import { useThrottledState } from '@/hooks/useThrottledState'
+import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeView } from '@/components/pdf/Resume'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
 import {
@@ -58,12 +58,12 @@ const PreviewToolbar = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1),
 }))
 
-export const ResumePreview: FunctionComponent<{
-  resume: Resume
-  setResume: Setter<Resume>
-  isSaved: boolean
-  removeResume: () => void
-}> = (props) => {
+export const ResumePreview: FunctionComponent<
+  {
+    resume: Resume
+    isSaved: boolean
+  } & Pick<AllResumeActions, 'removeResume' | 'setResume' | 'newResume'>
+> = (props) => {
   const { resume } = props
   const throttledResume = useThrottledState(resume, 1500)
 
@@ -85,7 +85,7 @@ export const ResumePreview: FunctionComponent<{
           />
           <UploadResumeButton
             color="inherit"
-            onChange={props.setResume}
+            onChange={props.newResume}
           />
           <DeleteButton
             removeResume={props.removeResume}

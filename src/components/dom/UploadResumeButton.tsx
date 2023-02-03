@@ -2,11 +2,10 @@ import { ChangeEventHandler, FunctionComponent, useRef } from 'react'
 import { Button, ButtonProps, Tooltip } from '@mui/material'
 import { UploadRounded } from '@mui/icons-material'
 import { Resume } from '@/model/resume'
-import { Setter } from '@/utils/Setter'
 
 export const UploadResumeButton: FunctionComponent<
   {
-    onChange?: Setter<Resume>
+    onChange?: (resume: Resume) => void
   } & Omit<ButtonProps<'label'>, 'onChange'>
 > = (props) => {
   const { onChange, ...buttonProps } = props
@@ -29,7 +28,7 @@ export const UploadResumeButton: FunctionComponent<
       }
       // TODO validate with Typia
       const resume = JSON.parse(json) as Resume
-      onChange?.(() => resume)
+      onChange?.(resume)
     })
     reader.readAsText(file, 'UTF-8')
     // Clear the value from the input, so that if the user selects the same file again, the event will be triggered
