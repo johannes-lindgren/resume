@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback } from 'react'
-import { Setter } from '@/utils/Setter'
+import { Setter, Setter2 } from '@/utils/Setter'
 import { Box, BoxProps, IconButton, styled } from '@mui/material'
 import { SelectFileButton } from '@/components/dom/SelectFileButton'
 import { AddAPhotoRounded, DeleteOutlineRounded } from '@mui/icons-material'
@@ -38,20 +38,21 @@ const HoverIconButton = styled(IconButton)(({ theme }) => ({
 export const ImageForm: FunctionComponent<
   {
     image: string | undefined
-    setImage: Setter<string | undefined>
+    setImage: Setter2<string | undefined>
   } & BoxProps<'img'>
 > = (props) => {
   const { image, setImage } = props
   const handleFile = useCallback(
     (file: File) => {
       const reader = new FileReader()
-      reader.onloadend = (e) => {
-        if (typeof e.target?.result !== 'string') {
+      reader.onloadend = ({ target }) => {
+        if (typeof target?.result !== 'string') {
           //   TODO show error message popup
           console.error('Failed to load the image')
           return
         }
-        setImage(e.target.result)
+        const { result } = target
+        setImage(() => result)
       }
       reader.readAsDataURL(file)
     },
@@ -89,7 +90,7 @@ export const ImageForm: FunctionComponent<
         size="small"
         onClick={(e) => {
           e.preventDefault()
-          props.setImage(undefined)
+          props.setImage(() => undefined)
         }}
         sx={{
           display: image ? 'flex' : 'none',

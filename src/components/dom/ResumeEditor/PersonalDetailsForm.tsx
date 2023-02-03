@@ -17,10 +17,10 @@ export const PersonalDetailsForm: FunctionComponent<{
     >
       <ImageForm
         image={props.resume.image}
-        setImage={(image) =>
+        setImage={(getNextImage) =>
           props.setResume((resume) => ({
             ...resume,
-            image,
+            image: getNextImage(resume.image),
           }))
         }
       />
