@@ -49,5 +49,6 @@ module.exports = {
   rules: {
     'prettier/prettier': 'warn',
     'no-unused-vars': 'off',
+    'react/display-name': 'off',
   },
 }
