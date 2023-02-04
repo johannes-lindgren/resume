@@ -8,7 +8,6 @@ import {
   useState,
 } from 'react'
 import { Resume } from '@/model/resume'
-import { Setter } from '@/utils/Setter'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeView } from '@/components/pdf/Resume'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
