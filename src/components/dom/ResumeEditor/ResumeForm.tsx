@@ -1,5 +1,11 @@
 import { FunctionComponent, memo, useCallback } from 'react'
-import { Resume, ResumeSection } from '@/model/resume'
+import {
+  DetailsSection,
+  EmploymentHistorySection,
+  Resume,
+  ResumeSection,
+  SkillSection,
+} from '@/model/resume'
 import { Box, Divider, Stack } from '@mui/material'
 import { arraySetter } from '@/utils/arraySetter'
 import { Setter } from '@/utils/Setter'
@@ -90,21 +96,21 @@ const SectionForm: FunctionComponent<{
       return (
         <DetailsSectionForm
           section={section}
-          setSection={setSection}
+          setSection={setSection as Setter<DetailsSection>}
         />
       )
     case 'skills':
       return (
         <SkillSectionForm
           section={section}
-          setSection={setSection}
+          setSection={setSection as Setter<SkillSection>}
         />
       )
     case 'employmentHistory':
       return (
         <EmploymentHistorySectionForm
           section={section}
-          setSection={setSection}
+          setSection={setSection as Setter<EmploymentHistorySection>}
         />
       )
   }
