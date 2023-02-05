@@ -1,15 +1,16 @@
 import { Setter } from '@/utils/Setter'
-import { Hoverable } from '@/components/dom/ResumeEditor/Hoverable'
-import { IconButton, Stack } from '@mui/material'
+import { ButtonGroup, IconButton } from '@mui/material'
 import { movedLeft } from '@/utils/movedLeft'
 import {
-  DeleteOutlineRounded,
-  ExpandLessRounded,
-  ExpandMoreRounded,
+  DeleteOutlined,
+  MoveDownOutlined,
+  MoveUpOutlined,
 } from '@mui/icons-material'
 import { movedRight } from '@/utils/movedRight'
 import { without } from '@/utils/without'
 import { ReactNode } from 'react'
+import * as React from 'react'
+import { HoverableMenu } from '@/components/dom/ResumeEditor/HoverableMenu'
 
 export const Rearrangeable = <
   Key extends string,
@@ -21,16 +22,26 @@ export const Rearrangeable = <
   propName: Key
   current: Child
   children: ReactNode
+  style?: React.CSSProperties
 }) => {
-  const { setParent, parent, current, propName, children } = props
+  const { setParent, parent, current, propName, children, ...unknownProps } =
+    props
   const currentIndex = parent[propName].findIndex(
     (it) => it.uid === current.uid,
   )
   const lastIndex = parent[propName].length - 1
   return (
-    <Hoverable
-      left={
-        <Stack>
+    <HoverableMenu
+      menu={
+        <ButtonGroup
+          variant="text"
+          sx={{
+            color: 'text.secondary',
+            backgroundColor: 'background.paper',
+            // boxShadow: 1,
+            // border: 1,
+          }}
+        >
           <IconButton
             color="inherit"
             size="small"
@@ -45,7 +56,7 @@ export const Rearrangeable = <
               }))
             }
           >
-            <ExpandLessRounded fontSize="inherit" />
+            <MoveUpOutlined fontSize="inherit" />
           </IconButton>
           <IconButton
             color="inherit"
@@ -61,31 +72,30 @@ export const Rearrangeable = <
               }))
             }
           >
-            <ExpandMoreRounded fontSize="inherit" />
+            <MoveDownOutlined fontSize="inherit" />
           </IconButton>
-        </Stack>
+          <IconButton
+            size="small"
+            color="inherit"
+          >
+            <DeleteOutlined
+              fontSize="inherit"
+              onClick={() =>
+                setParent((parent) => ({
+                  ...parent,
+                  [propName]: without(
+                    parent[propName],
+                    (it) => it.uid === current.uid,
+                  ),
+                }))
+              }
+            />
+          </IconButton>
+        </ButtonGroup>
       }
-      right={
-        <IconButton
-          size="small"
-          color="inherit"
-        >
-          <DeleteOutlineRounded
-            fontSize="inherit"
-            onClick={() =>
-              setParent((parent) => ({
-                ...parent,
-                [propName]: without(
-                  parent[propName],
-                  (it) => it.uid === current.uid,
-                ),
-              }))
-            }
-          />
-        </IconButton>
-      }
+      {...unknownProps}
     >
       {children}
-    </Hoverable>
+    </HoverableMenu>
   )
 }

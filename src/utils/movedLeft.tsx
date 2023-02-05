@@ -6,7 +6,6 @@ export const movedLeft = <T,>(
   if (index === -1 || index === 0) {
     return arr
   }
-  console.log('index', index)
   return [
     ...arr.slice(0, index - 1),
     arr[index],

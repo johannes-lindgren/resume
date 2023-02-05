@@ -1,4 +1,10 @@
-import { createTheme } from '@mui/material'
+import { alpha, createTheme, hexToRgb } from '@mui/material'
+import { Shadows } from '@mui/material/styles/shadows'
+
+const darkBrown = '#2E2A24'
+const brown = '#6C6355'
+const lightBrown = '#EDEBE8'
+const disabledBrown = alpha(brown, 0.1)
 
 export const lightTheme = createTheme({
   palette: {
@@ -8,7 +14,7 @@ export const lightTheme = createTheme({
       dark: '#006F86',
     },
     secondary: {
-      main: '#6C6355',
+      main: brown,
     },
     success: {
       main: '#68B672',
@@ -22,7 +28,7 @@ export const lightTheme = createTheme({
     error: {
       main: '#C7434E',
     },
-    divider: '#EDEBE8',
+    divider: lightBrown,
     grey: {
       A100: '#F3F4F6',
       A200: '#B9BECA',
@@ -30,9 +36,12 @@ export const lightTheme = createTheme({
       A700: '#464D5D',
     },
     text: {
-      primary: '#2E2A24',
-      secondary: '#6C6355',
-      disabled: '#6C6355',
+      primary: darkBrown,
+      secondary: brown,
+      disabled: disabledBrown,
+    },
+    action: {
+      disabled: disabledBrown,
     },
   },
   typography: {
@@ -58,6 +67,12 @@ export const lightTheme = createTheme({
       textTransform: 'initial',
     },
   },
+  shadows: [
+    'none',
+    ...Array(24)
+      .fill(0)
+      .map(() => `4px 4px 8px 0px ${alpha(brown, 0.2)}`),
+  ] as Shadows,
   components: {
     MuiButton: {
       defaultProps: {

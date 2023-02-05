@@ -5,6 +5,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  BoxProps,
+  Collapse,
   InputBase,
   Stack,
   Typography,
@@ -13,11 +15,13 @@ import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { Box } from '@mui/system'
 import { replaced } from '@/utils/replaced'
 import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
-import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
 import { ExpandMore } from '@mui/icons-material'
 import { arraySetter } from '@/utils/arraySetter'
 import { newEmployment } from '@/model/defaults'
 import { uid } from '@/utils/uid'
+import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
+import { Flipped, Flipper } from 'react-flip-toolkit'
+import { TransitionGroup } from 'react-transition-group'
 
 export const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
@@ -25,41 +29,53 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
 }> = (props) => {
   const { section, setSection } = props
   return (
-    <Stack gap={4}>
-      <PropTextEditor2
-        placeholder="Employment History"
-        propName={'header'}
-        value={section}
-        setValue={setSection}
-        inputProps={{ sx: { typography: 'h2' } }}
-      />
-      {props.section.employments.map((employment) => (
-        <RearrangeableEmploymentForm
-          key={employment.uid}
-          employment={employment}
-          section={section}
-          setSection={setSection}
-        />
-      ))}
-      <AddButton
-        onClick={() =>
-          setSection((section) => ({
-            ...section,
-            employments: [...section.employments, newEmployment()],
-          }))
-        }
+    <Flipper flipKey={props.section.employments.map((it) => it.uid).join(',')}>
+      <Stack
+        gap={4}
+        component={TransitionGroup}
+        sx={{ bgColor: 'background.paper' }}
       >
-        Add one more employment
-      </AddButton>
-    </Stack>
+        <PropTextEditor2
+          placeholder="Employment History"
+          propName={'header'}
+          value={section}
+          setValue={setSection}
+          inputProps={{ sx: { typography: 'h2' } }}
+        />
+        {props.section.employments.map((employment) => (
+          <Collapse key={employment.uid}>
+            <Flipped flipId={employment.uid}>
+              <RearrangeableEmploymentForm
+                key={employment.uid}
+                employment={employment}
+                section={section}
+                setSection={setSection}
+              />
+            </Flipped>
+          </Collapse>
+        ))}
+        <AddButton
+          onClick={() =>
+            setSection((section) => ({
+              ...section,
+              employments: [...section.employments, newEmployment()],
+            }))
+          }
+        >
+          Add one more employment
+        </AddButton>
+      </Stack>
+    </Flipper>
   )
 }
-const RearrangeableEmploymentForm: FunctionComponent<{
-  section: EmploymentHistorySection
-  setSection: Setter<EmploymentHistorySection>
-  employment: Employment
-}> = (props) => {
-  const { employment, section, setSection } = props
+const RearrangeableEmploymentForm: FunctionComponent<
+  {
+    section: EmploymentHistorySection
+    setSection: Setter<EmploymentHistorySection>
+    employment: Employment
+  } & BoxProps
+> = (props) => {
+  const { employment, section, setSection, ...boxProps } = props
   const setEmployment = useCallback<Setter<Employment>>(
     arraySetter(employment.uid, setSection, 'employments'),
     [employment.uid, setSection],
@@ -70,9 +86,9 @@ const RearrangeableEmploymentForm: FunctionComponent<{
       parent={section}
       propName="employments"
       current={employment}
+      {...boxProps}
     >
       <Accordion
-        key={employment.uid}
         variant="outlined"
         disableGutters
       >
@@ -102,7 +118,10 @@ export const EmploymentForm: FunctionComponent<{
   employment: Employment
   setEmployment: Setter<Employment>
 }> = memo((props) => (
-  <Stack gap={2}>
+  <Stack
+    gap={2}
+    sx={{ bgColor: 'background.paper' }}
+  >
     <PropTextEditor2
       label="Worked as"
       placeholder="Job Title"

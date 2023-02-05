@@ -8,7 +8,10 @@ export const DetailsSectionForm: FunctionComponent<{
   section: DetailsSection
   setSection: Setter<DetailsSection>
 }> = (props) => (
-  <Stack gap={2}>
+  <Stack
+    gap={2}
+    sx={{ bgColor: 'background.paper' }}
+  >
     <PropTextEditor2
       propName={'header'}
       placeholder="Profile"

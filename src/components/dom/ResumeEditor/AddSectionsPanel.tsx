@@ -3,10 +3,10 @@ import { Resume } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
 import { Button, Grid } from '@mui/material'
 import {
-  Assessment,
+  AssessmentOutlined,
   HistoryEduRounded,
   SchoolOutlined,
-  WorkHistory,
+  WorkHistoryOutlined,
 } from '@mui/icons-material'
 import {
   newEducationHistorySection,
@@ -15,7 +15,6 @@ import {
 } from '@/model/defaults'
 
 export const AddSectionsPanel: FunctionComponent<{
-  resume: Resume
   setResume: Setter<Resume>
 }> = (props) => (
   <Grid
@@ -28,7 +27,7 @@ export const AddSectionsPanel: FunctionComponent<{
       xs={1}
     >
       <Button
-        startIcon={<WorkHistory />}
+        startIcon={<WorkHistoryOutlined />}
         onClick={() =>
           props.setResume((resume) => ({
             ...resume,
@@ -60,7 +59,7 @@ export const AddSectionsPanel: FunctionComponent<{
       xs={1}
     >
       <Button
-        startIcon={<Assessment />}
+        startIcon={<AssessmentOutlined />}
         onClick={() =>
           props.setResume((resume) => ({
             ...resume,
