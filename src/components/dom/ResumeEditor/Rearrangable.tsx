@@ -1,5 +1,5 @@
 import { Setter } from '@/utils/Setter'
-import { ButtonGroup, IconButton } from '@mui/material'
+import { ButtonGroup, IconButton, Tooltip } from '@mui/material'
 import { movedLeft } from '@/utils/movedLeft'
 import {
   DeleteOutlined,
@@ -38,59 +38,63 @@ export const Rearrangeable = <
           sx={{
             color: 'text.secondary',
             backgroundColor: 'background.paper',
-            // boxShadow: 1,
-            // border: 1,
           }}
         >
-          <IconButton
-            color="inherit"
-            size="small"
-            disabled={currentIndex === 0}
-            onClick={() =>
-              setParent((parent) => ({
-                ...parent,
-                [propName]: movedLeft(
-                  parent[propName],
-                  (it) => it.uid === current.uid,
-                ),
-              }))
-            }
-          >
-            <MoveUpOutlined fontSize="inherit" />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            size="small"
-            disabled={currentIndex === lastIndex}
-            onClick={() =>
-              setParent((parent) => ({
-                ...parent,
-                [propName]: movedRight(
-                  parent[propName],
-                  (it) => it.uid === current.uid,
-                ),
-              }))
-            }
-          >
-            <MoveDownOutlined fontSize="inherit" />
-          </IconButton>
-          <IconButton
-            size="small"
-            color="inherit"
-          >
-            <DeleteOutlined
-              fontSize="inherit"
+          <Tooltip title="Move up">
+            <IconButton
+              color="inherit"
+              size="small"
+              disabled={currentIndex === 0}
               onClick={() =>
                 setParent((parent) => ({
                   ...parent,
-                  [propName]: without(
+                  [propName]: movedLeft(
                     parent[propName],
                     (it) => it.uid === current.uid,
                   ),
                 }))
               }
-            />
-          </IconButton>
+            >
+              <MoveUpOutlined fontSize="inherit" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Move down">
+            <IconButton
+              color="inherit"
+              size="small"
+              disabled={currentIndex === lastIndex}
+              onClick={() =>
+                setParent((parent) => ({
+                  ...parent,
+                  [propName]: movedRight(
+                    parent[propName],
+                    (it) => it.uid === current.uid,
+                  ),
+                }))
+              }
+            >
+              <MoveDownOutlined fontSize="inherit" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Remove">
+            <IconButton
+              size="small"
+              color="inherit"
+            >
+              <DeleteOutlined
+                fontSize="inherit"
+                onClick={() =>
+                  setParent((parent) => ({
+                    ...parent,
+                    [propName]: without(
+                      parent[propName],
+                      (it) => it.uid === current.uid,
+                    ),
+                  }))
+                }
+              />
+            </IconButton>
+          </Tooltip>
         </ButtonGroup>
       }
       {...unknownProps}
