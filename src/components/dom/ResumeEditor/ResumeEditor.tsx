@@ -5,7 +5,7 @@ import { Box, Stack, styled } from '@mui/material'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
 import { ResumePreview } from '@/components/dom/ResumeEditor/ResumePreview'
 import { AllResumeActions } from '@/hooks/useThrottledState'
-import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeApp'
+import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeAppFooter'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -28,9 +28,15 @@ const Split = styled(Box)(({ theme }) => ({
       height: '100vh',
     },
   },
-  // [theme.breakpoints.down('md')]:{
-  //
-  // },
+}))
+
+const FormContainer = styled(Stack)(({ theme }) => ({
+  paddingLeft: theme.spacing(8),
+  paddingRight: theme.spacing(8),
+  paddingTop: theme.spacing(8),
+  paddingBottom: theme.spacing(5),
+  justifyContent: 'space-between',
+  gap: theme.spacing(8),
 }))
 
 export const ResumeEditor: FunctionComponent<
@@ -43,20 +49,13 @@ export const ResumeEditor: FunctionComponent<
 
   return (
     <Split>
-      <Stack
-        sx={{
-          px: 8,
-          py: 8,
-          justifyContent: 'space-between',
-        }}
-        gap={8}
-      >
+      <FormContainer>
         <ResumeForm
           resume={resume}
           setResume={setResume}
         />
         <ResumeAppFooter />
-      </Stack>
+      </FormContainer>
       <ResumeContainer>
         <ResumePreview
           resume={resume}

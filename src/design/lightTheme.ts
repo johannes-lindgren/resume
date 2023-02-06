@@ -74,6 +74,15 @@ export const lightTheme = createTheme({
       .map(() => `4px 4px 8px 0px ${alpha(brown, 0.2)}`),
   ] as Shadows,
   components: {
+    MuiLink: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.secondary.main,
+          transition: theme.transitions.create('textDecorationColor'),
+          textDecorationColor: 'transparent',
+        }),
+      },
+    },
     MuiButton: {
       defaultProps: {
         disableElevation: true,

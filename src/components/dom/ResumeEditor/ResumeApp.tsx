@@ -1,18 +1,12 @@
 import { useResumeApp } from '@/hooks/useThrottledState'
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Box, Button, Container, Stack, Tooltip } from '@mui/material'
 import { NoteAddRounded } from '@mui/icons-material'
 import { blankResume, resumeTemplate } from '@/model/defaults'
 import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
 import { ResumeEditor } from '@/components/dom/ResumeEditor/ResumeEditor'
-import { FunctionComponent, useState } from 'react'
+import { useState } from 'react'
 import { getRandomElement } from '@/utils/getRandomElement'
+import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeAppFooter'
 
 const gloriousWords = [
   'Glorious',
@@ -111,17 +105,3 @@ export const ResumeApp = () => {
       )
   }
 }
-
-export const ResumeAppFooter: FunctionComponent = () => (
-  <Stack>
-    <Typography textAlign="center">
-      Created by{' '}
-      <Box
-        component="span"
-        sx={{ color: 'secondary.main' }}
-      >
-        Johannes Lindgren
-      </Box>
-    </Typography>
-  </Stack>
-)
