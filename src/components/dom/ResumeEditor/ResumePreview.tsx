@@ -13,18 +13,10 @@ import { ResumeView } from '@/components/pdf/Resume'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
 import {
   Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   styled,
 } from '@mui/material'
-import { DeleteForeverRounded, DeleteOutlineRounded } from '@mui/icons-material'
-import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
-import { DownloadResumeButton } from '@/components/dom/DownloadResumeButton'
 import dynamic from 'next/dynamic'
+import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
 
 const DownloadPdfButton = dynamic(
   () =>
@@ -63,7 +55,7 @@ export const ResumePreview: FunctionComponent<
     isSaved: boolean
   } & Pick<AllResumeActions, 'removeResume' | 'setResume' | 'newResume'>
 > = (props) => {
-  const { resume } = props
+  const { resume, setResume, removeResume, newResume } = props
   const throttledResume = useThrottledState(resume, 1500)
 
   const doc = useMemo(
@@ -74,21 +66,12 @@ export const ResumePreview: FunctionComponent<
   return (
     <PreviewLayout
       header={
-        <PreviewToolbar justifyContent="left">
+        <PreviewToolbar justifyContent="space-between">
           <SaveStatusBox isSaved={props.isSaved} />
-          <Box flex={1} />
-          <DownloadResumeButton
-            color="inherit"
+          <ActionsButton
             resume={resume}
-            suggestedName={`${resume.name}'s resumé`}
-          />
-          <UploadResumeButton
-            color="inherit"
-            onChange={props.newResume}
-          />
-          <DeleteButton
-            removeResume={props.removeResume}
-            resume={resume}
+            newResume={newResume}
+            removeResume={removeResume}
           />
         </PreviewToolbar>
       }
@@ -176,65 +159,5 @@ const PreviewLayout: FunctionComponent<{
       </Box>
       <Box width={dim.width}>{props.footer}</Box>
     </Box>
-  )
-}
-
-const DeleteButton: FunctionComponent<{
-  removeResume: () => void
-  resume: Resume
-}> = (props) => {
-  const [open, setOpen] = useState(false)
-
-  const handleClose = useCallback(() => setOpen(false), [])
-  const handleOpen = useCallback(() => setOpen(true), [])
-
-  return (
-    <>
-      <Dialog
-        onClose={handleClose}
-        open={open}
-      >
-        <DialogTitle>Delete Resume?</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you certain that you would like to delete this resume and start
-            over?
-          </DialogContentText>
-          <DialogContentText>
-            You can also save this resume to your file system.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={props.removeResume}
-            color="error"
-            autoFocus
-            startIcon={<DeleteForeverRounded />}
-          >
-            Delete Forever
-          </Button>
-          <DownloadResumeButton
-            color="secondary"
-            resume={props.resume}
-            suggestedName={`${props.resume.name}'s resume`}
-          />
-          <Button
-            onClick={handleClose}
-            variant="contained"
-            color="primary"
-          >
-            Cancel
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Button
-        startIcon={<DeleteOutlineRounded />}
-        onClick={handleOpen}
-        size="small"
-        color="inherit"
-      >
-        Delete resume
-      </Button>
-    </>
   )
 }
