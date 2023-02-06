@@ -49,9 +49,9 @@ export const ResumePreview: FunctionComponent<
   {
     resume: Resume
     isSaved: boolean
-  } & Pick<AllResumeActions, 'removeResume' | 'setResume' | 'newResume'>
+  } & Pick<AllResumeActions, 'removeResume' | 'newResume'>
 > = (props) => {
-  const { resume, setResume, removeResume, newResume } = props
+  const { resume, removeResume, newResume } = props
   const throttledResume = useThrottledState(resume, 1500)
 
   const doc = useMemo(
@@ -132,6 +132,7 @@ const PreviewLayout: FunctionComponent<{
         justifyContent: 'center',
         alignItems: 'center',
         gap: 2,
+        flex: 1,
       }}
     >
       <Box width={dim.width}>{props.header}</Box>
@@ -144,6 +145,7 @@ const PreviewLayout: FunctionComponent<{
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          flex: 1,
         }}
       >
         <Box

@@ -8,9 +8,28 @@ import { AllResumeActions } from '@/hooks/useThrottledState'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
-  '& > *': {
-    width: '50%',
+  flexDirection: 'column-reverse',
+  '& > *': {},
+  '& > *:nth-child(1)': {},
+  '& > :nth-child(2)': {
+    minHeight: '100vh',
   },
+  [theme.breakpoints.up('md')]: {
+    '& > *': {
+      width: '50%',
+    },
+    '& > *:nth-child(1)': {},
+    '& > :nth-child(2)': {
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      width: '50%',
+      height: '100vh',
+    },
+  },
+  // [theme.breakpoints.down('md')]:{
+  //
+  // },
 }))
 
 export const ResumeEditor: FunctionComponent<
@@ -38,7 +57,6 @@ export const ResumeEditor: FunctionComponent<
       <ResumeContainer>
         <ResumePreview
           resume={resume}
-          setResume={setResume}
           isSaved={props.saved}
           removeResume={removeResume}
           newResume={props.newResume}
