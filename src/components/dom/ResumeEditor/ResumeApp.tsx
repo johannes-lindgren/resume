@@ -95,7 +95,7 @@ export const ResumeApp = () => {
                 onChange={actions.newResume}
               />
             </Stack>
-            <Footer />
+            <ResumeAppFooter />
           </Stack>
         </Container>
       )
@@ -112,7 +112,7 @@ export const ResumeApp = () => {
   }
 }
 
-export const Footer: FunctionComponent = () => (
+export const ResumeAppFooter: FunctionComponent = () => (
   <Stack>
     <Typography textAlign="center">
       Created by{' '}
