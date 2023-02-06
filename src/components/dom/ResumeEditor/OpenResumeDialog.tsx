@@ -9,7 +9,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material'
-import { DeleteForeverRounded, UploadRounded } from '@mui/icons-material'
+import { UploadRounded } from '@mui/icons-material'
 import { OpenObjectInput } from '@/components/dom/OpenObjectInput'
 
 export const OpenResumeDialog: FunctionComponent<

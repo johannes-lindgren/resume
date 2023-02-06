@@ -1,7 +1,6 @@
 import {
   FunctionComponent,
   ReactNode,
-  useCallback,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -11,10 +10,7 @@ import { Resume } from '@/model/resume'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeView } from '@/components/pdf/Resume'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
-import {
-  Box,
-  styled,
-} from '@mui/material'
+import { Box, styled } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
 

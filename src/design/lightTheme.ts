@@ -1,4 +1,4 @@
-import { alpha, createTheme, hexToRgb } from '@mui/material'
+import { alpha, createTheme } from '@mui/material'
 import { Shadows } from '@mui/material/styles/shadows'
 
 const darkBrown = '#2E2A24'

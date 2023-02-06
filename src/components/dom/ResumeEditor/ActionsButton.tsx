@@ -16,7 +16,6 @@ import {
   MoreVertOutlined,
   UploadRounded,
 } from '@mui/icons-material'
-import { OpenObjectInput } from '@/components/dom/OpenObjectInput'
 import { DeleteResumeDialog } from '@/components/dom/ResumeEditor/DeleteResumeDialog'
 import { OpenResumeDialog } from '@/components/dom/ResumeEditor/OpenResumeDialog'
 

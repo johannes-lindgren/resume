@@ -2,7 +2,6 @@ import { useResumeApp } from '@/hooks/useThrottledState'
 import {
   Box,
   Button,
-  CircularProgress,
   Container,
   Stack,
   Tooltip,
