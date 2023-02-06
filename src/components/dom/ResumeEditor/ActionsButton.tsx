@@ -40,7 +40,7 @@ export const ActionsButton: FunctionComponent<
     download()
     handleClose()
   }
-  const handleClickOpen = (openedResume: Resume) => {
+  const handleClickOpen = () => {
     setOpenDialogOpen(true)
     handleClose()
   }
