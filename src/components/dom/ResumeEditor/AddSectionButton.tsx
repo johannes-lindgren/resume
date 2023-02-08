@@ -28,7 +28,7 @@ export const AddSectionButton: FunctionComponent<
     | { insertBefore: true; insertAfter?: false }
   )
 > = (props) => {
-  const { setResume, refUid, insertBefore, insertAfter } = props
+  const { setResume, refUid, insertBefore } = props
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {

@@ -3,23 +3,6 @@ import { ResumeEditor } from '@/components/dom/ResumeEditor/ResumeEditor'
 import { LandingPage } from '@/components/dom/ResumeEditor/LandingPage'
 
 // splendidresume.com
-const gloriousWords = [
-  // 'Glorious',
-  'Splendid',
-  // 'Magnificent',
-  // 'Brilliant',
-  // 'Beautiful',
-  // 'Illustrious',
-]
-const createWords = [
-  // 'Create',
-  // 'Make',
-  // 'Produce',
-  // 'Build',
-  'Bring Forth',
-  // 'Construct',
-  // 'Craft',
-]
 
 export const ResumeApp = () => {
   const [state, actions] = useResumeApp(1500)

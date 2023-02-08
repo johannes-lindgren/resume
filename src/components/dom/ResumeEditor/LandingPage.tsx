@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react'
 import { AllResumeActions } from '@/hooks/useThrottledState'
-import { useSpring } from '@react-spring/core'
 import { Box, Button, Container, Grow, Stack, Typography } from '@mui/material'
 import { Embossed } from '@/components/dom/ResumeEditor/Embossed'
 import { NoteAddRounded, TagFacesOutlined } from '@mui/icons-material'

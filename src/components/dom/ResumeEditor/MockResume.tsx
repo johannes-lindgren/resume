@@ -38,7 +38,6 @@ const Trail: FunctionComponent<{ children?: ReactNode }> = ({ children }) => {
 export const MockResume: FunctionComponent<AnimatedProps<BoxProps>> = (
   props,
 ) => {
-  const [open, setOpen] = useState(false)
   return (
     <AnimatedBox
       sx={{
@@ -55,8 +54,6 @@ export const MockResume: FunctionComponent<AnimatedProps<BoxProps>> = (
         px: 4,
         gap: 1,
       }}
-      // onMouseEnter={() => setOpen(true)}
-      // onMouseLeave={() => setOpen(false)}
       {...props}
     >
       <Trail>
