@@ -44,10 +44,9 @@ export const OpenResumeDialog: FunctionComponent<
         <Button
           component="label"
           color="warning"
-          variant="contained"
           startIcon={<UploadRounded />}
         >
-          Open a resume from the file system
+          Open from file system
           {/* Validate with typia */}
           <OpenObjectInput
             accept=".cv"
