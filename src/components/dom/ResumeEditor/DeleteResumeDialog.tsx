@@ -8,7 +8,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material'
-import { DeleteForeverRounded } from '@mui/icons-material'
+import { DeleteOutlined } from '@mui/icons-material'
 
 export const DeleteResumeDialog: FunctionComponent<
   { open: boolean; setOpen: (open: boolean) => void } & Pick<
@@ -37,7 +37,8 @@ export const DeleteResumeDialog: FunctionComponent<
         <Button
           onClick={removeResume}
           color="error"
-          startIcon={<DeleteForeverRounded />}
+          // variant="contained"
+          startIcon={<DeleteOutlined />}
         >
           Delete Forever
         </Button>
