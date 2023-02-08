@@ -1,4 +1,5 @@
 export const tan = `#CEB083`
+export const caramel = `#C5813E`
 export const lightRoast = `#614730`
 export const brown = '#6C6355'
 export const coyote = `#7B6751`

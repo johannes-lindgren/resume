@@ -1,6 +1,6 @@
 import { alpha, createTheme } from '@mui/material'
 import { Shadows } from '@mui/material/styles/shadows'
-import { brown, faluRed, ink, parchment, seal } from '@/design/palette'
+import { brown, caramel, faluRed, ink, parchment, seal } from '@/design/palette'
 
 const disabledBrown = alpha(brown, 0.1)
 
@@ -21,7 +21,7 @@ export const lightTheme = createTheme({
       main: '#3AAED8',
     },
     warning: {
-      main: '#FFCF56',
+      main: caramel,
     },
     error: {
       main: faluRed,
