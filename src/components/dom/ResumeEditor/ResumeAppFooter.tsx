@@ -22,7 +22,7 @@ export const ResumeAppFooter: FunctionComponent = () => (
       target="_blank"
       startIcon={<GitHub fontSize="inherit" />}
       color="secondary"
-      sx={{ ...tangerine400.style, fontSize: '1.5rem' }}
+      sx={{ ...tangerine400.style, fontSize: '1.5rem', alignSelf: 'center' }}
     >
       GitHub{' '}
     </Button>
