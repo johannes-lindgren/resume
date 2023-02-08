@@ -1,9 +1,7 @@
 import { alpha, createTheme } from '@mui/material'
 import { Shadows } from '@mui/material/styles/shadows'
+import { brown, ink, parchment, seal } from '@/design/palette'
 
-const darkBrown = '#2E2A24'
-const brown = '#6C6355'
-const lightBrown = '#EDEBE8'
 const disabledBrown = alpha(brown, 0.1)
 
 export const lightTheme = createTheme({
@@ -26,9 +24,9 @@ export const lightTheme = createTheme({
       main: '#FFCF56',
     },
     error: {
-      main: '#C7434E',
+      main: seal,
     },
-    divider: lightBrown,
+    divider: parchment,
     grey: {
       A100: '#F3F4F6',
       A200: '#B9BECA',
@@ -36,7 +34,7 @@ export const lightTheme = createTheme({
       A700: '#464D5D',
     },
     text: {
-      primary: darkBrown,
+      primary: ink,
       secondary: brown,
       disabled: disabledBrown,
     },
@@ -71,15 +69,23 @@ export const lightTheme = createTheme({
     'none',
     ...Array(24)
       .fill(0)
-      .map(() => `4px 4px 8px 0px ${alpha(brown, 0.2)}`),
+      .map(() => `2px 2px 16px 4px ${alpha(brown, 0.1)}`),
   ] as Shadows,
   components: {
     MuiLink: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.secondary.main,
-          transition: theme.transitions.create('textDecorationColor'),
-          textDecorationColor: 'transparent',
+          transition: theme.transitions.create([
+            'textDecorationColor',
+            'color',
+          ]),
+          color: theme.palette.text.secondary,
+          textDecorationColor: 'inherit',
+          textDecorationThickness: '1px',
+          // textDecorationColor: 'inherit',
+          '&:hover': {
+            color: theme.palette.primary.main,
+          },
         }),
       },
     },
@@ -130,6 +136,11 @@ export const lightTheme = createTheme({
           borderRadius: theme.shape.borderRadius * 2,
           overflow: 'hidden',
         }),
+      },
+    },
+    MuiSkeleton: {
+      defaultProps: {
+        animation: false,
       },
     },
   },
