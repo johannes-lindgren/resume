@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { AllResumeActions } from '@/hooks/useThrottledState'
 import { useSpring } from '@react-spring/core'
-import { Box, Button, Container, Stack, Typography } from '@mui/material'
+import { Box, Button, Container, Grow, Stack, Typography } from '@mui/material'
 import { Embossed } from '@/components/dom/ResumeEditor/Embossed'
 import { NoteAddRounded, TagFacesOutlined } from '@mui/icons-material'
 import { resumeTemplate } from '@/model/defaults'
@@ -36,12 +36,6 @@ export const LandingPage: FunctionComponent<
 const Hero: FunctionComponent<Pick<AllResumeActions, 'newResume'>> = ({
   newResume,
 }) => {
-  const style = useSpring({
-    config: { mass: 2, tension: 200, friction: 100 },
-    position: 'abosulte',
-    from: { bottom: -50 },
-    to: { bottom: 0 },
-  })
   return (
     <Box
       sx={{
@@ -141,41 +135,29 @@ const Hero: FunctionComponent<Pick<AllResumeActions, 'newResume'>> = ({
             },
           }}
         >
-          <MockResume style={style} />
+          <Grow
+            in
+            timeout={2000}
+          >
+            <Box>
+              <MockResume />
+            </Box>
+          </Grow>
         </Box>
       </Box>
-      {/*<Container maxWidth="md">*/}
-      {/*</Container>*/}
     </Box>
   )
 }
 
 const Background: FunctionComponent = () => {
-  const style = useSpring({
-    config: {
-      mass: 5,
-      tension: 500,
-      friction: 200,
-    },
-    delay: 5000,
-    from: { transform: `skew(0deg, -3deg) translate(0px, -100px)` },
-    to: [
-      { transform: `skew(0deg, -5deg) translate(0px, -100px)` },
-      { transform: `skew(0deg, -3deg) translate(0px, -100px)` },
-      { transform: `skew(0deg, 1deg) translate(0px, -100px)` },
-      { transform: `skew(0deg, -3deg) translate(0px, -100px)` },
-    ],
-    loop: true,
-  })
   return (
     <AnimatedBox
-      style={style}
       sx={{
         position: 'absolute',
         width: '100%',
         height: '100%',
         backgroundColor: parchment,
-        // transform: `skew(0deg, 3deg) translate(0px, -100px)`,
+        transform: `skew(0deg, -3deg) translate(0px, -100px)`,
         zIndex: -1,
       }}
     />
