@@ -2,20 +2,20 @@ import React, { FunctionComponent } from 'react'
 import { Employment } from '@/model/resume'
 import { Style } from '@react-pdf/types'
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
-import { theme } from '@/design/Theme'
+import { defaultTheme } from '@/resume-view/Theme'
 import { Stack } from '@/components/pdf/Stack'
 
 const styles = StyleSheet.create({
   header: {
-    ...theme.typography.header3,
+    ...defaultTheme.typography.header3,
   },
   date: {
-    ...theme.typography.details,
+    ...defaultTheme.typography.details,
   },
   achievement: {
-    ...theme.typography.body,
-    paddingLeft: theme.spacing(2),
-    marginBottom: theme.spacing(1),
+    ...defaultTheme.typography.body,
+    paddingLeft: defaultTheme.spacing(2),
+    marginBottom: defaultTheme.spacing(1),
   },
 })
 

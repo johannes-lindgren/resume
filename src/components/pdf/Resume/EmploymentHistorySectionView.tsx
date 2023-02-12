@@ -3,7 +3,7 @@ import { EmploymentHistorySection } from '@/model/resume'
 import { Style } from '@react-pdf/types'
 import { Stack } from '@/components/pdf/Stack'
 import { Text } from '@react-pdf/renderer'
-import { theme } from '@/design/Theme'
+import { defaultTheme } from '@/resume-view/Theme'
 import { EmploymentView } from '@/components/pdf/Resume/EmploymentView'
 
 export const EmploymentHistorySectionView: FunctionComponent<{
@@ -18,7 +18,7 @@ export const EmploymentHistorySectionView: FunctionComponent<{
       wrap={false}
       gap={3}
     >
-      <Text style={{ ...theme.typography.header2 }}>
+      <Text style={{ ...defaultTheme.typography.header2 }}>
         {props.section.header}
       </Text>
       {props.section.employments.slice(0, 1).map((employment, index) => (

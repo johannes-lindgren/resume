@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Document, Page, StyleSheet } from '@react-pdf/renderer'
 import { Resume } from '@/model/resume'
 import { Header } from '@/components/pdf/Resume/Header'
-import { theme } from '@/design/Theme'
+import { defaultTheme } from '@/resume-view/Theme'
 import { SectionView } from '@/components/pdf/Resume/SectionView'
 import { Stack } from '@/components/pdf/Stack'
 import { PageCount } from '@/components/pdf/Resume/PageCount'
@@ -10,12 +10,12 @@ import { PageCount } from '@/components/pdf/Resume/PageCount'
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
-    backgroundColor: theme.palette.background,
+    backgroundColor: defaultTheme.palette.background,
     paddingTop: '7vh',
     paddingBottom: '7vh',
     paddingLeft: '15vw',
     paddingRight: '15vw',
-    ...theme.typography.body,
+    ...defaultTheme.typography.body,
   },
 })
 

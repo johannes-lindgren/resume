@@ -6,6 +6,9 @@ import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
 import { ResumePreview } from '@/components/dom/ResumeEditor/ResumePreview'
 import { AllResumeActions } from '@/hooks/useThrottledState'
 import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeAppFooter'
+import { PdfResume } from '@/resume-view/PdfResume'
+import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
+import { DomResume } from '@/resume-view/DomResume'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -57,12 +60,20 @@ export const ResumeEditor: FunctionComponent<
         <ResumeAppFooter />
       </FormContainer>
       <ResumeContainer>
-        <ResumePreview
-          resume={resume}
-          isSaved={props.saved}
-          removeResume={removeResume}
-          newResume={props.newResume}
-        />
+        <Stack gap={2}>
+          <DomResume>
+            <DefaultTemplate resume={resume} />
+          </DomResume>
+          <PdfResume>
+            <DefaultTemplate resume={resume} />
+          </PdfResume>
+        </Stack>
+        {/*<ResumePreview*/}
+        {/*  resume={resume}*/}
+        {/*  isSaved={props.saved}*/}
+        {/*  removeResume={removeResume}*/}
+        {/*  newResume={props.newResume}*/}
+        {/*/>*/}
       </ResumeContainer>
     </Split>
   )

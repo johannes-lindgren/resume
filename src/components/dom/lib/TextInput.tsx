@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FunctionComponent, ReactNode } from 'react'
-import { theme } from '@/design/Theme'
+import { defaultTheme } from '@/resume-view/Theme'
 
 export const TextInput: FunctionComponent<{
   placeholder?: string
@@ -17,10 +17,10 @@ export const TextInput: FunctionComponent<{
       onChange={props.onChange}
       value={props.value}
       style={{
-        borderRadius: theme.radius(1),
-        border: theme.border,
-        padding: theme.spacing(2),
-        backgroundColor: theme.palette.background,
+        borderRadius: defaultTheme.radius(1),
+        border: defaultTheme.border,
+        padding: defaultTheme.spacing(2),
+        backgroundColor: defaultTheme.palette.background,
       }}
     />
   </>

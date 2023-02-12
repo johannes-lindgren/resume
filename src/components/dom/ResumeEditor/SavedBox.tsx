@@ -13,7 +13,7 @@ const Root = styled(Box)(({ theme }) => ({
 export const SaveStatusBox: FunctionComponent<{
   isSaved: boolean
 }> = (props) => (
-  <Root sx={{ color: props.isSaved ? 'success.main' : 'inherit' }}>
+  <Root sx={{ color: 'inherit' }}>
     {props.isSaved ? (
       <>
         <CheckCircleOutlineRounded fontSize="inherit" />

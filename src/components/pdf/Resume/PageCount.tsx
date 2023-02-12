@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
-import { theme } from '@/design/Theme'
+import { defaultTheme } from '@/resume-view/Theme'
 
 const styles = StyleSheet.create({
   view: {
@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
   },
   text: {
     position: 'absolute',
-    marginLeft: theme.spacing(4),
-    bottom: theme.spacing(4),
+    marginLeft: defaultTheme.spacing(4),
+    bottom: defaultTheme.spacing(4),
     color: 'grey',
-    ...theme.typography.caption,
+    ...defaultTheme.typography.caption,
   },
 })
 

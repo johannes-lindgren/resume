@@ -1,5 +1,5 @@
 import { createElement, FunctionComponent, ReactNode } from 'react'
-import { theme } from '@/design/Theme'
+import { defaultTheme } from '@/resume-view/Theme'
 
 export type ButtonComponent = FunctionComponent<
   | {
@@ -21,12 +21,12 @@ export const Button: ButtonComponent = (props) => {
     ...otherProps,
     style: {
       textDecoration: 'none',
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: defaultTheme.palette.primary.main,
       border: 'none',
-      borderRadius: theme.radius(1),
-      padding: theme.spacing(2),
-      ...theme.typography.body,
-      color: theme.palette.primary.contrastText,
+      borderRadius: defaultTheme.radius(1),
+      padding: defaultTheme.spacing(2),
+      ...defaultTheme.typography.body,
+      color: defaultTheme.palette.primary.contrastText,
       cursor: 'pointer',
     },
   })

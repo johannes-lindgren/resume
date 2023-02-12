@@ -44,7 +44,7 @@ const fontColorSecondary = `#8d919f`
 const borderColor = `#8d919f`
 const linkColor = `#1E90FF`
 
-export const theme: Theme = {
+export const defaultTheme: Theme = {
   spacing: exponentialSpacing,
   radius: exponentialSpacing,
   palette: {

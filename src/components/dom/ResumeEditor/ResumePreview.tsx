@@ -30,7 +30,7 @@ const PdfDocument = dynamic(
   },
 )
 
-const PdfRoot = styled(PdfDocument)(({ theme }) => ({
+export const PdfRoot = styled(PdfDocument)(({ theme }) => ({
   aspectRatio: '0.707107 / 1',
   border: 'none',
   overflow: 'hidden',
@@ -42,6 +42,8 @@ const PdfRoot = styled(PdfDocument)(({ theme }) => ({
 const PreviewToolbar = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
+  paddingLeft: theme.spacing(1),
+  paddingRight: theme.spacing(1),
   gap: theme.spacing(1),
 }))
 

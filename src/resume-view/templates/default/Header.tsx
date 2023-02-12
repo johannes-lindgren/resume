@@ -1,10 +1,13 @@
 import React, { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
-import { Image, StyleSheet, Text, View } from '@react-pdf/renderer'
 import { defaultTheme } from '@/resume-view/Theme'
-import { ContactDetailsView } from '@/components/pdf/Resume/ContactDetailsView'
+import { ContactDetailsView } from '@/resume-view/templates/default/ContactDetailsView'
+import { createStyles } from '@/resume-view/primitives/Styles'
+import { View } from '@/resume-view/primitives/View'
+import { Image } from '@/resume-view/primitives/Image'
+import { Text } from '@/resume-view/primitives/Text'
 
-const styles = StyleSheet.create({
+const styles = createStyles({
   root: {
     flexDirection: 'row',
     alignItems: 'center',
