@@ -2,10 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
 import { defaultTheme } from '@/resume-view/Theme'
 import { ContactDetailsView } from '@/resume-view/templates/default/ContactDetailsView'
-import { createStyles } from '@/resume-view/primitives/Styles'
-import { View } from '@/resume-view/primitives/View'
-import { Image } from '@/resume-view/primitives/Image'
-import { Text } from '@/resume-view/primitives/Text'
+import { createStyles, View, Image, Text } from '@/resume-view/primitives'
 
 const styles = createStyles({
   root: {
@@ -20,6 +17,7 @@ const styles = createStyles({
     marginRight: defaultTheme.spacing(3),
   },
   textSection: {
+    yoyo: 'dummy',
     display: 'flex',
     flexDirection: 'column',
     flex: 1,

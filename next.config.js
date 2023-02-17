@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
   reactStrictMode: true,
   compiler: {
     emotion: true,
   },
 }
 
-module.exports = nextConfig
+export default config

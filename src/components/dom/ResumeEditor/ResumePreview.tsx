@@ -13,6 +13,9 @@ import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
 import { Box, styled } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
+import { DomResume } from '@/resume-view/DomResume'
+import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
+import { PdfResume } from '@/resume-view/PdfResume'
 
 const DownloadPdfButton = dynamic(
   () =>
@@ -34,8 +37,8 @@ export const PdfRoot = styled(PdfDocument)(({ theme }) => ({
   aspectRatio: '0.707107 / 1',
   border: 'none',
   overflow: 'hidden',
-  width: '100%',
-  height: '100%',
+  // width: '100%',
+  // height: '100%',
   borderRadius: theme.shape.borderRadius * 2,
 }))
 

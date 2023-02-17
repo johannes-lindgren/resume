@@ -30,7 +30,7 @@ export type Palette = {
 }
 
 const exponentialSpacing = (size: number) =>
-  `${Math.floor(Math.pow(4, (size + 1) / 2))}pt`
+  Math.floor(Math.pow(4, (size + 1) / 2))
 
 const bodySize = 12
 
@@ -43,6 +43,8 @@ const fontColor = `#1b243f`
 const fontColorSecondary = `#8d919f`
 const borderColor = `#8d919f`
 const linkColor = `#1E90FF`
+
+const fontSize = (scalar = 1) => `${scalar * bodySize}u`
 
 export const defaultTheme: Theme = {
   spacing: exponentialSpacing,
@@ -57,38 +59,38 @@ export const defaultTheme: Theme = {
   border: `1px solid ${borderColor}`,
   typography: {
     header1: {
-      fontSize: `${Math.round(1.75 * bodySize)}pt`,
+      fontSize: fontSize(1.75),
       fontFamily: headerFont,
       fontWeight: headerWeight,
       color: fontColor,
     },
     header2: {
-      fontSize: `${Math.round(1.25 * bodySize)}pt`,
+      fontSize: fontSize(1.25),
       fontFamily: headerFont,
       fontWeight: headerWeight,
       color: fontColor,
     },
     header3: {
-      fontSize: `${Math.round(1.0 * bodySize)}pt`,
+      fontSize: fontSize(1.0),
       fontFamily: headerFont,
       fontWeight: headerWeight,
       color: fontColor,
     },
     body: {
-      fontSize: `${bodySize}pt`,
+      fontSize: fontSize(),
       fontFamily: bodyFont,
       fontWeight: bodyWeight,
       color: fontColor,
       textAlign: 'justify',
     },
     details: {
-      fontSize: `${bodySize}pt`,
+      fontSize: fontSize(),
       fontFamily: bodyFont,
       fontWeight: bodyWeight,
       color: fontColorSecondary,
     },
     caption: {
-      fontSize: `${Math.round((5 / 6) * bodySize)}pt`,
+      fontSize: fontSize(5 / 6),
       fontFamily: bodyFont,
       fontWeight: bodyWeight,
       color: fontColor,

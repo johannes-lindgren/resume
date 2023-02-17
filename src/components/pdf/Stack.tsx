@@ -1,12 +1,12 @@
 import React, { FunctionComponent, ReactNode } from 'react'
-import { View } from '@react-pdf/renderer'
 import { defaultTheme } from '@/resume-view/Theme'
-import { Style } from '@react-pdf/types'
+import { View } from '@/resume-view/primitives/View'
+import { Style } from '@/resume-view/primitives/Styles'
 
 export const Stack: FunctionComponent<{
   children: ReactNode
   gap?: 0 | 1 | 2 | 3 | 4 | 5 | 6
-  style?: Style | Style[]
+  style?: Style
   wrap?: boolean
 }> = (props) => (
   <View

@@ -8,7 +8,10 @@ export const PdfResume: FunctionComponent<{
   children?: ReactNode
 }> = (props) => {
   return (
-    <PdfRoot showToolbar={false}>
+    <PdfRoot
+      showToolbar={false}
+      sx={{ flex: 1 }}
+    >
       <Document>
         <Page
           size="A4"

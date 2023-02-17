@@ -99,7 +99,7 @@ export type Style = {
     | 'underline line-through'
   textDecorationColor?: string
   textDecorationStyle?: 'dashed' | 'dotted' | 'solid' | string // ?
-  textIndent?: any // ?
+  textIndent?: unknown // ?
   textOverflow?: 'ellipsis'
   textTransform?: 'capitalize' | 'lowercase' | 'uppercase'
 
@@ -163,12 +163,54 @@ export type Style = {
   borderRadius?: number | string
 }
 
+export type UnitTransformer = (
+  value: number | string | undefined,
+) => number | string | undefined
+
+export const transformToDomUnits: UnitTransformer = (value) => {
+  if (typeof value === 'string') {
+    return value.replaceAll(/(-?\d+\.?\d*)u/g, `$1px`)
+  } else {
+    return value
+  }
+}
+export const transformToPdfUnits: UnitTransformer = (value) => {
+  if (typeof value === 'string') {
+    return value.replaceAll(/(-?\d+\.?\d*)u/g, `$1pt`)
+  } else {
+    return value
+  }
+}
+
+export const transformUnits = (
+  style: Style,
+  transformUnit: UnitTransformer,
+): Style =>
+  Object.keys(style).reduce((previousValue, currentValue) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    previousValue[currentValue] = transformUnit(style[currentValue])
+    return previousValue
+  }, {} as Style)
+
 export const pdfStyles = (styles: Style | undefined): PdfStyle | undefined =>
-  styles
+  typeof styles === 'undefined'
+    ? styles
+    : transformUnits(styles, transformToPdfUnits)
 
 export const domStyles = (
   styles: Style | undefined,
-): React.CSSProperties | undefined => ({
-  display: 'flex',
-  ...styles,
-})
+): React.CSSProperties | undefined =>
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  typeof styles === 'undefined'
+    ? styles
+    : transformUnits(
+        {
+          display: 'flex',
+          ...styles,
+        },
+        transformToDomUnits,
+      )

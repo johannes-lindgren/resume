@@ -22,7 +22,14 @@ const Split = styled(Box)(({ theme }) => ({
     '& > *': {
       width: '50%',
     },
-    '& > *:nth-child(1)': {},
+    '& > *:nth-child(1)': {
+      // TODO remove all in this selection
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '50%',
+      height: '100vh',
+    },
     '& > :nth-child(2)': {
       position: 'fixed',
       top: 0,
@@ -52,22 +59,31 @@ export const ResumeEditor: FunctionComponent<
 
   return (
     <Split>
-      <FormContainer>
-        <ResumeForm
-          resume={resume}
-          setResume={setResume}
-        />
-        <ResumeAppFooter />
-      </FormContainer>
       <ResumeContainer>
-        <Stack gap={2}>
-          <DomResume>
-            <DefaultTemplate resume={resume} />
-          </DomResume>
+        <DomResume>
+          <DefaultTemplate resume={resume} />
+        </DomResume>
+      </ResumeContainer>
+      {/*<FormContainer>*/}
+      {/*  <ResumeForm*/}
+      {/*    resume={resume}*/}
+      {/*    setResume={setResume}*/}
+      {/*  />*/}
+      {/*  <ResumeAppFooter />*/}
+      {/*</FormContainer>*/}
+      <ResumeContainer>
+        <Box
+          display="flex"
+          flexDirection="row"
+          gap={2}
+          sx={{
+            overflowY: 'hidden',
+          }}
+        >
           <PdfResume>
             <DefaultTemplate resume={resume} />
           </PdfResume>
-        </Stack>
+        </Box>
         {/*<ResumePreview*/}
         {/*  resume={resume}*/}
         {/*  isSaved={props.saved}*/}

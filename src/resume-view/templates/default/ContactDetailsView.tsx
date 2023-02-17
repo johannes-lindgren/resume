@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
-import { Stack } from '@/components/pdf/Stack'
+import { Stack } from '@/resume-view/base-components'
 import { defaultTheme } from '@/resume-view/Theme'
-import { Link } from '@/resume-view/primitives/Link'
-import { Text } from '@/resume-view/primitives/Text'
+import { Link, Text } from '@/resume-view/primitives'
 
 export const ContactDetailsView: FunctionComponent<{
   resume: Resume

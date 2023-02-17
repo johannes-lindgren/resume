@@ -13,7 +13,13 @@ module.exports = {
   plugins: [
     'prettier',
   ],
-  parser: '@typescript-eslint/parser',overrides: [
+  parser: '@typescript-eslint/parser',
+  rules: {
+    'prettier/prettier': 'warn',
+    'no-unused-vars': 'off',
+    'react/display-name': 'off',
+  },
+  overrides: [
     {
       files: ['*.ts', '*.tsx'], // Your TypeScript files extension
       extends: [
@@ -39,16 +45,11 @@ module.exports = {
       },
     },
     {
-      files: ["*.test.ts"],
+      files: ["*.test.ts", '*.test.tsx'],
       env: {
         jest: true,
         node: true,
       }
     }
   ],
-  rules: {
-    'prettier/prettier': 'warn',
-    'no-unused-vars': 'off',
-    'react/display-name': 'off',
-  },
 }
