@@ -12,17 +12,25 @@ export const PdfResume: FunctionComponent<{
       showToolbar={false}
       sx={{ flex: 1 }}
     >
-      <Document>
-        <Page
-          size="A4"
-          // style={styles.page}
-        >
-          <ResumeTargetProvider target="pdf">
-            {props.children}
-          </ResumeTargetProvider>
-          <PageCount />
-        </Page>
-      </Document>
+      <PdfResumeDocument {...props} />
     </PdfRoot>
+  )
+}
+
+export const PdfResumeDocument: FunctionComponent<{
+  children?: ReactNode
+}> = (props) => {
+  return (
+    <Document>
+      <Page
+        size="A4"
+        // style={styles.page}
+      >
+        <ResumeTargetProvider target="pdf">
+          {props.children}
+        </ResumeTargetProvider>
+        <PageCount />
+      </Page>
+    </Document>
   )
 }

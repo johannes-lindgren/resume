@@ -59,37 +59,20 @@ export const ResumeEditor: FunctionComponent<
 
   return (
     <Split>
+      <FormContainer>
+        <ResumeForm
+          resume={resume}
+          setResume={setResume}
+        />
+        <ResumeAppFooter />
+      </FormContainer>
       <ResumeContainer>
-        <DomResume>
-          <DefaultTemplate resume={resume} />
-        </DomResume>
-      </ResumeContainer>
-      {/*<FormContainer>*/}
-      {/*  <ResumeForm*/}
-      {/*    resume={resume}*/}
-      {/*    setResume={setResume}*/}
-      {/*  />*/}
-      {/*  <ResumeAppFooter />*/}
-      {/*</FormContainer>*/}
-      <ResumeContainer>
-        <Box
-          display="flex"
-          flexDirection="row"
-          gap={2}
-          sx={{
-            overflowY: 'hidden',
-          }}
-        >
-          <PdfResume>
-            <DefaultTemplate resume={resume} />
-          </PdfResume>
-        </Box>
-        {/*<ResumePreview*/}
-        {/*  resume={resume}*/}
-        {/*  isSaved={props.saved}*/}
-        {/*  removeResume={removeResume}*/}
-        {/*  newResume={props.newResume}*/}
-        {/*/>*/}
+        <ResumePreview
+          resume={resume}
+          isSaved={props.saved}
+          removeResume={removeResume}
+          newResume={props.newResume}
+        />
       </ResumeContainer>
     </Split>
   )

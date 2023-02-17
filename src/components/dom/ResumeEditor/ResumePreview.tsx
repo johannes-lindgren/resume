@@ -10,12 +10,14 @@ import { Resume } from '@/model/resume'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeView } from '@/components/pdf/Resume'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
-import { Box, styled } from '@mui/material'
+import { Box, styled, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
 import { DomResume } from '@/resume-view/DomResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
-import { PdfResume } from '@/resume-view/PdfResume'
+import { PdfResume, PdfResumeDocument } from '@/resume-view/PdfResume'
+import { ResumeContainer } from '@/components/dom/ResumeContainer'
+import { PictureAsPdf, WebAsset } from '@mui/icons-material'
 
 const DownloadPdfButton = dynamic(
   () =>
@@ -60,15 +62,49 @@ export const ResumePreview: FunctionComponent<
   const throttledResume = useThrottledState(resume, 1500)
 
   const doc = useMemo(
-    () => <ResumeView resume={throttledResume} />,
+    () => (
+      <PdfResumeDocument>
+        <DefaultTemplate resume={throttledResume} />
+      </PdfResumeDocument>
+    ),
     [throttledResume],
   )
+
+  const [previewMode, setPreviewMode] = useState<'pdf' | 'dom'>('dom')
+
+  const handleChangePreviewMode = (
+    event: React.MouseEvent<HTMLElement>,
+    newPreviewMode: 'pdf' | 'dom',
+  ) => setPreviewMode(newPreviewMode)
 
   return (
     <PreviewLayout
       header={
         <PreviewToolbar justifyContent="space-between">
           <SaveStatusBox isSaved={props.isSaved} />
+          <ToggleButtonGroup
+            value={previewMode}
+            exclusive
+            onChange={handleChangePreviewMode}
+            aria-label="preview mode"
+            size="small"
+            sx={{ bgcolor: 'background.paper' }}
+          >
+            <ToggleButton
+              value="dom"
+              aria-label="preview web"
+              // sx={{ color: 'inherit' }}
+            >
+              <WebAsset />
+            </ToggleButton>
+            <ToggleButton
+              value="pdf"
+              aria-label="preview pdf"
+              // sx={{ color: 'inherit' }}
+            >
+              <PictureAsPdf />
+            </ToggleButton>
+          </ToggleButtonGroup>
           <ActionsButton
             resume={resume}
             newResume={newResume}
@@ -82,7 +118,23 @@ export const ResumePreview: FunctionComponent<
         </PreviewToolbar>
       }
     >
-      <PdfRoot showToolbar={false}>{doc}</PdfRoot>
+      <Box
+        display="flex"
+        flexDirection="row"
+        gap={2}
+        sx={{
+          overflowY: 'hidden',
+        }}
+      >
+        {previewMode === 'dom' ? (
+          <DomResume>
+            <DefaultTemplate resume={resume} />
+          </DomResume>
+        ) : (
+          <PdfRoot showToolbar={false}>{doc}</PdfRoot>
+        )}
+      </Box>
+      {/*<PdfRoot showToolbar={false}>{doc}</PdfRoot>*/}
     </PreviewLayout>
   )
 }
@@ -154,13 +206,27 @@ const PreviewLayout: FunctionComponent<{
         }}
       >
         <Box
-          width={dim.width}
-          height={dim.height}
+          sx={{
+            overflow: 'hidden',
+            borderRadius: 1,
+          }}
         >
-          {props.children}
+          <Box
+            sx={{
+              width: dim.width,
+              height: dim.height,
+              maxWidth: dim.width,
+              maxHeight: dim.height,
+              overflowY: 'auto',
+            }}
+          >
+            {props.children}
+          </Box>
         </Box>
       </Box>
       <Box width={dim.width}>{props.footer}</Box>
     </Box>
   )
 }
+
+export const AutoA4: FunctionComponent = (props) => {}
