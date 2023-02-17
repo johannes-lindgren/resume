@@ -6,9 +6,6 @@ import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
 import { ResumePreview } from '@/components/dom/ResumeEditor/ResumePreview'
 import { AllResumeActions } from '@/hooks/useThrottledState'
 import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeAppFooter'
-import { PdfResume } from '@/resume-view/PdfResume'
-import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
-import { DomResume } from '@/resume-view/DomResume'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -22,14 +19,7 @@ const Split = styled(Box)(({ theme }) => ({
     '& > *': {
       width: '50%',
     },
-    '& > *:nth-child(1)': {
-      // TODO remove all in this selection
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '50%',
-      height: '100vh',
-    },
+    '& > *:nth-child(1)': {},
     '& > :nth-child(2)': {
       position: 'fixed',
       top: 0,

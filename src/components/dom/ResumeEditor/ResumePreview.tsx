@@ -8,16 +8,15 @@ import {
 } from 'react'
 import { Resume } from '@/model/resume'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
-import { ResumeView } from '@/components/pdf/Resume'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
-import { Box, styled, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
 import { DomResume } from '@/resume-view/DomResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
-import { PdfResume, PdfResumeDocument } from '@/resume-view/PdfResume'
-import { ResumeContainer } from '@/components/dom/ResumeContainer'
-import { PictureAsPdf, WebAsset } from '@mui/icons-material'
+import { PdfResumeDocument } from '@/resume-view/PdfResume'
+import { PreviewTargetSwitch } from '@/components/dom/ResumeEditor/PreviewTargetSwitch'
+import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
 
 const DownloadPdfButton = dynamic(
   () =>
@@ -39,8 +38,8 @@ export const PdfRoot = styled(PdfDocument)(({ theme }) => ({
   aspectRatio: '0.707107 / 1',
   border: 'none',
   overflow: 'hidden',
-  // width: '100%',
-  // height: '100%',
+  width: '100%',
+  height: '100%',
   borderRadius: theme.shape.borderRadius * 2,
 }))
 
@@ -70,41 +69,17 @@ export const ResumePreview: FunctionComponent<
     [throttledResume],
   )
 
-  const [previewMode, setPreviewMode] = useState<'pdf' | 'dom'>('dom')
-
-  const handleChangePreviewMode = (
-    event: React.MouseEvent<HTMLElement>,
-    newPreviewMode: 'pdf' | 'dom',
-  ) => setPreviewMode(newPreviewMode)
+  const [previewTarget, setPreviewTarget] = useState<ResumeTarget>('dom')
 
   return (
     <PreviewLayout
       header={
         <PreviewToolbar justifyContent="space-between">
           <SaveStatusBox isSaved={props.isSaved} />
-          <ToggleButtonGroup
-            value={previewMode}
-            exclusive
-            onChange={handleChangePreviewMode}
-            aria-label="preview mode"
-            size="small"
-            sx={{ bgcolor: 'background.paper' }}
-          >
-            <ToggleButton
-              value="dom"
-              aria-label="preview web"
-              // sx={{ color: 'inherit' }}
-            >
-              <WebAsset />
-            </ToggleButton>
-            <ToggleButton
-              value="pdf"
-              aria-label="preview pdf"
-              // sx={{ color: 'inherit' }}
-            >
-              <PictureAsPdf />
-            </ToggleButton>
-          </ToggleButtonGroup>
+          <PreviewTargetSwitch
+            previewTarget={previewTarget}
+            setPreviewTarget={setPreviewTarget}
+          />
           <ActionsButton
             resume={resume}
             newResume={newResume}
@@ -126,7 +101,7 @@ export const ResumePreview: FunctionComponent<
           overflowY: 'hidden',
         }}
       >
-        {previewMode === 'dom' ? (
+        {previewTarget === 'dom' ? (
           <DomResume>
             <DefaultTemplate resume={resume} />
           </DomResume>

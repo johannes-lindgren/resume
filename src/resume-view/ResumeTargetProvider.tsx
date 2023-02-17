@@ -1,12 +1,12 @@
 import { createContext, FunctionComponent, ReactNode, useContext } from 'react'
 
-type ResumeTarget = 'dom' | 'pdf' | undefined
+export type ResumeTarget = 'dom' | 'pdf'
 
-const resumeContext = createContext<ResumeTarget>(undefined)
+const resumeContext = createContext<ResumeTarget | undefined>(undefined)
 
 export const ResumeTargetProvider: FunctionComponent<{
   children?: ReactNode
-  target: 'dom' | 'pdf'
+  target: ResumeTarget
 }> = (props) => {
   return (
     <resumeContext.Provider value={props.target}>
@@ -15,4 +15,5 @@ export const ResumeTargetProvider: FunctionComponent<{
   )
 }
 
-export const useResumeTarget = (): ResumeTarget => useContext(resumeContext)
+export const useResumeTarget = (): ResumeTarget | undefined =>
+  useContext(resumeContext)
