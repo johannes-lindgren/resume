@@ -1,8 +1,8 @@
-import { FunctionComponent, ReactNode, useMemo, useState } from 'react'
+import { FunctionComponent, useMemo, useState } from 'react'
 import { Resume } from '@/model/resume'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
-import { Box, styled } from '@mui/material'
+import { Box, Container, styled } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
 import { DomResume } from '@/resume-view/DomResume'
@@ -10,7 +10,7 @@ import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate
 import { PdfResumeDocument } from '@/resume-view/PdfResume'
 import { PreviewTargetSwitch } from '@/components/dom/ResumeEditor/PreviewTargetSwitch'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
-import { A4AspectRatio } from '@/components/dom/ResumeEditor/A4AspectRatio'
+import { PreviewLayout } from '@/components/dom/ResumeEditor/PreviewLayout'
 
 const DownloadPdfButton = dynamic(
   () =>
@@ -87,47 +87,27 @@ export const ResumePreview: FunctionComponent<
         </PreviewToolbar>
       }
     >
-      <Box
-        display="flex"
-        flexDirection="row"
-        gap={2}
-        sx={{
-          overflowY: 'hidden',
-        }}
-      >
-        {previewTarget === 'dom' ? (
-          <DomResume>
+      {previewTarget === 'dom' ? (
+        <Container
+          maxWidth="md"
+          disableGutters
+          sx={{
+            overflowY: 'hidden',
+            borderRadius: 1,
+            display: 'flex',
+          }}
+        >
+          <DomResume
+            sx={{
+              overflow: 'auto',
+            }}
+          >
             <DefaultTemplate resume={resume} />
           </DomResume>
-        ) : (
-          <PdfRoot showToolbar={false}>{doc}</PdfRoot>
-        )}
-      </Box>
+        </Container>
+      ) : (
+        <PdfRoot showToolbar={false}>{doc}</PdfRoot>
+      )}
     </PreviewLayout>
-  )
-}
-
-const PreviewLayout: FunctionComponent<{
-  children?: ReactNode
-  header?: ReactNode
-  footer?: ReactNode
-}> = (props) => {
-  return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 2,
-        flex: 1,
-      }}
-    >
-      <Box width="100%">{props.header}</Box>
-      <A4AspectRatio>{props.children}</A4AspectRatio>
-      <Box width="100%">{props.footer}</Box>
-    </Box>
   )
 }

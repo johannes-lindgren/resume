@@ -5,10 +5,8 @@ import { Box, BoxProps, styled } from '@mui/material'
 const Root = styled(Box)(({ theme }) => ({
   flex: 1,
   whiteSpace: 'break-spaces',
-  overflowY: 'hidden',
-  overflowX: 'hidden',
   backgroundColor: theme.palette.background.paper,
-  '& *': {
+  '& div': {
     display: 'flex',
     flexDirection: 'column',
   },
