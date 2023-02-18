@@ -1,14 +1,11 @@
-import { FunctionComponent, useMemo, useState } from 'react'
+import { FunctionComponent, ReactNode, useMemo, useState } from 'react'
 import { Resume } from '@/model/resume'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
-import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
-import { Box, Container, styled } from '@mui/material'
+import { Container, styled } from '@mui/material'
 import dynamic from 'next/dynamic'
-import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
 import { DomResume } from '@/resume-view/DomResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
 import { PdfResumeDocument } from '@/resume-view/PdfResume'
-import { PreviewTargetSwitch } from '@/components/dom/ResumeEditor/PreviewTargetSwitch'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
 import { PreviewLayout } from '@/components/dom/ResumeEditor/PreviewLayout'
 
@@ -37,56 +34,18 @@ export const PdfRoot = styled(PdfDocument)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius * 2,
 }))
 
-const PreviewToolbar = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexWrap: 'wrap',
-  paddingLeft: theme.spacing(1),
-  paddingRight: theme.spacing(1),
-  gap: theme.spacing(1),
-}))
-
 export const ResumePreview: FunctionComponent<
   {
     resume: Resume
     isSaved: boolean
+    previewTarget: ResumeTarget
+    doc: JSX.Element
   } & Pick<AllResumeActions, 'removeResume' | 'newResume'>
 > = (props) => {
-  const { resume, removeResume, newResume } = props
-  const throttledResume = useThrottledState(resume, 1500)
-
-  const doc = useMemo(
-    () => (
-      <PdfResumeDocument>
-        <DefaultTemplate resume={throttledResume} />
-      </PdfResumeDocument>
-    ),
-    [throttledResume],
-  )
-
-  const [previewTarget, setPreviewTarget] = useState<ResumeTarget>('dom')
+  const { resume, removeResume, newResume, previewTarget, doc } = props
 
   return (
-    <PreviewLayout
-      header={
-        <PreviewToolbar justifyContent="space-between">
-          <SaveStatusBox isSaved={props.isSaved} />
-          <PreviewTargetSwitch
-            previewTarget={previewTarget}
-            setPreviewTarget={setPreviewTarget}
-          />
-          <ActionsButton
-            resume={resume}
-            newResume={newResume}
-            removeResume={removeResume}
-          />
-        </PreviewToolbar>
-      }
-      footer={
-        <PreviewToolbar justifyContent="right">
-          <DownloadPdfButton document={doc} />
-        </PreviewToolbar>
-      }
-    >
+    <PreviewLayout>
       {previewTarget === 'dom' ? (
         <Container
           maxWidth="md"

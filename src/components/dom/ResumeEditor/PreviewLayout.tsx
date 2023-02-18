@@ -3,8 +3,6 @@ import { Box } from '@mui/material'
 
 export const PreviewLayout: FunctionComponent<{
   children?: ReactNode
-  header?: ReactNode
-  footer?: ReactNode
 }> = (props) => {
   return (
     <Box
@@ -19,9 +17,7 @@ export const PreviewLayout: FunctionComponent<{
         flex: 1,
       }}
     >
-      <Box width="100%">{props.header}</Box>
       {props.children}
-      <Box width="100%">{props.footer}</Box>
     </Box>
   )
 }
