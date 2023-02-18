@@ -1,11 +1,4 @@
-import {
-  FunctionComponent,
-  ReactNode,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FunctionComponent, ReactNode, useMemo, useState } from 'react'
 import { Resume } from '@/model/resume'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
@@ -17,6 +10,7 @@ import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate
 import { PdfResumeDocument } from '@/resume-view/PdfResume'
 import { PreviewTargetSwitch } from '@/components/dom/ResumeEditor/PreviewTargetSwitch'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
+import { A4AspectRatio } from '@/components/dom/ResumeEditor/A4AspectRatio'
 
 const DownloadPdfButton = dynamic(
   () =>
@@ -109,51 +103,15 @@ export const ResumePreview: FunctionComponent<
           <PdfRoot showToolbar={false}>{doc}</PdfRoot>
         )}
       </Box>
-      {/*<PdfRoot showToolbar={false}>{doc}</PdfRoot>*/}
     </PreviewLayout>
   )
 }
-
-const aspectRatio = 1.4142135624
-const aspectRatioInv = 0.7071067812
 
 const PreviewLayout: FunctionComponent<{
   children?: ReactNode
   header?: ReactNode
   footer?: ReactNode
 }> = (props) => {
-  type Dimension = {
-    width: number
-    height: number
-  }
-  const ref = useRef<HTMLDivElement>(null)
-  const [dim, setDim] = useState<Dimension>({
-    width: 400,
-    height: aspectRatio * 400,
-  })
-  useLayoutEffect(() => {
-    if (!ref.current) {
-      return
-    }
-    const element = ref.current
-    const handleResize = () => {
-      const { clientWidth, clientHeight } = element
-      const v1: Dimension = {
-        width: clientWidth,
-        height: clientWidth * aspectRatio,
-      }
-      const v2: Dimension = {
-        width: clientHeight * aspectRatioInv,
-        height: clientHeight,
-      }
-      setDim(v1.height > clientHeight ? v2 : v1)
-    }
-    window.addEventListener('resize', handleResize)
-    handleResize() // Trigger initially
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [setDim])
   return (
     <Box
       sx={{
@@ -167,41 +125,9 @@ const PreviewLayout: FunctionComponent<{
         flex: 1,
       }}
     >
-      <Box width={dim.width}>{props.header}</Box>
-      <Box
-        ref={ref}
-        sx={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flex: 1,
-        }}
-      >
-        <Box
-          sx={{
-            overflow: 'hidden',
-            borderRadius: 1,
-          }}
-        >
-          <Box
-            sx={{
-              width: dim.width,
-              height: dim.height,
-              maxWidth: dim.width,
-              maxHeight: dim.height,
-              overflowY: 'auto',
-            }}
-          >
-            {props.children}
-          </Box>
-        </Box>
-      </Box>
-      <Box width={dim.width}>{props.footer}</Box>
+      <Box width="100%">{props.header}</Box>
+      <A4AspectRatio>{props.children}</A4AspectRatio>
+      <Box width="100%">{props.footer}</Box>
     </Box>
   )
 }
-
-export const AutoA4: FunctionComponent = (props) => {}

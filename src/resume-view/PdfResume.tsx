@@ -22,10 +22,7 @@ export const PdfResumeDocument: FunctionComponent<{
 }> = (props) => {
   return (
     <Document>
-      <Page
-        size="A4"
-        // style={styles.page}
-      >
+      <Page size="A4">
         <ResumeTargetProvider target="pdf">
           {props.children}
         </ResumeTargetProvider>
