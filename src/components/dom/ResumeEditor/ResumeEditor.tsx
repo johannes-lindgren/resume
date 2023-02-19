@@ -1,7 +1,16 @@
 import { FunctionComponent, useMemo, useState } from 'react'
 import { PreviewContainer } from '@/components/dom/PreviewContainer'
 import { Resume } from '@/model/resume'
-import { Box, Fab, FabProps, Stack, styled, Toolbar } from '@mui/material'
+import {
+  AppBar,
+  Box,
+  Fab,
+  FabProps,
+  Stack,
+  styled,
+  Toolbar,
+  Typography,
+} from '@mui/material'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
 import { ResumePreview } from '@/components/dom/ResumeEditor/ResumePreview'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
@@ -13,17 +22,18 @@ import { Setter } from '@/utils/Setter'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
 import { PreviewTargetSwitch } from '@/components/dom/ResumeEditor/PreviewTargetSwitch'
 import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
-import { PreviewToolbar } from '@/components/dom/ResumeEditor/PreviewToolbar'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
 import { DownloadPdfButton } from '@/components/dom/DownloadPdfButton'
 import { PdfResumeDocument } from '@/resume-view/PdfResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
+import { tangerine400 } from '@/fonts/tangerine'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'column-reverse',
+  flexDirection: 'row',
+  overflow: 'hidden',
   '& > .ResumeEditor-form': {
-    minHeight: '100vh',
+    overflowY: 'auto',
   },
   '&.ResumeEditor-viewPreview > .ResumeEditor-form': {
     display: 'none',
@@ -31,10 +41,7 @@ const Split = styled(Box)(({ theme }) => ({
   '&.ResumeEditor-viewForm > .ResumeEditor-preview': {
     display: 'none',
   },
-  '& > .ResumeEditor-preview': {
-    minHeight: '100vh',
-    height: '100vh',
-  },
+  '& > .ResumeEditor-preview': {},
   '& > .ResumeEditor-fab': {
     position: 'fixed',
     bottom: 0,
@@ -50,11 +57,8 @@ const Split = styled(Box)(({ theme }) => ({
       width: '50%',
     },
     '& > .ResumeEditor-preview': {
-      position: 'fixed',
       display: 'flex !important',
       width: '50%',
-      top: 0,
-      right: 0,
       padding: theme.spacing(2),
     },
   },
@@ -71,10 +75,15 @@ const FormContainer = styled(Stack)(({ theme }) => ({
   paddingTop: theme.spacing(8),
   paddingBottom: theme.spacing(5),
   justifyContent: 'space-between',
-  gap: theme.spacing(8),
 }))
 
 type SmallScreenView = 'preview' | 'form'
+
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  position: 'fixed',
+  left: 0,
+  top: 0,
+}))
 
 export const ResumeEditor: FunctionComponent<
   {
@@ -99,20 +108,38 @@ export const ResumeEditor: FunctionComponent<
   )
 
   return (
-    <Stack>
-      <Toolbar>
-        <SaveStatusBox isSaved={saved} />
-        <PreviewTargetSwitch
-          previewTarget={previewTarget}
-          setPreviewTarget={setPreviewTarget}
-        />
-        <DownloadPdfButton document={doc} />
-        <ActionsButton
-          resume={resume}
-          newResume={newResume}
-          removeResume={removeResume}
-        />
-      </Toolbar>
+    <Stack height="100vh">
+      <AppBar
+        color="inherit"
+        position="sticky"
+      >
+        <Toolbar>
+          <Typography
+            variant="h1"
+            noWrap
+            component="div"
+            sx={{
+              ...tangerine400.style,
+              transform: 'skew(0deg, -5deg)',
+              display: { xs: 'none', sm: 'block' },
+            }}
+          >
+            Splendid Resume
+          </Typography>
+          <Box flex={1} />
+          <SaveStatusBox isSaved={saved} />
+          <PreviewTargetSwitch
+            previewTarget={previewTarget}
+            setPreviewTarget={setPreviewTarget}
+          />
+          <DownloadPdfButton document={doc} />
+          <ActionsButton
+            resume={resume}
+            newResume={newResume}
+            removeResume={removeResume}
+          />
+        </Toolbar>
+      </AppBar>
       <Split
         className={
           smallScreenView === 'form'
