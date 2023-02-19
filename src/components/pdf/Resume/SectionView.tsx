@@ -7,7 +7,7 @@ import { DetailsSectionView } from '@/components/pdf/Resume/DetailsSectionView'
 
 export const SectionView: FunctionComponent<{
   section: ResumeSection
-  style?: Style | Style[] | undefined
+  style?: Style | undefined
 }> = (props) => {
   const { section, ...p } = props
   switch (section.type) {

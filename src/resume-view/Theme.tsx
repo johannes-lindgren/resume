@@ -1,5 +1,7 @@
 import { Style } from '@react-pdf/types'
 
+type Sizing = 0 | 1 | 2 | 3 | 4 | 5 | 6
+
 export type Theme = {
   spacing: (size: 0 | 1 | 2 | 3 | 4 | 5 | 6) => string
   radius: (size: 0 | 1 | 2 | 3) => string
@@ -46,9 +48,11 @@ const linkColor = `#1E90FF`
 
 const fontSize = (scalar = 1) => `${scalar * bodySize}u`
 
+const unit = (u: number) => `${u}u`
+
 export const defaultTheme: Theme = {
-  spacing: exponentialSpacing,
-  radius: exponentialSpacing,
+  spacing: (s) => unit(exponentialSpacing(s)),
+  radius: (s) => unit(exponentialSpacing(s)),
   palette: {
     background: '#ffffff',
     primary: {

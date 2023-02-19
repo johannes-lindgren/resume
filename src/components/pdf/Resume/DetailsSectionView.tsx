@@ -7,7 +7,7 @@ import { defaultTheme } from '@/resume-view/Theme'
 
 export const DetailsSectionView: FunctionComponent<{
   section: DetailsSection
-  style?: Style | Style[] | undefined
+  style?: Style | undefined
 }> = (props) => (
   <Stack
     style={props.style}

@@ -189,7 +189,7 @@ export const transformUnits = (
   Object.keys(style).reduce((previousValue, currentValue) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/ban-ts-comment
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument
     previousValue[currentValue] = transformUnit(style[currentValue])
     return previousValue
   }, {} as Style)

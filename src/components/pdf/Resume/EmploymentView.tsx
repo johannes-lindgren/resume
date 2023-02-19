@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 export const EmploymentView: FunctionComponent<{
   emloyment: Employment
-  style?: Style | Style[] | undefined
+  style?: Style | undefined
 }> = (props) => (
   <Stack
     style={props.style}

@@ -8,7 +8,7 @@ import { EmploymentView } from '@/components/pdf/Resume/EmploymentView'
 
 export const EmploymentHistorySectionView: FunctionComponent<{
   section: EmploymentHistorySection
-  style?: Style | Style[] | undefined
+  style?: Style | undefined
 }> = (props) => (
   <Stack
     style={props.style}
