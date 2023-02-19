@@ -10,6 +10,7 @@ import {
   styled,
   Toolbar,
   Typography,
+  Zoom,
 } from '@mui/material'
 import { ResumeForm } from '@/components/dom/ResumeEditor/ResumeForm'
 import { ResumePreview } from '@/components/dom/ResumeEditor/ResumePreview'
@@ -79,12 +80,6 @@ const FormContainer = styled(Stack)(({ theme }) => ({
 
 type SmallScreenView = 'preview' | 'form'
 
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-  position: 'fixed',
-  left: 0,
-  top: 0,
-}))
-
 export const ResumeEditor: FunctionComponent<
   {
     resume: Resume
@@ -113,7 +108,7 @@ export const ResumeEditor: FunctionComponent<
         color="inherit"
         position="sticky"
       >
-        <Toolbar>
+        <Toolbar sx={{ gap: 1 }}>
           <Typography
             variant="h1"
             noWrap
@@ -164,7 +159,7 @@ export const ResumeEditor: FunctionComponent<
             doc={doc}
           />
         </PreviewContainer>
-        <ScrollFab
+        <EditorFab
           className="ResumeEditor-fab"
           smallScreenView={smallScreenView}
           setSmallScreenView={setSmallScreenView}
@@ -174,22 +169,13 @@ export const ResumeEditor: FunctionComponent<
   )
 }
 
-const AnimatedVisibilityIcon = animated(Visibility)
-const AnimatedModeEditIcon = animated(ModeEdit)
-
-const ScrollFab: FunctionComponent<
+const EditorFab: FunctionComponent<
   {
     smallScreenView?: SmallScreenView
     setSmallScreenView?: Setter<SmallScreenView>
   } & FabProps
 > = (props) => {
   const { smallScreenView, setSmallScreenView, ...fabProps } = props
-  const hasScrolled = smallScreenView === 'form'
-  const { transform, opacity } = useSpring({
-    opacity: hasScrolled ? 1 : 0,
-    transform: `perspective(600px) rotateX(${hasScrolled ? 180 : 0}deg)`,
-    config: { mass: 5, tension: 500, friction: 80 },
-  })
 
   const handleClick = () =>
     setSmallScreenView?.((oldValue) =>
@@ -197,30 +183,35 @@ const ScrollFab: FunctionComponent<
     )
 
   return (
-    <Fab
-      size="small"
-      aria-label="scroll back to top"
-      color="primary"
-      onClick={handleClick}
-      {...fabProps}
-    >
-      <AnimatedVisibilityIcon
-        fontSize="inherit"
-        style={{
-          position: 'absolute',
-          opacity: opacity.to((o) => 1 - o),
-          transform,
-        }}
-      />
-      <AnimatedModeEditIcon
-        fontSize="inherit"
-        style={{
-          position: 'absolute',
-          opacity,
-          transform,
-          rotateX: '180deg',
-        }}
-      />
-    </Fab>
+    <>
+      <Zoom
+        in={smallScreenView === 'form'}
+        unmountOnExit
+      >
+        <Fab
+          size="small"
+          aria-label="scroll back to top"
+          color="primary"
+          onClick={handleClick}
+          {...fabProps}
+        >
+          <Visibility fontSize="inherit" />
+        </Fab>
+      </Zoom>
+      <Zoom
+        in={smallScreenView === 'preview'}
+        unmountOnExit
+      >
+        <Fab
+          size="small"
+          aria-label="scroll back to top"
+          color="primary"
+          onClick={handleClick}
+          {...fabProps}
+        >
+          <ModeEdit fontSize="inherit" />
+        </Fab>
+      </Zoom>
+    </>
   )
 }
