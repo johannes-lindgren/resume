@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   },
   text: {
     position: 'absolute',
-    marginLeft: defaultTheme.spacing(4),
-    bottom: defaultTheme.spacing(4),
+    marginLeft: 32,
+    bottom: 32,
     color: 'grey',
     ...defaultTheme.typography.caption,
   },

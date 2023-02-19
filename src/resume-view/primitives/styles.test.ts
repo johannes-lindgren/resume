@@ -27,7 +27,7 @@ describe('unit transformation', () => {
       expect(transformToDomUnits('column')).toEqual('column')
     })
   })
-  describe('transformToDomUnits', () => {
+  describe('transformToPdfUnits', () => {
     it('does not transform undefined', () => {
       expect(transformToPdfUnits(undefined)).toBeUndefined()
     })

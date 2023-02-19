@@ -31,6 +31,7 @@ const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   overflow: 'hidden',
+  flex: 1,
   '& > .ResumeEditor-form': {
     overflowY: 'auto',
     flex: 1,
@@ -146,8 +147,6 @@ export const ResumeEditor: FunctionComponent<
           <ResumePreview
             resume={resume}
             isSaved={props.saved}
-            removeResume={removeResume}
-            newResume={props.newResume}
             previewTarget={previewTarget}
             doc={doc}
           />

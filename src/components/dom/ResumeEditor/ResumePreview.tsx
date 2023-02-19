@@ -34,15 +34,13 @@ export const PdfRoot = styled(PdfDocument)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius * 2,
 }))
 
-export const ResumePreview: FunctionComponent<
-  {
-    resume: Resume
-    isSaved: boolean
-    previewTarget: ResumeTarget
-    doc: JSX.Element
-  } & Pick<AllResumeActions, 'removeResume' | 'newResume'>
-> = (props) => {
-  const { resume, removeResume, newResume, previewTarget, doc } = props
+export const ResumePreview: FunctionComponent<{
+  resume: Resume
+  isSaved: boolean
+  previewTarget: ResumeTarget
+  doc: JSX.Element
+}> = (props) => {
+  const { resume, previewTarget, doc } = props
 
   return (
     <>

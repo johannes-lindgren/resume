@@ -207,10 +207,4 @@ export const domStyles = (
   // @ts-ignore
   typeof styles === 'undefined'
     ? styles
-    : transformUnits(
-        {
-          display: 'flex',
-          ...styles,
-        },
-        transformToDomUnits,
-      )
+    : transformUnits(styles, transformToDomUnits)
