@@ -1,7 +1,8 @@
 import { Box } from '@mui/system'
-import { styled } from '@mui/material'
+import { BoxProps, Container, styled } from '@mui/material'
+import { FunctionComponent, ReactNode } from 'react'
 
-export const PreviewContainer = styled(Box)(({ theme }) => ({
+export const Root = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -9,4 +10,31 @@ export const PreviewContainer = styled(Box)(({ theme }) => ({
   overflow: 'hidden',
   color: theme.palette.primary.contrastText,
   background: theme.palette.grey.A700,
+  padding: theme.spacing(2),
+  [theme.breakpoints.up('lg')]: {
+    padding: theme.spacing(4),
+  },
 }))
+
+export const StyledContainer = styled(Container)(({ theme }) => ({
+  overflowY: 'hidden',
+  display: 'flex',
+  borderRadius: theme.shape.borderRadius,
+}))
+
+export const PreviewContainer: FunctionComponent<{
+  children?: ReactNode
+  className?: string
+}> = (props) => {
+  const { children, ...boxProps } = props
+  return (
+    <Root {...boxProps}>
+      <StyledContainer
+        maxWidth="md"
+        disableGutters
+      >
+        {children}
+      </StyledContainer>
+    </Root>
+  )
+}

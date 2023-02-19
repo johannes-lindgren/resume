@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, useEffect } from 'react'
+import { FunctionComponent, ReactElement, useEffect, useRef } from 'react'
 import ReactPDF, { usePDF } from '@react-pdf/renderer'
 import { Box, styled } from '@mui/material'
 import { DownloadRounded, ErrorOutlineRounded } from '@mui/icons-material'
@@ -12,13 +12,22 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
 export const DownloadPdfButton: FunctionComponent<{
   document: ReactElement<ReactPDF.DocumentProps>
 }> = (props) => {
+  const { document } = props
   const [instance, updateInstance] = usePDF({
-    document: props.document,
+    document: document,
   })
 
+  // useEffect(() => console.log('updateInstance'), [updateInstance])
+  // useEffect(() => console.log('document'), [props.document])
+  const lastDoc = useRef(document)
   useEffect(() => {
-    updateInstance()
-  }, [props.document, updateInstance])
+    if (document !== lastDoc.current) {
+      lastDoc.current = document
+      console.log('updating')
+      // updateInstance is not memoized by usePDF :(
+      updateInstance()
+    }
+  }, [updateInstance])
 
   return (
     <HeaderContainer>

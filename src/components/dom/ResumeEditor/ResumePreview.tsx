@@ -45,28 +45,18 @@ export const ResumePreview: FunctionComponent<
   const { resume, removeResume, newResume, previewTarget, doc } = props
 
   return (
-    <PreviewLayout>
+    <>
       {previewTarget === 'dom' ? (
-        <Container
-          maxWidth="md"
-          disableGutters
+        <DomResume
           sx={{
-            overflowY: 'hidden',
-            borderRadius: 1,
-            display: 'flex',
+            overflow: 'auto',
           }}
         >
-          <DomResume
-            sx={{
-              overflow: 'auto',
-            }}
-          >
-            <DefaultTemplate resume={resume} />
-          </DomResume>
-        </Container>
+          <DefaultTemplate resume={resume} />
+        </DomResume>
       ) : (
         <PdfRoot showToolbar={false}>{doc}</PdfRoot>
       )}
-    </PreviewLayout>
+    </>
   )
 }

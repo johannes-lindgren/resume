@@ -17,8 +17,6 @@ import { ResumePreview } from '@/components/dom/ResumeEditor/ResumePreview'
 import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeAppFooter'
 import { ModeEdit, Visibility } from '@mui/icons-material'
-import { useSpring } from '@react-spring/core'
-import { animated } from '@react-spring/web'
 import { Setter } from '@/utils/Setter'
 import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
 import { PreviewTargetSwitch } from '@/components/dom/ResumeEditor/PreviewTargetSwitch'
@@ -35,6 +33,10 @@ const Split = styled(Box)(({ theme }) => ({
   overflow: 'hidden',
   '& > .ResumeEditor-form': {
     overflowY: 'auto',
+    flex: 1,
+  },
+  '& > .ResumeEditor-preview': {
+    flex: 1,
   },
   '&.ResumeEditor-viewPreview > .ResumeEditor-form': {
     display: 'none',
@@ -42,12 +44,11 @@ const Split = styled(Box)(({ theme }) => ({
   '&.ResumeEditor-viewForm > .ResumeEditor-preview': {
     display: 'none',
   },
-  '& > .ResumeEditor-preview': {},
   '& > .ResumeEditor-fab': {
     position: 'fixed',
     bottom: 0,
     right: 0,
-    margin: theme.spacing(2),
+    margin: theme.spacing(4),
   },
   [theme.breakpoints.up('md')]: {
     '& > .ResumeEditor-fab': {
@@ -55,17 +56,9 @@ const Split = styled(Box)(({ theme }) => ({
     },
     '& > .ResumeEditor-form': {
       display: 'flex !important',
-      width: '50%',
     },
     '& > .ResumeEditor-preview': {
       display: 'flex !important',
-      width: '50%',
-      padding: theme.spacing(2),
-    },
-  },
-  [theme.breakpoints.up('lg')]: {
-    '& > .ResumeEditor-preview': {
-      padding: theme.spacing(4),
     },
   },
 }))

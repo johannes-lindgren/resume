@@ -1,23 +1,20 @@
 import { FunctionComponent, ReactNode } from 'react'
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 
 export const PreviewLayout: FunctionComponent<{
   children?: ReactNode
 }> = (props) => {
   return (
-    <Box
+    <Container
+      maxWidth="md"
+      disableGutters
       sx={{
-        width: '100%',
-        height: '100%',
+        overflowY: 'hidden',
+        borderRadius: 1,
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-        gap: 2,
-        flex: 1,
       }}
     >
       {props.children}
-    </Box>
+    </Container>
   )
 }
