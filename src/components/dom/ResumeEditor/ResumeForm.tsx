@@ -46,19 +46,12 @@ export const ResumeForm: FunctionComponent<{
           </Flipped>
         </Collapse>
       ))}
-      <Divider />
-      {/*<AddSectionButton*/}
-      {/*  setResume={props.setResume}*/}
-      {/*  refUid={''}*/}
-      {/*  insertAfter*/}
-      {/*/>*/}
-      {/*</Divider>*/}
-      {/*<Flipped*/}
-      {/*  key="addPanel"*/}
-      {/*  flipId="addPanel"*/}
-      {/*>*/}
-      <AddSectionsPanel setResume={props.setResume} />
-      {/*</Flipped>*/}
+      <Collapse>
+        <Divider />
+      </Collapse>
+      <Collapse>
+        <AddSectionsPanel setResume={props.setResume} />
+      </Collapse>
     </Stack>
   </Flipper>
 )

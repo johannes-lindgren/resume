@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
 import { Setter } from '@/utils/Setter'
-import { ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material'
 import { PictureAsPdf, WebAsset } from '@mui/icons-material'
 
 export const PreviewTargetSwitch: FunctionComponent<{
@@ -13,26 +13,32 @@ export const PreviewTargetSwitch: FunctionComponent<{
     newPreviewTarget: 'pdf' | 'dom',
   ) => props.setPreviewTarget(() => newPreviewTarget)
 
+  const previewTarget: ResumeTarget = props.previewTarget ?? 'dom'
+
   return (
     <ToggleButtonGroup
-      value={props.previewTarget}
+      value={previewTarget}
       exclusive
       onChange={handleChangePreviewMode}
       aria-label="preview mode"
       size="small"
-      sx={{ bgcolor: 'background.paper' }}
+      color="primary"
     >
       <ToggleButton
         value="dom"
         aria-label="preview web"
       >
-        <WebAsset />
+        <Tooltip title="Preview Web Page">
+          <WebAsset />
+        </Tooltip>
       </ToggleButton>
       <ToggleButton
         value="pdf"
         aria-label="preview pdf"
       >
-        <PictureAsPdf />
+        <Tooltip title="Preview PDF">
+          <PictureAsPdf />
+        </Tooltip>
       </ToggleButton>
     </ToggleButtonGroup>
   )

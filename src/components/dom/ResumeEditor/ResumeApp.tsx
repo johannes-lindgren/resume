@@ -6,8 +6,6 @@ import { LandingPage } from '@/components/dom/ResumeEditor/LandingPage'
 
 export const ResumeApp = () => {
   const [state, actions] = useResumeApp(1500)
-  // const [createWord] = useState(() => getRandomElement(createWords))
-  // const [gloriousWord] = useState(() => getRandomElement(gloriousWords))
 
   switch (state.type) {
     case 'loading':

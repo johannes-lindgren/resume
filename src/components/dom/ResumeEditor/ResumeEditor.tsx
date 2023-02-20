@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo, useState } from 'react'
+import { FunctionComponent, ReactElement, useMemo, useState } from 'react'
 import { PreviewContainer } from '@/components/dom/PreviewContainer'
 import { Resume } from '@/model/resume'
 import {
@@ -18,14 +18,13 @@ import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeAppFooter'
 import { ModeEdit, Visibility } from '@mui/icons-material'
 import { Setter } from '@/utils/Setter'
-import { SaveStatusBox } from '@/components/dom/ResumeEditor/SavedBox'
 import { PreviewTargetSwitch } from '@/components/dom/ResumeEditor/PreviewTargetSwitch'
 import { ActionsButton } from '@/components/dom/ResumeEditor/ActionsButton'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
-import { DownloadPdfButton } from '@/components/dom/DownloadPdfButton'
 import { PdfResumeDocument } from '@/resume-view/PdfResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
 import { tangerine400 } from '@/fonts/tangerine'
+import ReactPDF from '@react-pdf/renderer'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -70,24 +69,25 @@ const FormContainer = styled(Stack)(({ theme }) => ({
   paddingTop: theme.spacing(8),
   paddingBottom: theme.spacing(5),
   justifyContent: 'space-between',
+  gap: theme.spacing(8),
 }))
 
 type SmallScreenView = 'preview' | 'form'
 
-export const ResumeEditor: FunctionComponent<
-  {
-    resume: Resume
-    saved: boolean
-  } & Pick<AllResumeActions, 'setResume' | 'removeResume' | 'newResume'>
-> = (props) => {
-  const { resume, setResume, removeResume, newResume, saved } = props
+type EditorProps = {
+  resume: Resume
+  saved: boolean
+} & Pick<AllResumeActions, 'setResume' | 'removeResume' | 'newResume'>
+
+export const ResumeEditor: FunctionComponent<EditorProps> = (props) => {
+  const { resume, setResume } = props
   const [smallScreenView, setSmallScreenView] =
     useState<SmallScreenView>('form')
   const [previewTarget, setPreviewTarget] = useState<ResumeTarget>('dom')
 
   const throttledResume = useThrottledState(resume, 1500)
 
-  const doc = useMemo(
+  const resumeDocument = useMemo(
     () => (
       <PdfResumeDocument>
         <DefaultTemplate resume={throttledResume} />
@@ -98,37 +98,12 @@ export const ResumeEditor: FunctionComponent<
 
   return (
     <Stack height="100vh">
-      <AppBar
-        color="inherit"
-        position="sticky"
-      >
-        <Toolbar sx={{ gap: 1 }}>
-          <Typography
-            variant="h1"
-            noWrap
-            component="div"
-            sx={{
-              ...tangerine400.style,
-              transform: 'skew(0deg, -5deg)',
-              display: { xs: 'none', sm: 'block' },
-            }}
-          >
-            Splendid Resume
-          </Typography>
-          <Box flex={1} />
-          {/*<SaveStatusBox isSaved={saved} />*/}
-          <PreviewTargetSwitch
-            previewTarget={previewTarget}
-            setPreviewTarget={setPreviewTarget}
-          />
-          <ActionsButton
-            document={doc}
-            resume={resume}
-            newResume={newResume}
-            removeResume={removeResume}
-          />
-        </Toolbar>
-      </AppBar>
+      <EditorAppBar
+        {...props}
+        resumeDocument={resumeDocument}
+        previewTarget={previewTarget}
+        setPreviewTarget={setPreviewTarget}
+      />
       <Split
         className={
           smallScreenView === 'form'
@@ -148,7 +123,7 @@ export const ResumeEditor: FunctionComponent<
             resume={resume}
             isSaved={props.saved}
             previewTarget={previewTarget}
-            doc={doc}
+            doc={resumeDocument}
           />
         </PreviewContainer>
         <EditorFab
@@ -205,5 +180,53 @@ const EditorFab: FunctionComponent<
         </Fab>
       </Zoom>
     </>
+  )
+}
+
+export const EditorAppBar: FunctionComponent<
+  EditorProps & {
+    previewTarget: ResumeTarget
+    setPreviewTarget: Setter<ResumeTarget>
+    resumeDocument: ReactElement<ReactPDF.DocumentProps>
+  }
+> = (props) => {
+  const {
+    previewTarget,
+    setPreviewTarget,
+    resume,
+    resumeDocument,
+    newResume,
+    removeResume,
+  } = props
+  return (
+    <AppBar
+      color="inherit"
+      position="sticky"
+    >
+      <Toolbar sx={{ gap: 2 }}>
+        <Typography
+          variant="h1"
+          noWrap
+          component="div"
+          sx={{
+            ...tangerine400.style,
+            transform: 'skew(0deg, -5deg)',
+          }}
+        >
+          Splendid Resume
+        </Typography>
+        <Box flex={1} />
+        <PreviewTargetSwitch
+          previewTarget={previewTarget}
+          setPreviewTarget={setPreviewTarget}
+        />
+        <ActionsButton
+          resumeDocument={resumeDocument}
+          resume={resume}
+          newResume={newResume}
+          removeResume={removeResume}
+        />
+      </Toolbar>
+    </AppBar>
   )
 }

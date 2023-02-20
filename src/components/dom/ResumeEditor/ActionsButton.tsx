@@ -8,10 +8,8 @@ import { Resume } from '@/model/resume'
 import { AllResumeActions } from '@/hooks/useThrottledState'
 import { useSaveObject } from '@/components/dom/DownloadResumeButton'
 import {
-  Box,
   Button,
   ButtonGroup,
-  IconButton,
   ListItemIcon,
   ListItemText,
   Menu,
@@ -22,23 +20,20 @@ import {
   DeleteOutlineRounded,
   DownloadRounded,
   ErrorOutlineRounded,
-  MoreVertOutlined,
   UploadRounded,
 } from '@mui/icons-material'
 import { DeleteResumeDialog } from '@/components/dom/ResumeEditor/DeleteResumeDialog'
 import { OpenResumeDialog } from '@/components/dom/ResumeEditor/OpenResumeDialog'
-import { DownloadPdfButton } from '@/components/dom/DownloadPdfButton'
 import ReactPDF from '@react-pdf/renderer'
-import LoadingButton from '@mui/lab/LoadingButton'
 import { useDownloadablePdf } from '@/components/dom/useDownloadablePdf'
 
 export const ActionsButton: FunctionComponent<
-  { resume: Resume; document: ReactElement<ReactPDF.DocumentProps> } & Pick<
-    AllResumeActions,
-    'removeResume' | 'newResume'
-  >
+  {
+    resume: Resume
+    resumeDocument: ReactElement<ReactPDF.DocumentProps>
+  } & Pick<AllResumeActions, 'removeResume' | 'newResume'>
 > = (props) => {
-  const { document } = props
+  const { resumeDocument } = props
 
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [isOpenDialogOpen, setOpenDialogOpen] = useState(false)
@@ -67,7 +62,7 @@ export const ActionsButton: FunctionComponent<
     handleClose()
   }
 
-  const instance = useDownloadablePdf(document)
+  const instance = useDownloadablePdf(resumeDocument)
 
   return (
     <>
