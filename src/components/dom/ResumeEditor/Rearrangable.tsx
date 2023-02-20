@@ -80,19 +80,17 @@ export const Rearrangeable = <
             <IconButton
               size="small"
               color="inherit"
+              onClick={() =>
+                setParent((parent) => ({
+                  ...parent,
+                  [propName]: without(
+                    parent[propName],
+                    (it) => it.uid === current.uid,
+                  ),
+                }))
+              }
             >
-              <DeleteOutlined
-                fontSize="inherit"
-                onClick={() =>
-                  setParent((parent) => ({
-                    ...parent,
-                    [propName]: without(
-                      parent[propName],
-                      (it) => it.uid === current.uid,
-                    ),
-                  }))
-                }
-              />
+              <DeleteOutlined fontSize="inherit" />
             </IconButton>
           </Tooltip>
         </ButtonGroup>
