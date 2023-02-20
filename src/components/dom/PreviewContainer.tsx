@@ -18,8 +18,10 @@ export const Root = styled(Box)(({ theme }) => ({
 
 export const StyledContainer = styled(Container)(({ theme }) => ({
   overflowY: 'hidden',
+  overflowX: 'hidden',
   display: 'flex',
   borderRadius: theme.shape.borderRadius,
+  height: '100%',
 }))
 
 export const PreviewContainer: FunctionComponent<{
