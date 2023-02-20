@@ -40,7 +40,7 @@ export const Rearrangeable = <
             backgroundColor: 'background.paper',
           }}
         >
-          <Tooltip title="Move up">
+          <Tooltip title={currentIndex === 0 ? '' : 'Move up'}>
             <IconButton
               color="inherit"
               size="small"
@@ -58,7 +58,7 @@ export const Rearrangeable = <
               <MoveUpOutlined fontSize="inherit" />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Move down">
+          <Tooltip title={currentIndex === lastIndex ? '' : 'Move down'}>
             <IconButton
               color="inherit"
               size="small"
