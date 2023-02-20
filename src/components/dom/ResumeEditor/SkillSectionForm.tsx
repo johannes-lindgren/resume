@@ -30,13 +30,15 @@ export const SkillSectionForm: FunctionComponent<{
       gap={2}
       sx={{ bgColor: 'background.paper' }}
     >
-      <PropTextEditor
-        propName="header"
-        value={props.section}
-        setValue={props.setSection}
-        inputProps={{ sx: { typography: 'h2' } }}
-        placeholder="Skills"
-      />
+      <Collapse>
+        <PropTextEditor
+          propName="header"
+          value={props.section}
+          setValue={props.setSection}
+          inputProps={{ sx: { typography: 'h2' } }}
+          placeholder="Skills"
+        />
+      </Collapse>
       {props.section.skillCategories.map((skillCategory) => (
         <Collapse key={skillCategory.uid}>
           <Flipped flipId={skillCategory.uid}>

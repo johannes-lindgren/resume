@@ -35,13 +35,15 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
         component={TransitionGroup}
         sx={{ bgColor: 'background.paper' }}
       >
-        <PropTextEditor
-          placeholder="Employment History"
-          propName="header"
-          value={section}
-          setValue={setSection}
-          inputProps={{ sx: { typography: 'h2' } }}
-        />
+        <Collapse>
+          <PropTextEditor
+            placeholder="Employment History"
+            propName="header"
+            value={section}
+            setValue={setSection}
+            inputProps={{ sx: { typography: 'h2' } }}
+          />
+        </Collapse>
         {props.section.employments.map((employment) => (
           <Collapse key={employment.uid}>
             <Flipped flipId={employment.uid}>
