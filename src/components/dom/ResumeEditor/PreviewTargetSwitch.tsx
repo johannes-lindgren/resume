@@ -10,14 +10,12 @@ export const PreviewTargetSwitch: FunctionComponent<{
 }> = (props) => {
   const handleChangePreviewMode = (
     event: React.MouseEvent<HTMLElement>,
-    newPreviewTarget: 'pdf' | 'dom',
-  ) => props.setPreviewTarget(() => newPreviewTarget)
-
-  const previewTarget: ResumeTarget = props.previewTarget ?? 'dom'
+    newPreviewTarget: 'pdf' | 'dom' | undefined,
+  ) => props.setPreviewTarget(() => newPreviewTarget ?? 'dom')
 
   return (
     <ToggleButtonGroup
-      value={previewTarget}
+      value={props.previewTarget}
       exclusive
       onChange={handleChangePreviewMode}
       aria-label="preview mode"
