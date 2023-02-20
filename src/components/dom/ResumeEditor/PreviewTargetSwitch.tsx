@@ -9,7 +9,7 @@ export const PreviewTargetSwitch: FunctionComponent<{
   setPreviewTarget: Setter<ResumeTarget>
 }> = (props) => {
   const handleChangePreviewMode = (
-    event: MouseEvent<HTMLElement>,
+    event: React.MouseEvent<HTMLElement>,
     newPreviewTarget: 'pdf' | 'dom' | undefined,
   ) => props.setPreviewTarget(() => newPreviewTarget ?? 'dom')
 
