@@ -4,11 +4,6 @@ import { Box, styled } from '@mui/material'
 import { DownloadRounded, ErrorOutlineRounded } from '@mui/icons-material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
-const HeaderContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(2),
-}))
-
 export const DownloadPdfButton: FunctionComponent<{
   document: ReactElement<ReactPDF.DocumentProps>
 }> = (props) => {
@@ -17,8 +12,6 @@ export const DownloadPdfButton: FunctionComponent<{
     document: document,
   })
 
-  // useEffect(() => console.log('updateInstance'), [updateInstance])
-  // useEffect(() => console.log('document'), [props.document])
   const lastDoc = useRef(document)
   useEffect(() => {
     if (document !== lastDoc.current) {
@@ -30,21 +23,17 @@ export const DownloadPdfButton: FunctionComponent<{
   }, [updateInstance])
 
   return (
-    <HeaderContainer>
-      <LoadingButton
-        variant="contained"
-        component="a"
-        href={instance.url ?? undefined}
-        download="resume.pdf"
-        startIcon={
-          instance.error ? <ErrorOutlineRounded /> : <DownloadRounded />
-        }
-        loadingPosition="start"
-        disabled={!instance.url}
-        loading={instance.loading}
-      >
-        Download PDF
-      </LoadingButton>
-    </HeaderContainer>
+    <LoadingButton
+      variant="contained"
+      component="a"
+      href={instance.url ?? undefined}
+      download="resume.pdf"
+      startIcon={instance.error ? <ErrorOutlineRounded /> : <DownloadRounded />}
+      loadingPosition="start"
+      disabled={!instance.url}
+      loading={instance.loading}
+    >
+      Download PDF
+    </LoadingButton>
   )
 }
