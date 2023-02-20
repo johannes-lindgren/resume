@@ -10,6 +10,7 @@ import {
 } from '@mui/icons-material'
 import {
   newEducationHistorySection,
+  newEmploymentHistorySection,
   newSkillsSection,
   newSummarySection,
 } from '@/model/defaults'
@@ -31,7 +32,7 @@ export const AddSectionsPanel: FunctionComponent<{
         onClick={() =>
           props.setResume((resume) => ({
             ...resume,
-            sections: [...resume.sections, newEducationHistorySection()],
+            sections: [...resume.sections, newEmploymentHistorySection()],
           }))
         }
       >
