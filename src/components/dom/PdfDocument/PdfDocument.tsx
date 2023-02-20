@@ -5,29 +5,6 @@ import { Font } from '@react-pdf/renderer'
 import { PDFViewer } from '@react-pdf/renderer'
 import cssStyles from './styles.module.scss'
 
-Font.register({
-  family: 'Roboto',
-  fonts: [
-    {
-      src: `/fonts/Roboto-Light.ttf`,
-      fontWeight: 300,
-    },
-    {
-      src: `/fonts/Roboto-Regular.ttf`,
-      fontWeight: 400,
-    },
-    {
-      src: `/fonts/Roboto-Medium.ttf`,
-      fontWeight: 500,
-    },
-    {
-      src: `/fonts/Roboto-Bold.ttf`,
-      fontWeight: 700,
-    },
-  ],
-})
-Font.registerHyphenationCallback((w) => [w])
-
 export const PdfDocument: FunctionComponent<
   ComponentProps<typeof PDFViewer>
 > = (props) => (
