@@ -67,13 +67,6 @@ export const ActionsButton: FunctionComponent<
     handleClose()
   }
 
-  // const handleAddProfile = () => {
-  //   setResume((resume) =>
-  //     withSectionInserted(resume, refUid, newSummarySection()),
-  //   )
-  //   handleClose()
-  // }
-
   const instance = useDownloadablePdf(document)
 
   return (
