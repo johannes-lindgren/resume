@@ -86,6 +86,7 @@ export const newEmploymentHistorySection = (): EmploymentHistorySection => ({
   header: 'Employments',
   employments: [],
 })
+
 export const newSkillsSection = (): SkillSection => ({
   uid: uid(),
   type: 'skills',

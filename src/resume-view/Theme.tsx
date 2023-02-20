@@ -1,8 +1,6 @@
 import { Style } from '@react-pdf/types'
 import { Font } from '@react-pdf/renderer'
 
-type Sizing = 0 | 1 | 2 | 3 | 4 | 5 | 6
-
 export type Theme = {
   spacing: (size: 0 | 1 | 2 | 3 | 4 | 5 | 6) => string
   radius: (size: 0 | 1 | 2 | 3) => string
