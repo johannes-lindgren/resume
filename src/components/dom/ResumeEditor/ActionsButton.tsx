@@ -1,9 +1,16 @@
-import { FunctionComponent, MouseEventHandler, useState } from 'react'
+import {
+  FunctionComponent,
+  MouseEventHandler,
+  ReactElement,
+  useState,
+} from 'react'
 import { Resume } from '@/model/resume'
 import { AllResumeActions } from '@/hooks/useThrottledState'
 import { useSaveObject } from '@/components/dom/DownloadResumeButton'
 import {
   Box,
+  Button,
+  ButtonGroup,
   IconButton,
   ListItemIcon,
   ListItemText,
@@ -11,17 +18,28 @@ import {
   MenuItem,
 } from '@mui/material'
 import {
+  ArrowDropDown,
   DeleteOutlineRounded,
   DownloadRounded,
+  ErrorOutlineRounded,
   MoreVertOutlined,
   UploadRounded,
 } from '@mui/icons-material'
 import { DeleteResumeDialog } from '@/components/dom/ResumeEditor/DeleteResumeDialog'
 import { OpenResumeDialog } from '@/components/dom/ResumeEditor/OpenResumeDialog'
+import { DownloadPdfButton } from '@/components/dom/DownloadPdfButton'
+import ReactPDF from '@react-pdf/renderer'
+import LoadingButton from '@mui/lab/LoadingButton'
+import { useDownloadablePdf } from '@/components/dom/useDownloadablePdf'
 
 export const ActionsButton: FunctionComponent<
-  { resume: Resume } & Pick<AllResumeActions, 'removeResume' | 'newResume'>
+  { resume: Resume; document: ReactElement<ReactPDF.DocumentProps> } & Pick<
+    AllResumeActions,
+    'removeResume' | 'newResume'
+  >
 > = (props) => {
+  const { document } = props
+
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [isOpenDialogOpen, setOpenDialogOpen] = useState(false)
   const { resume, removeResume, newResume } = props
@@ -56,21 +74,35 @@ export const ActionsButton: FunctionComponent<
   //   handleClose()
   // }
 
+  const instance = useDownloadablePdf(document)
+
   return (
-    <Box>
-      <IconButton
-        sx={{ color: 'divider' }}
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
+    <>
+      <ButtonGroup
+        variant="contained"
+        disableElevation
       >
-        <MoreVertOutlined
-          fontSize="inherit"
-          color="inherit"
-        />
-      </IconButton>
+        <Button
+          component="a"
+          href={instance.url ?? undefined}
+          download="resume.pdf"
+          startIcon={
+            instance.error ? <ErrorOutlineRounded /> : <DownloadRounded />
+          }
+          disabled={!instance.url}
+        >
+          Export to PDF
+        </Button>
+        <Button
+          size="small"
+          aria-controls={open ? 'menu-button' : undefined}
+          aria-haspopup="menu"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+        >
+          <ArrowDropDown />
+        </Button>
+      </ButtonGroup>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -109,6 +141,6 @@ export const ActionsButton: FunctionComponent<
         setOpen={setDeleteDialogOpen}
         removeResume={removeResume}
       />
-    </Box>
+    </>
   )
 }

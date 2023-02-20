@@ -89,6 +89,22 @@ export const lightTheme = createTheme({
         }),
       },
     },
+    MuiButtonGroup: {
+      styleOverrides: {
+        grouped: {
+          '&:not(:last-child)': {
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 0,
+            borderRight: `1px solid`,
+            borderColor: `inherit`,
+          },
+          '&:not(:first-child)': {
+            borderTopLeftRadius: 0,
+            borderBottomLeftRadius: 0,
+          },
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         disableElevation: true,

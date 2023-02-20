@@ -116,13 +116,13 @@ export const ResumeEditor: FunctionComponent<
             Splendid Resume
           </Typography>
           <Box flex={1} />
-          <SaveStatusBox isSaved={saved} />
+          {/*<SaveStatusBox isSaved={saved} />*/}
           <PreviewTargetSwitch
             previewTarget={previewTarget}
             setPreviewTarget={setPreviewTarget}
           />
-          <DownloadPdfButton document={doc} />
           <ActionsButton
+            document={doc}
             resume={resume}
             newResume={newResume}
             removeResume={removeResume}
