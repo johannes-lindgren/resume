@@ -111,7 +111,13 @@ export const lightTheme = createTheme({
       },
       styleOverrides: {
         sizeLarge: ({ theme }) => ({
-          padding: theme.spacing(2),
+          paddingTop: theme.spacing(2),
+          paddingBottom: theme.spacing(2),
+          paddingLeft: theme.spacing(4),
+          paddingRight: theme.spacing(4),
+          borderRadius: theme.spacing(0),
+          borderTopLeftRadius: theme.shape.borderRadius * 4,
+          borderBottomRightRadius: theme.shape.borderRadius * 4,
         }),
       },
     },
