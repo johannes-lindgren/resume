@@ -1,4 +1,4 @@
-import { Children, FunctionComponent, ReactNode, useState } from 'react'
+import { Children, FunctionComponent, ReactNode } from 'react'
 import { useTrail } from '@react-spring/core'
 import { Box, BoxProps, Skeleton, Typography } from '@mui/material'
 import { Embossed } from '@/components/dom/ResumeEditor/Embossed'

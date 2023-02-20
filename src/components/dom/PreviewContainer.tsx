@@ -1,5 +1,5 @@
 import { Box } from '@mui/system'
-import { BoxProps, Container, styled } from '@mui/material'
+import { Container, styled } from '@mui/material'
 import { FunctionComponent, ReactNode } from 'react'
 
 export const Root = styled(Box)(({ theme }) => ({

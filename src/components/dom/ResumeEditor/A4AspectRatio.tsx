@@ -7,8 +7,9 @@ import {
 } from 'react'
 import { Box } from '@mui/material'
 
-const aspectRatio = 1.4142135624
-const aspectRatioInv = 0.7071067812
+export const a4AspectRatio = 1.4142135624
+export const a4AspectRatioInv = 0.7071067812
+
 export const A4AspectRatio: FunctionComponent<{
   children?: ReactNode
 }> = (props) => {
@@ -19,7 +20,7 @@ export const A4AspectRatio: FunctionComponent<{
   const ref = useRef<HTMLDivElement>(null)
   const [dim, setDim] = useState<Dimension>({
     width: 400,
-    height: aspectRatio * 400,
+    height: a4AspectRatio * 400,
   })
   useLayoutEffect(() => {
     if (!ref.current) {
@@ -30,10 +31,10 @@ export const A4AspectRatio: FunctionComponent<{
       const { clientWidth, clientHeight } = element
       const v1: Dimension = {
         width: clientWidth,
-        height: clientWidth * aspectRatio,
+        height: clientWidth * a4AspectRatio,
       }
       const v2: Dimension = {
-        width: clientHeight * aspectRatioInv,
+        width: clientHeight * a4AspectRatioInv,
         height: clientHeight,
       }
       setDim(v1.height > clientHeight ? v2 : v1)
