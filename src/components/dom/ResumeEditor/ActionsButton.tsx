@@ -25,7 +25,7 @@ import {
 import { DeleteResumeDialog } from '@/components/dom/ResumeEditor/DeleteResumeDialog'
 import { OpenResumeDialog } from '@/components/dom/ResumeEditor/OpenResumeDialog'
 import ReactPDF from '@react-pdf/renderer'
-import { useDownloadablePdf } from '@/components/dom/useDownloadablePdf'
+import { useDownloadablePdf } from '@/useDownloadablePdf'
 
 export const ActionsButton: FunctionComponent<
   {

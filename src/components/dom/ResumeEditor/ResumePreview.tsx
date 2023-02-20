@@ -9,14 +9,6 @@ import { PdfResumeDocument } from '@/resume-view/PdfResume'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'
 import { PreviewLayout } from '@/components/dom/ResumeEditor/PreviewLayout'
 
-const DownloadPdfButton = dynamic(
-  () =>
-    import('../DownloadPdfButton').then((module) => module.DownloadPdfButton),
-  {
-    ssr: false,
-  },
-)
-
 const PdfDocument = dynamic(
   () =>
     import('../PdfDocument/PdfDocument').then((module) => module.PdfDocument),

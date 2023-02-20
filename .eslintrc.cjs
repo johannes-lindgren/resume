@@ -6,10 +6,6 @@ module.exports = {
     'prettier',
     'eslint:recommended',
   ],
-  globals: {
-    JSX: true,
-    React: true,
-  },
   plugins: [
     'prettier',
   ],
@@ -22,6 +18,10 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'], // Your TypeScript files extension
+      globals: {
+        JSX: true,
+        React: true,
+      },
       extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
