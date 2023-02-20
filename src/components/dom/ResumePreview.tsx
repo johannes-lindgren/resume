@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
-import dynamic from 'next/dynamic'
 import { DomResume } from '@/resume-view/DomResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
 import { ResumeTarget } from '@/resume-view/ResumeTargetProvider'

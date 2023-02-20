@@ -1,9 +1,9 @@
 import { Children, FunctionComponent, ReactNode } from 'react'
 import { useTrail } from '@react-spring/core'
 import { Box, BoxProps, Skeleton, Typography } from '@mui/material'
-import { Embossed } from '@/components/dom/ResumeEditor/Embossed'
+import { Embossed } from '@/components/dom/Embossed'
 import { AnimatedProps } from '@react-spring/web/dist/declarations/src/animated'
-import { AnimatedBox } from '@/components/dom/ResumeEditor/AnimatedBox'
+import { AnimatedBox } from '@/components/dom/AnimatedBox'
 
 const Trail: FunctionComponent<{ children?: ReactNode }> = ({ children }) => {
   const items = Children.toArray(children)

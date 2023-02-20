@@ -22,8 +22,8 @@ import {
   ErrorOutlineRounded,
   UploadRounded,
 } from '@mui/icons-material'
-import { DeleteResumeDialog } from '@/components/dom/ResumeEditor/DeleteResumeDialog'
-import { OpenResumeDialog } from '@/components/dom/ResumeEditor/OpenResumeDialog'
+import { DeleteResumeDialog } from '@/components/dom/DeleteResumeDialog'
+import { OpenResumeDialog } from '@/components/dom/OpenResumeDialog'
 import ReactPDF from '@react-pdf/renderer'
 import { useDownloadablePdf } from '@/useDownloadablePdf'
 
