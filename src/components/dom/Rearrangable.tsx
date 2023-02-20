@@ -10,7 +10,7 @@ import { movedRight } from '@/utils/movedRight'
 import { without } from '@/utils/without'
 import { ReactNode } from 'react'
 import * as React from 'react'
-import { HoverableMenu } from '@/components/dom/ResumeEditor/HoverableMenu'
+import { HoverableMenu } from '@/components/dom/HoverableMenu'
 
 export const Rearrangeable = <
   Key extends string,

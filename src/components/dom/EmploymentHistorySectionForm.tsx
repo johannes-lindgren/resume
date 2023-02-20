@@ -11,15 +11,15 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
+import { PropTextEditor } from '@/components/dom/PropTextEditor'
 import { Box } from '@mui/system'
 import { replaced } from '@/utils/replaced'
-import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
+import { AddButton } from '@/components/dom/AddButton'
 import { ExpandMore } from '@mui/icons-material'
 import { arraySetter } from '@/utils/arraySetter'
 import { newEmployment } from '@/model/defaults'
 import { uid } from '@/utils/uid'
-import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
+import { Rearrangeable } from '@/components/dom/Rearrangable'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { TransitionGroup } from 'react-transition-group'
 

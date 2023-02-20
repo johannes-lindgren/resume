@@ -1,3 +1,3 @@
-import { ResumeApp } from '@/components/dom/ResumeEditor/ResumeApp'
+import { ResumeApp } from '@/components/dom/ResumeApp'
 
 export default ResumeApp

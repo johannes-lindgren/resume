@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react'
 import { AllResumeActions } from '@/hooks/useThrottledState'
 import { Box, Button, Container, Grow, Stack, Typography } from '@mui/material'
-import { Embossed } from '@/components/dom/ResumeEditor/Embossed'
+import { Embossed } from '@/components/dom/Embossed'
 import { NoteAddRounded, TagFacesOutlined } from '@mui/icons-material'
 import { resumeTemplate } from '@/model/defaults'
 import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
-import { MockResume } from '@/components/dom/ResumeEditor/MockResume'
-import { ResumeAppFooter } from '@/components/dom/ResumeEditor/ResumeAppFooter'
+import { MockResume } from '@/components/dom/MockResume'
+import { ResumeAppFooter } from '@/components/dom/ResumeAppFooter'
 import { parchment } from '@/design/palette'
-import { AnimatedBox } from '@/components/dom/ResumeEditor/AnimatedBox'
+import { AnimatedBox } from '@/components/dom/AnimatedBox'
 
 export const LandingPage: FunctionComponent<
   Pick<AllResumeActions, 'newResume'>

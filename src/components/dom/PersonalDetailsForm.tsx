@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
 import { Box, Stack } from '@mui/material'
-import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
-import { ImageForm } from '@/components/dom/ResumeEditor/ImageForm'
+import { PropTextEditor } from '@/components/dom/PropTextEditor'
+import { ImageForm } from '@/components/dom/ImageForm'
 
 export const PersonalDetailsForm: FunctionComponent<{
   resume: Resume

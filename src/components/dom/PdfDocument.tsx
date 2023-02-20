@@ -3,10 +3,7 @@
 import React, { ComponentProps, FunctionComponent } from 'react'
 import { PDFViewer } from '@react-pdf/renderer'
 import { styled } from '@mui/material'
-import {
-  a4AspectRatio,
-  a4AspectRatioInv,
-} from '@/components/dom/ResumeEditor/A4AspectRatio'
+import { a4AspectRatio, a4AspectRatioInv } from '@/components/dom/A4AspectRatio'
 
 export const PdfDocument: FunctionComponent<
   ComponentProps<typeof PDFViewer>

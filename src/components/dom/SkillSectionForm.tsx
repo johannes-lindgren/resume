@@ -9,13 +9,13 @@ import {
   Stack,
   TextField,
 } from '@mui/material'
-import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
+import { PropTextEditor } from '@/components/dom/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
-import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
+import { AddButton } from '@/components/dom/AddButton'
 import { newSkillCategory } from '@/model/defaults'
 import { uid } from '@/utils/uid'
 import { Flipped, Flipper } from 'react-flip-toolkit'
-import { Rearrangeable } from '@/components/dom/ResumeEditor/Rearrangable'
+import { Rearrangeable } from '@/components/dom/Rearrangable'
 import { TransitionGroup } from 'react-transition-group'
 
 export const SkillSectionForm: FunctionComponent<{

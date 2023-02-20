@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { DetailsSection } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
 import { Stack } from '@mui/material'
-import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
+import { PropTextEditor } from '@/components/dom/PropTextEditor'
 
 export const DetailsSectionForm: FunctionComponent<{
   section: DetailsSection

@@ -1,6 +1,6 @@
 import { useResumeApp } from '@/hooks/useThrottledState'
-import { ResumeEditor } from '@/components/dom/ResumeEditor/ResumeEditor'
-import { LandingPage } from '@/components/dom/ResumeEditor/LandingPage'
+import { ResumeEditor } from '@/components/dom/ResumeEditor'
+import { LandingPage } from '@/components/dom/LandingPage'
 
 // splendidresume.com
 
