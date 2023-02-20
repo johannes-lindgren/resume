@@ -13,7 +13,7 @@ export const DetailsSectionForm: FunctionComponent<{
     sx={{ bgColor: 'background.paper' }}
   >
     <PropTextEditor
-      propName={'header'}
+      propName="header"
       placeholder="Profile"
       value={props.section}
       setValue={props.setSection}
@@ -22,7 +22,7 @@ export const DetailsSectionForm: FunctionComponent<{
     <PropTextEditor
       multiline
       placeholder="A brief description of my profile..."
-      propName={'description'}
+      propName="description"
       value={props.section}
       setValue={props.setSection}
     />

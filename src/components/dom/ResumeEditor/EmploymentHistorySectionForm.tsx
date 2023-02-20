@@ -37,7 +37,7 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
       >
         <PropTextEditor
           placeholder="Employment History"
-          propName={'header'}
+          propName="header"
           value={section}
           setValue={setSection}
           inputProps={{ sx: { typography: 'h2' } }}
@@ -125,7 +125,7 @@ export const EmploymentForm: FunctionComponent<{
     <PropTextEditor
       label="Worked as"
       placeholder="Job Title"
-      propName={'jobTitle'}
+      propName="jobTitle"
       value={props.employment}
       setValue={props.setEmployment}
       inputProps={{ sx: { typography: 'subtitle1' } }}
@@ -138,7 +138,7 @@ export const EmploymentForm: FunctionComponent<{
       <PropTextEditor
         label="at"
         placeholder="Employer"
-        propName={'employer'}
+        propName="employer"
         value={props.employment}
         setValue={props.setEmployment}
         variant="filled"
@@ -147,7 +147,7 @@ export const EmploymentForm: FunctionComponent<{
       <PropTextEditor
         label="in"
         placeholder="Location"
-        propName={'location'}
+        propName="location"
         value={props.employment}
         setValue={props.setEmployment}
         variant="filled"
@@ -161,7 +161,7 @@ export const EmploymentForm: FunctionComponent<{
       <PropTextEditor
         label="from"
         placeholder="Start Date"
-        propName={'startDate'}
+        propName="startDate"
         value={props.employment}
         setValue={props.setEmployment}
         variant="filled"
@@ -170,7 +170,7 @@ export const EmploymentForm: FunctionComponent<{
       <PropTextEditor
         label="to"
         placeholder="End Date"
-        propName={'endDate'}
+        propName="endDate"
         value={props.employment}
         setValue={props.setEmployment}
         variant="filled"

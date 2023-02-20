@@ -28,7 +28,7 @@ export const PersonalDetailsForm: FunctionComponent<{
         <PropTextEditor
           // label="Name"
           placeholder="Full name"
-          propName={'name'}
+          propName="name"
           value={props.resume}
           setValue={props.setResume}
           inputProps={{ sx: { typography: 'h1' } }}
@@ -36,7 +36,7 @@ export const PersonalDetailsForm: FunctionComponent<{
         <PropTextEditor
           // label="Job Title"
           placeholder="Job title"
-          propName={'jobTitle'}
+          propName="jobTitle"
           value={props.resume}
           setValue={props.setResume}
           inputProps={{ sx: { typography: 'subtitle1' } }}
@@ -47,28 +47,28 @@ export const PersonalDetailsForm: FunctionComponent<{
       <PropTextEditor
         variant="filled"
         label="Country"
-        propName={'location'}
+        propName="location"
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
         variant="filled"
         label="Nationality"
-        propName={'nationality'}
+        propName="nationality"
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
         variant="filled"
         label="Email Address"
-        propName={'emailAddress'}
+        propName="emailAddress"
         value={props.resume}
         setValue={props.setResume}
       />
       <PropTextEditor
         variant="filled"
         label="Phone Number"
-        propName={'phoneNumber'}
+        propName="phoneNumber"
         value={props.resume}
         setValue={props.setResume}
       />

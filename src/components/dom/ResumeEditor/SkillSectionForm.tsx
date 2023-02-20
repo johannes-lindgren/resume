@@ -31,7 +31,7 @@ export const SkillSectionForm: FunctionComponent<{
       sx={{ bgColor: 'background.paper' }}
     >
       <PropTextEditor
-        propName={'header'}
+        propName="header"
         value={props.section}
         setValue={props.setSection}
         inputProps={{ sx: { typography: 'h2' } }}
@@ -83,7 +83,7 @@ export const SkillCategoryForm: FunctionComponent<{
   <Stack>
     <PropTextEditor
       placeholder="Skill Category"
-      propName={'header'}
+      propName="header"
       value={props.skillCategory}
       setValue={props.setSkillCategory}
       inputProps={{ sx: { typography: 'subtitle1' } }}
