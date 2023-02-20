@@ -9,7 +9,7 @@ import {
   Stack,
   TextField,
 } from '@mui/material'
-import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
+import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { arraySetter } from '@/utils/arraySetter'
 import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
 import { newSkillCategory } from '@/model/defaults'
@@ -30,7 +30,7 @@ export const SkillSectionForm: FunctionComponent<{
       gap={2}
       sx={{ bgColor: 'background.paper' }}
     >
-      <PropTextEditor2
+      <PropTextEditor
         propName={'header'}
         value={props.section}
         setValue={props.setSection}
@@ -81,7 +81,7 @@ export const SkillCategoryForm: FunctionComponent<{
   setSkillCategory: Setter<SkillCategory>
 }> = (props) => (
   <Stack>
-    <PropTextEditor2
+    <PropTextEditor
       placeholder="Skill Category"
       propName={'header'}
       value={props.skillCategory}

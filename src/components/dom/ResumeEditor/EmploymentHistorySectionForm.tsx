@@ -11,7 +11,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
+import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { Box } from '@mui/system'
 import { replaced } from '@/utils/replaced'
 import { AddButton } from '@/components/dom/ResumeEditor/AddButton'
@@ -35,7 +35,7 @@ export const EmploymentHistorySectionForm: FunctionComponent<{
         component={TransitionGroup}
         sx={{ bgColor: 'background.paper' }}
       >
-        <PropTextEditor2
+        <PropTextEditor
           placeholder="Employment History"
           propName={'header'}
           value={section}
@@ -122,7 +122,7 @@ export const EmploymentForm: FunctionComponent<{
     gap={2}
     sx={{ bgColor: 'background.paper' }}
   >
-    <PropTextEditor2
+    <PropTextEditor
       label="Worked as"
       placeholder="Job Title"
       propName={'jobTitle'}
@@ -135,7 +135,7 @@ export const EmploymentForm: FunctionComponent<{
       display="flex"
       gap={2}
     >
-      <PropTextEditor2
+      <PropTextEditor
         label="at"
         placeholder="Employer"
         propName={'employer'}
@@ -144,7 +144,7 @@ export const EmploymentForm: FunctionComponent<{
         variant="filled"
         fullWidth
       />
-      <PropTextEditor2
+      <PropTextEditor
         label="in"
         placeholder="Location"
         propName={'location'}
@@ -158,7 +158,7 @@ export const EmploymentForm: FunctionComponent<{
       display="flex"
       gap={2}
     >
-      <PropTextEditor2
+      <PropTextEditor
         label="from"
         placeholder="Start Date"
         propName={'startDate'}
@@ -167,7 +167,7 @@ export const EmploymentForm: FunctionComponent<{
         variant="filled"
         fullWidth
       />
-      <PropTextEditor2
+      <PropTextEditor
         label="to"
         placeholder="End Date"
         propName={'endDate'}

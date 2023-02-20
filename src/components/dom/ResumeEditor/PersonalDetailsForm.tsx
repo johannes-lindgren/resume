@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { Resume } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
 import { Box, Stack } from '@mui/material'
-import { PropTextEditor2 } from '@/components/dom/ResumeEditor/PropTextEditor'
+import { PropTextEditor } from '@/components/dom/ResumeEditor/PropTextEditor'
 import { ImageForm } from '@/components/dom/ResumeEditor/ImageForm'
 
 export const PersonalDetailsForm: FunctionComponent<{
@@ -25,7 +25,7 @@ export const PersonalDetailsForm: FunctionComponent<{
         }
       />
       <Stack>
-        <PropTextEditor2
+        <PropTextEditor
           // label="Name"
           placeholder="Full name"
           propName={'name'}
@@ -33,7 +33,7 @@ export const PersonalDetailsForm: FunctionComponent<{
           setValue={props.setResume}
           inputProps={{ sx: { typography: 'h1' } }}
         />
-        <PropTextEditor2
+        <PropTextEditor
           // label="Job Title"
           placeholder="Job title"
           propName={'jobTitle'}
@@ -44,28 +44,28 @@ export const PersonalDetailsForm: FunctionComponent<{
       </Stack>
     </Box>
     <Stack gap={2}>
-      <PropTextEditor2
+      <PropTextEditor
         variant="filled"
         label="Country"
         propName={'location'}
         value={props.resume}
         setValue={props.setResume}
       />
-      <PropTextEditor2
+      <PropTextEditor
         variant="filled"
         label="Nationality"
         propName={'nationality'}
         value={props.resume}
         setValue={props.setResume}
       />
-      <PropTextEditor2
+      <PropTextEditor
         variant="filled"
         label="Email Address"
         propName={'emailAddress'}
         value={props.resume}
         setValue={props.setResume}
       />
-      <PropTextEditor2
+      <PropTextEditor
         variant="filled"
         label="Phone Number"
         propName={'phoneNumber'}

@@ -2,7 +2,7 @@ import { TextField } from '@mui/material'
 import { Setter } from '@/utils/Setter'
 import { TextFieldProps } from '@mui/material/TextField/TextField'
 
-export const PropTextEditor2 = <T,>(
+export const PropTextEditor = <T,>(
   props: {
     value: T
     propName: keyof T
