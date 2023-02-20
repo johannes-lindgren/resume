@@ -1,9 +1,17 @@
 import { Children, FunctionComponent, ReactNode } from 'react'
 import { useTrail } from '@react-spring/core'
-import { Box, BoxProps, Skeleton, Typography } from '@mui/material'
+import {
+  Box,
+  BoxProps,
+  Skeleton,
+  styled,
+  StyledComponentProps,
+  Typography,
+} from '@mui/material'
 import { Embossed } from '@/components/dom/Embossed'
 import { AnimatedProps } from '@react-spring/web/dist/declarations/src/animated'
 import { AnimatedBox } from '@/components/dom/AnimatedBox'
+import { animated } from '@react-spring/web'
 
 const Trail: FunctionComponent<{ children?: ReactNode }> = ({ children }) => {
   const items = Children.toArray(children)
@@ -35,27 +43,25 @@ const Trail: FunctionComponent<{ children?: ReactNode }> = ({ children }) => {
   )
 }
 
+const Root = animated(
+  styled(Box)(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    gap: theme.spacing(1),
+  })),
+)
+
 export const MockResume: FunctionComponent<AnimatedProps<BoxProps>> = (
   props,
 ) => {
   return (
-    <AnimatedBox
-      sx={{
-        width: 300,
-        height: 400,
-        bgcolor: 'background.paper',
-        // border: (theme) => `1px solid ${theme.palette.divider}`,
-        boxShadow: 1,
-        borderRadius: 2,
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        py: 3,
-        px: 4,
-        gap: 1,
-      }}
-      {...props}
-    >
+    <Root {...props}>
       <Trail>
         <MockHeader />
         <Typography variant="caption">
@@ -83,7 +89,7 @@ export const MockResume: FunctionComponent<AnimatedProps<BoxProps>> = (
           <Skeleton />
         </Typography>
       </Trail>
-    </AnimatedBox>
+    </Root>
   )
 }
 const MockHeader: FunctionComponent = () => (

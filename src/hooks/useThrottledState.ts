@@ -7,7 +7,7 @@ import {
   saveToLocalStorage,
 } from '@/localStorage'
 
-export type ResumeAppState =
+export type AppState =
   | {
       type: 'loading'
       resume: undefined
@@ -37,7 +37,7 @@ export type Actions =
       type: 'saveResume'
     }
 
-const reducer: Reducer<ResumeAppState, Actions> = (prevState, action) => {
+const reducer: Reducer<AppState, Actions> = (prevState, action) => {
   switch (action.type) {
     case 'unsetResume':
       return {
@@ -62,7 +62,7 @@ const reducer: Reducer<ResumeAppState, Actions> = (prevState, action) => {
   }
 }
 
-export type AllResumeActions = {
+export type AppActions = {
   setResume: Setter<Resume>
   newResume: (resume: Resume) => void
   removeResume: () => void
@@ -70,12 +70,8 @@ export type AllResumeActions = {
 
 export const useResumeApp = (
   throttleDelayMs: number,
-): [ResumeAppState, AllResumeActions] => {
-  // const [state, dispatch] = useReducer(reducer, {
-  //   type: 'loading',
-  //   resume: undefined,
-  // })
-  const [state, setState] = useState<ResumeAppState>({
+): [AppState, AppActions] => {
+  const [state, setState] = useState<AppState>({
     type: 'loading',
     resume: undefined,
   })

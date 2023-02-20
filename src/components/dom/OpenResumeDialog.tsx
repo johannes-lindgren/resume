@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { AllResumeActions } from '@/hooks/useThrottledState'
+import { AppActions } from '@/hooks/useThrottledState'
 import { Resume } from '@/model/resume'
 import {
   Button,
@@ -14,7 +14,7 @@ import { OpenObjectInput } from '@/components/dom/OpenObjectInput'
 
 export const OpenResumeDialog: FunctionComponent<
   { open: boolean; setOpen: (open: boolean) => void } & Pick<
-    AllResumeActions,
+    AppActions,
     'newResume'
   >
 > = (props) => {

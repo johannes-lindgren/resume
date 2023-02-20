@@ -1,17 +1,18 @@
-import { useResumeApp } from '@/hooks/useThrottledState'
 import { ResumeEditor } from '@/components/dom/ResumeEditor'
-import { LandingPage } from '@/components/dom/LandingPage'
+import { NextPage } from 'next'
+import { ResumeAppProps } from '@/pages/index'
+import { useRouter } from 'next/router'
 
-// splendidresume.com
-
-export const ResumeApp = () => {
-  const [state, actions] = useResumeApp(1500)
+export const EditorPage: NextPage<ResumeAppProps> = (props) => {
+  const { state, actions } = props
+  const { push } = useRouter()
 
   switch (state.type) {
     case 'loading':
       return <></>
     case 'uninitialized':
-      return <LandingPage newResume={actions.newResume} />
+      void push('/')
+      return <></>
     default:
       return (
         <ResumeEditor
@@ -24,3 +25,5 @@ export const ResumeApp = () => {
       )
   }
 }
+
+export default EditorPage

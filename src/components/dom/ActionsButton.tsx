@@ -5,7 +5,7 @@ import {
   useState,
 } from 'react'
 import { Resume } from '@/model/resume'
-import { AllResumeActions } from '@/hooks/useThrottledState'
+import { AppActions } from '@/hooks/useThrottledState'
 import { useSaveObject } from '@/components/dom/DownloadResumeButton'
 import {
   Button,
@@ -31,7 +31,7 @@ export const ActionsButton: FunctionComponent<
   {
     resume: Resume
     resumeDocument: ReactElement<ReactPDF.DocumentProps>
-  } & Pick<AllResumeActions, 'removeResume' | 'newResume'>
+  } & Pick<AppActions, 'removeResume' | 'newResume'>
 > = (props) => {
   const { resumeDocument } = props
 

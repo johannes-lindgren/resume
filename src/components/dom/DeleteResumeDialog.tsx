@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { AllResumeActions } from '@/hooks/useThrottledState'
+import { AppActions } from '@/hooks/useThrottledState'
 import {
   Button,
   Dialog,
@@ -12,7 +12,7 @@ import { DeleteOutlined } from '@mui/icons-material'
 
 export const DeleteResumeDialog: FunctionComponent<
   { open: boolean; setOpen: (open: boolean) => void } & Pick<
-    AllResumeActions,
+    AppActions,
     'removeResume'
   >
 > = (props) => {

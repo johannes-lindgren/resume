@@ -4,17 +4,17 @@ import { Resume } from '@/model/resume'
 import {
   AppBar,
   Box,
+  ButtonBase,
   Fab,
   FabProps,
   Stack,
   styled,
   Toolbar,
-  Typography,
   Zoom,
 } from '@mui/material'
 import { ResumeForm } from '@/components/dom/ResumeForm'
 import { ResumePreview } from '@/components/dom/ResumePreview'
-import { AllResumeActions, useThrottledState } from '@/hooks/useThrottledState'
+import { AppActions, useThrottledState } from '@/hooks/useThrottledState'
 import { ResumeAppFooter } from '@/components/dom/ResumeAppFooter'
 import { ModeEdit, Visibility } from '@mui/icons-material'
 import { Setter } from '@/utils/Setter'
@@ -25,6 +25,7 @@ import { PdfResumeDocument } from '@/resume-view/PdfResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
 import { tangerine400 } from '@/fonts/tangerine'
 import ReactPDF from '@react-pdf/renderer'
+import Link from 'next/link'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -77,7 +78,7 @@ type SmallScreenView = 'preview' | 'form'
 type EditorProps = {
   resume: Resume
   saved: boolean
-} & Pick<AllResumeActions, 'setResume' | 'removeResume' | 'newResume'>
+} & Pick<AppActions, 'setResume' | 'removeResume' | 'newResume'>
 
 export const ResumeEditor: FunctionComponent<EditorProps> = (props) => {
   const { resume, setResume } = props
@@ -204,17 +205,20 @@ export const EditorAppBar: FunctionComponent<
       position="sticky"
     >
       <Toolbar sx={{ gap: 2 }}>
-        <Typography
-          variant="h1"
-          noWrap
-          component="div"
+        <ButtonBase
+          component={Link}
+          href="/"
           sx={{
+            typography: 'h1',
             ...tangerine400.style,
             transform: 'skew(0deg, -5deg)',
+            textDecoration: 'none',
+            color: 'secondary.main',
+            whiteSpace: 'nowrap',
           }}
         >
           Splendid Resume
-        </Typography>
+        </ButtonBase>
         <Box flex={1} />
         <PreviewTargetSwitch
           previewTarget={previewTarget}
