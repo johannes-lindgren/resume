@@ -41,7 +41,7 @@ export const ImageForm: FunctionComponent<
     setImage: Setter<string | undefined>
   } & BoxProps<'img'>
 > = (props) => {
-  const { image, setImage } = props
+  const { image, setImage, ...boxProps } = props
   const handleFile = useCallback(
     (file: File) => {
       const reader = new FileReader()
@@ -78,7 +78,7 @@ export const ImageForm: FunctionComponent<
               height: '100%',
               objectFit: 'cover',
             }}
-            {...props}
+            {...boxProps}
           />
         ) : (
           <AddAPhotoRounded />
