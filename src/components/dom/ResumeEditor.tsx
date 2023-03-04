@@ -26,6 +26,7 @@ import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate
 import { tangerine400 } from '@/fonts/tangerine'
 import ReactPDF from '@react-pdf/renderer'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Split = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -209,15 +210,29 @@ export const EditorAppBar: FunctionComponent<
           component={Link}
           href="/"
           sx={{
-            typography: 'h1',
-            ...tangerine400.style,
-            transform: 'skew(0deg, -5deg)',
-            textDecoration: 'none',
-            color: 'secondary.main',
-            whiteSpace: 'nowrap',
+            display: 'flex',
+            gap: 1,
           }}
         >
-          Splendid Resume
+          <Image
+            src="/apple-touch-icon.png"
+            alt="icon"
+            width={48}
+            height={48}
+          />
+          <Box
+            component="span"
+            sx={{
+              typography: 'h1',
+              ...tangerine400.style,
+              transform: 'skew(0deg, -5deg)',
+              textDecoration: 'none',
+              color: 'secondary.main',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Splendid Resume
+          </Box>
         </ButtonBase>
         <Box flex={1} />
         <PreviewTargetSwitch
