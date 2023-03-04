@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import { FunctionComponent, ReactNode } from 'react'
+import { FunctionComponent } from 'react'
 import { AppActions, AppState } from '@/hooks/useThrottledState'
 import {
   Box,
@@ -8,16 +8,10 @@ import {
   Grow,
   Stack,
   styled,
-  SxProps,
   Typography,
 } from '@mui/material'
 import { Embossed } from '@/components/dom/Embossed'
-import {
-  Edit,
-  NavigateNext,
-  NoteAddRounded,
-  TagFacesOutlined,
-} from '@mui/icons-material'
+import { NavigateNext, NoteAddRounded } from '@mui/icons-material'
 import { resumeTemplate } from '@/model/defaults'
 import { UploadResumeButton } from '@/components/dom/UploadResumeButton'
 import { MockResume } from '@/components/dom/MockResume'
@@ -137,18 +131,17 @@ const Hero: FunctionComponent<
               gap={2}
             >
               {resume ? (
-                <>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    component="a"
-                    href="/editor"
-                    endIcon={<NavigateNext />}
-                  >
-                    Continue editing
-                  </Button>
-                </>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  component="a"
+                  href="/editor"
+                  disableElevation={false}
+                  endIcon={<NavigateNext />}
+                >
+                  Continue editing
+                </Button>
               ) : (
                 <>
                   <Button
