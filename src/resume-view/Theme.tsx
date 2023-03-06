@@ -33,7 +33,7 @@ export type Palette = {
 const exponentialSpacing = (size: number) =>
   Math.floor(Math.pow(4, (size + 1) / 2))
 
-const bodySize = 12
+const bodySize = 10
 
 const headerWeight = 400
 const bodyWeight = 300
