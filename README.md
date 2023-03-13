@@ -1,2 +1,5 @@
-# resume
-Create your beautiful resume for free
+# Splendid Resume
+
+Create your resume for free
+
+https://splendid-resume.vercel.app/
