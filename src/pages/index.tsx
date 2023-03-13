@@ -22,8 +22,6 @@ import { useRouter } from 'next/router'
 import { Resume } from '@/model/resume'
 import { DomResume } from '@/resume-view/DomResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
-import { useSpring } from '@react-spring/core'
-import { animated } from '@react-spring/web'
 
 export const LandingPage: FunctionComponent<
   Pick<AppActions, 'newResume'> & {
@@ -32,24 +30,22 @@ export const LandingPage: FunctionComponent<
 > = (props) => {
   const { newResume, resume } = props
   return (
-    <Box>
-      <Stack
-        gap={6}
-        justifyContent="space-between"
-        sx={{
-          minHeight: '100vh',
-          pb: 5,
-          maxWidth: 'xs',
-          typography: 'h1',
-        }}
-      >
-        <Hero
-          newResume={newResume}
-          resume={resume}
-        />
-        <ResumeAppFooter />
-      </Stack>
-    </Box>
+    <Stack
+      gap={6}
+      justifyContent="space-between"
+      sx={{
+        minHeight: '100vh',
+        pb: 5,
+        maxWidth: 'xs',
+        typography: 'h1',
+      }}
+    >
+      <Hero
+        newResume={newResume}
+        resume={resume}
+      />
+      <ResumeAppFooter />
+    </Stack>
   )
 }
 
@@ -79,7 +75,10 @@ const Hero: FunctionComponent<
         <Stack
           gap={5}
           sx={{
-            pt: 10,
+            pt: {
+              xs: 10,
+              md: 20,
+            },
             pb: 20,
           }}
         >
@@ -116,19 +115,16 @@ const Hero: FunctionComponent<
                 Write a simple – yet illuminating – resume that recruiters and
                 hiring managers love to read.
               </Typography>
-              <Typography
-                display="inline-flex"
-                alignItems="center"
-                sx={{
-                  ml: 2,
-                }}
-              >
-                &mdash; Oh, and it&apos;s free.
-              </Typography>
             </Stack>
             <Box
-              display="flex"
-              gap={2}
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: {
+                  xs: 'center',
+                  md: 'flex-start',
+                },
+              }}
             >
               {resume ? (
                 <Button
@@ -193,42 +189,18 @@ const Hero: FunctionComponent<
   )
 }
 
-const AnimatedDomResume = animated(DomResume)
-
 const PreviewResume: FunctionComponent<{
   resume: Resume
-}> = ({ resume }) => {
-  const styles = useSpring({
-    config: {
-      tension: 0.2,
-      damping: 0,
-      friction: 0,
-    },
-    from: {
-      top: 0,
-    },
-    to: [
-      {
-        top: -200,
-      },
-      {
-        top: 0,
-      },
-    ],
-    loop: true,
-  })
-  return (
-    <AnimatedDomResume
-      style={styles}
-      sx={{
-        position: 'relative',
-        height: '100%',
-      }}
-    >
-      <DefaultTemplate resume={resume} />
-    </AnimatedDomResume>
-  )
-}
+}> = ({ resume }) => (
+  <DomResume
+    sx={{
+      position: 'relative',
+      height: '100%',
+    }}
+  >
+    <DefaultTemplate resume={resume} />
+  </DomResume>
+)
 
 const A4Paper = styled(Box)(({ theme }) => ({
   width: 300,
