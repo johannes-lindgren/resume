@@ -1,4 +1,4 @@
-import { FunctionComponent, memo, useCallback } from 'react'
+import { FunctionComponent, memo, ReactNode, useCallback } from 'react'
 import { Employment, EmploymentHistorySection } from '@/model/resume'
 import { Setter } from '@/utils/Setter'
 import {
@@ -22,6 +22,7 @@ import { uid } from '@/utils/uid'
 import { Rearrangeable } from '@/components/dom/Rearrangable'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { TransitionGroup } from 'react-transition-group'
+import { employmentHeaderText } from '@/resume-view/templates/default/EmploymentView/employmentHeaderText'
 
 export const EmploymentHistorySectionForm: FunctionComponent<{
   section: EmploymentHistorySection
@@ -96,7 +97,7 @@ const RearrangeableEmploymentForm: FunctionComponent<
       >
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Stack>
-            <Typography>{employment.jobTitle}&nbsp;</Typography>
+            <Typography>{employmentHeaderText(employment)}</Typography>
             <Typography
               variant="body2"
               sx={{ color: 'text.secondary' }}
@@ -188,53 +189,82 @@ export const EmploymentForm: FunctionComponent<{
       >
         Achievements
       </Typography>
-      <Stack
-        component="ul"
-        gap={1}
+      <Flipper
+        flipKey={props.employment.achievements.map((it) => it.uid).join(',')}
       >
-        {props.employment.achievements.map((achievement, index) => (
-          <Box
-            component="li"
-            key={index}
+        <TransitionAchievmentsStack>
+          {props.employment.achievements.map((achievement) => (
+            <Collapse key={achievement.uid}>
+              <Flipped flipId={achievement.uid}>
+                <Rearrangeable
+                  setParent={props.setEmployment}
+                  parent={props.employment}
+                  propName="achievements"
+                  current={achievement}
+                >
+                  <Box component="li">
+                    <InputBase
+                      value={achievement.description}
+                      placeholder="The value I brought, and how I achieved it."
+                      onChange={({ target }) =>
+                        props.setEmployment((employment) => ({
+                          ...employment,
+                          achievements: replaced(
+                            employment.achievements,
+                            ({ uid }) => achievement.uid === uid,
+                            {
+                              uid: achievement.uid,
+                              description: target.value,
+                            },
+                          ),
+                        }))
+                      }
+                      multiline
+                      fullWidth
+                    />
+                  </Box>
+                </Rearrangeable>
+              </Flipped>
+            </Collapse>
+          ))}
+          <AddButton
+            onClick={() =>
+              props.setEmployment((employment) => ({
+                ...employment,
+                achievements: [
+                  ...employment.achievements,
+                  {
+                    uid: uid(),
+                    description: '',
+                  },
+                ],
+              }))
+            }
           >
-            <InputBase
-              value={achievement.description}
-              placeholder="The value I brought, and how I achieved it."
-              onChange={({ target }) =>
-                props.setEmployment((employment) => ({
-                  ...employment,
-                  achievements: replaced(
-                    employment.achievements,
-                    ({ uid }) => achievement.uid === uid,
-                    {
-                      uid: achievement.uid,
-                      description: target.value,
-                    },
-                  ),
-                }))
-              }
-              multiline
-              fullWidth
-            />
-          </Box>
-        ))}
-        <AddButton
-          onClick={() =>
-            props.setEmployment((employment) => ({
-              ...employment,
-              achievements: [
-                ...employment.achievements,
-                {
-                  uid: uid(),
-                  description: '',
-                },
-              ],
-            }))
-          }
-        >
-          Add one more achievement
-        </AddButton>
-      </Stack>
+            Add one more achievement
+          </AddButton>
+        </TransitionAchievmentsStack>
+      </Flipper>
     </Stack>
   </Stack>
 ))
+
+const TransitionAchievmentsStack: FunctionComponent<{
+  children?: ReactNode
+}> = (props) => (
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  <TransitionGroup component={AchievmentsStack}>
+    {props.children}
+  </TransitionGroup>
+)
+
+const AchievmentsStack: FunctionComponent<{
+  children?: ReactNode
+}> = (props) => (
+  <Stack
+    component="ul"
+    gap={1}
+    {...props}
+  />
+)
