@@ -3,7 +3,7 @@ import { EmploymentHistorySection } from '@/model/resume'
 import { Style, Text } from '@/resume-view/primitives'
 import { Stack } from '@/resume-view/base-components'
 import { defaultTheme } from '@/resume-view/Theme'
-import { EmploymentView } from '@/resume-view/templates/default/EmploymentView'
+import { EmploymentView } from '@/resume-view/templates/default/EmploymentView/EmploymentView'
 
 export const EmploymentHistorySectionView: FunctionComponent<{
   section: EmploymentHistorySection
@@ -23,14 +23,14 @@ export const EmploymentHistorySectionView: FunctionComponent<{
       {props.section.employments.slice(0, 1).map((employment, index) => (
         <EmploymentView
           key={index}
-          emloyment={employment}
+          employment={employment}
         />
       ))}
     </Stack>
     {props.section.employments.slice(1).map((employment, index) => (
       <EmploymentView
         key={index}
-        emloyment={employment}
+        employment={employment}
       />
     ))}
   </Stack>
