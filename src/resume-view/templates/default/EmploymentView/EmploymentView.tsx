@@ -43,17 +43,22 @@ export const EmploymentView: FunctionComponent<{
         />
       </Stack>
       <Stack gap={1}>
-        {props.employment.achievements.map((achievement) => (
-          <View
-            key={achievement.uid}
-            style={{
-              flexDirection: 'row',
-            }}
-          >
-            <Text>•</Text>
-            <Text style={styles.achievement}>{achievement.description}</Text>
-          </View>
-        ))}
+        {props.employment.achievements.map(
+          (achievement) =>
+            achievement.description !== '' && (
+              <View
+                key={achievement.uid}
+                style={{
+                  flexDirection: 'row',
+                }}
+              >
+                <Text>•</Text>
+                <Text style={styles.achievement}>
+                  {achievement.description}
+                </Text>
+              </View>
+            ),
+        )}
       </Stack>
     </Stack>
   )
