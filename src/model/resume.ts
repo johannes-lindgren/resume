@@ -48,7 +48,7 @@ export type Skill = {
 
 export type Employment = {
   uid: string
-  employer?: string
+  employer: string
   jobTitle: string
   location: string
   startDate: string
