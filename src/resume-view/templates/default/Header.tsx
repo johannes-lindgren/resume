@@ -33,18 +33,23 @@ const styles = createStyles({
 
 export const Header: FunctionComponent<{
   resume: Resume
-}> = (props) => (
-  <View style={styles.root}>
-    {props.resume.image && (
-      <Image
-        src={props.resume.image}
-        style={styles.image}
-      />
-    )}
-    <View style={styles.textSection}>
-      <Text style={styles.name}>{props.resume.name}</Text>
-      <Text style={styles.title}>{props.resume.jobTitle}</Text>
+}> = (props) => {
+  const {
+    resume: { name, jobTitle, image },
+  } = props
+  return (
+    <View style={styles.root}>
+      {image && (
+        <Image
+          src={image}
+          style={styles.image}
+        />
+      )}
+      <View style={styles.textSection}>
+        {name && <Text style={styles.name}>{name}</Text>}
+        {jobTitle && <Text style={styles.title}>{jobTitle}</Text>}
+      </View>
+      <ContactDetailsView resume={props.resume} />
     </View>
-    <ContactDetailsView resume={props.resume} />
-  </View>
-)
+  )
+}
