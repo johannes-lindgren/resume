@@ -7,15 +7,20 @@ import { Style, Text } from '@/resume-view/primitives'
 export const DetailsSectionView: FunctionComponent<{
   section: DetailsSection
   style?: Style | undefined
-}> = (props) => (
-  <Stack
-    style={props.style}
-    gap={3}
-    wrap={false}
-  >
-    <Text style={{ ...defaultTheme.typography.header2 }}>
-      {props.section.header}
-    </Text>
-    <Text>{props.section.description}</Text>
-  </Stack>
-)
+}> = (props) => {
+  const {
+    section: { header, description },
+  } = props
+  return (
+    <Stack
+      style={props.style}
+      gap={3}
+      wrap={false}
+    >
+      {header && (
+        <Text style={{ ...defaultTheme.typography.header2 }}>{header}</Text>
+      )}
+      {description && <Text>{description}</Text>}
+    </Stack>
+  )
+}

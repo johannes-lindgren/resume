@@ -46,18 +46,18 @@ export const PersonalDetailsForm: FunctionComponent<{
     <Stack gap={2}>
       <PropTextEditor
         variant="filled"
-        label="Country"
+        label="Location"
         propName="location"
         value={props.resume}
         setValue={props.setResume}
       />
-      <PropTextEditor
-        variant="filled"
-        label="Nationality"
-        propName="nationality"
-        value={props.resume}
-        setValue={props.setResume}
-      />
+      {/*<PropTextEditor*/}
+      {/*  variant="filled"*/}
+      {/*  label="Nationality"*/}
+      {/*  propName="nationality"*/}
+      {/*  value={props.resume}*/}
+      {/*  setValue={props.setResume}*/}
+      {/*/>*/}
       <PropTextEditor
         variant="filled"
         label="Email Address"

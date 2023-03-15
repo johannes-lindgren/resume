@@ -25,6 +25,9 @@ export const EmploymentView: FunctionComponent<{
   style?: Style | undefined
 }> = (props) => {
   const { employment } = props
+  const achievements = employment.achievements.filter(
+    ({ description }) => description !== '',
+  )
   return (
     <Stack
       style={props.style}
@@ -42,19 +45,21 @@ export const EmploymentView: FunctionComponent<{
           endDate={employment.endDate}
         />
       </Stack>
-      <Stack gap={1}>
-        {props.employment.achievements.map((achievement) => (
-          <View
-            key={achievement.uid}
-            style={{
-              flexDirection: 'row',
-            }}
-          >
-            <Text>•</Text>
-            <Text style={styles.achievement}>{achievement.description}</Text>
-          </View>
-        ))}
-      </Stack>
+      {achievements.length > 0 && (
+        <Stack gap={1}>
+          {achievements.map((achievement) => (
+            <View
+              key={achievement.uid}
+              style={{
+                flexDirection: 'row',
+              }}
+            >
+              <Text>•</Text>
+              <Text style={styles.achievement}>{achievement.description}</Text>
+            </View>
+          ))}
+        </Stack>
+      )}
     </Stack>
   )
 }

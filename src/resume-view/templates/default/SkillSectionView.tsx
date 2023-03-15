@@ -21,9 +21,11 @@ export const SkillSectionView: FunctionComponent<{
       wrap={false}
       gap={3}
     >
-      <Text style={{ ...defaultTheme.typography.header2 }}>
-        {props.section.header}
-      </Text>
+      {props.section.header && (
+        <Text style={{ ...defaultTheme.typography.header2 }}>
+          {props.section.header}
+        </Text>
+      )}
       {props.section.skillCategories.slice(0, 1).map((skillCategory, index) => (
         <SkillCategoryView
           key={index}
@@ -47,18 +49,22 @@ export const SkillCategoryView: FunctionComponent<{
     gap={2}
     wrap={false}
   >
-    <Text style={{ ...defaultTheme.typography.header3 }}>
-      {skillCategory.header}
-    </Text>
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-      {skillCategory.skills.map((skill) => (
-        <Text
-          key={skill.uid}
-          style={{ marginRight: defaultTheme.spacing(2) }}
-        >
-          {skill.label}
-        </Text>
-      ))}
-    </View>
+    {skillCategory.header && (
+      <Text style={{ ...defaultTheme.typography.header3 }}>
+        {skillCategory.header}
+      </Text>
+    )}
+    {skillCategory.skills.length > 0 && (
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        {skillCategory.skills.map((skill) => (
+          <Text
+            key={skill.uid}
+            style={{ marginRight: defaultTheme.spacing(2) }}
+          >
+            {skill.label}
+          </Text>
+        ))}
+      </View>
+    )}
   </Stack>
 )

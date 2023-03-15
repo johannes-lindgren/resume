@@ -6,18 +6,22 @@ import { Link, Text } from '@/resume-view/primitives'
 
 export const ContactDetailsView: FunctionComponent<{
   resume: Resume
-}> = (props) => (
-  <Stack
-    style={defaultTheme.typography.caption}
-    wrap={false}
-  >
-    {/*<Text style={{...theme.typography.header2}}>Contact Details</Text>*/}
-    <Link src={`mailto:${props.resume.emailAddress}`}>
-      <Text style={defaultTheme.typography.link}>
-        {props.resume.emailAddress}
-      </Text>
-    </Link>
-    <Text>{props.resume.phoneNumber}</Text>
-    <Text>{props.resume.location}</Text>
-  </Stack>
-)
+}> = (props) => {
+  const {
+    resume: { emailAddress, phoneNumber, location },
+  } = props
+  return (
+    <Stack
+      style={defaultTheme.typography.caption}
+      wrap={false}
+    >
+      {emailAddress && (
+        <Link src={`mailto:${emailAddress}`}>
+          <Text style={defaultTheme.typography.link}>{emailAddress}</Text>
+        </Link>
+      )}
+      {phoneNumber && <Text>{phoneNumber}</Text>}
+      {location && <Text>{location}</Text>}
+    </Stack>
+  )
+}
