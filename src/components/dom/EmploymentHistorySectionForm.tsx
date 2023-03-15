@@ -126,6 +126,7 @@ export const EmploymentForm: FunctionComponent<{
   >
     <PropTextEditor
       label="Worked as"
+      required
       placeholder="Job Title"
       propName="jobTitle"
       value={props.employment}
@@ -164,6 +165,7 @@ export const EmploymentForm: FunctionComponent<{
         label="from"
         placeholder="Start Date"
         propName="startDate"
+        required
         value={props.employment}
         setValue={props.setEmployment}
         variant="filled"

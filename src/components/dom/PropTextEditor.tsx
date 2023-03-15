@@ -7,11 +7,14 @@ export const PropTextEditor = <T,>(
     value: T
     propName: keyof T
     setValue: Setter<T>
+    required?: boolean
   } & Omit<TextFieldProps, 'value' | 'onChange'>,
 ): JSX.Element => {
-  const { value, setValue, propName, ...textFieldProps } = props
+  const { value, setValue, propName, required, ...textFieldProps } = props
   return (
     <TextField
+      error={required && value[propName] === ''}
+      required={required}
       value={value[propName]}
       onChange={({ target }) =>
         setValue((oldValue) => ({
