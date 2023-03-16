@@ -1,27 +1,27 @@
 import * as React from 'react'
 import { FunctionComponent, ReactNode } from 'react'
-import { domStyles, pdfStyles, Style } from '@/resume-view/primitives/Styles'
 import { useResumeTarget } from '@/resume-view/ResumeTargetProvider'
-import { Text as PdfText } from '@react-pdf/renderer'
-
-export const Text: FunctionComponent<{
+import { Page as PdfPage } from '@react-pdf/renderer'
+import { domStyles, pdfStyles, Style } from '@/resume-view/primitives/Styles'
+export const Page: FunctionComponent<{
   children?: ReactNode
   style?: Style
-  render?: (args: { pageNumber: number; totalPages: number }) => ReactNode
+  wrap?: boolean
 }> = (props) => {
-  const { style, children, render } = props
+  const { style, children, wrap } = props
   const target = useResumeTarget()
   if (target === 'pdf') {
     return (
-      <PdfText
+      <PdfPage
+        size="A4"
         style={pdfStyles(style)}
-        render={render}
+        wrap={wrap}
       >
         {children}
-      </PdfText>
+      </PdfPage>
     )
   } else if (target === 'dom') {
-    return <span style={domStyles(style)}>{children}</span>
+    return <div style={domStyles(style)}>{children}</div>
   } else {
     throw new Error(
       'Resume target is undefined. Wrap the resume with PdfResume or DomResume',

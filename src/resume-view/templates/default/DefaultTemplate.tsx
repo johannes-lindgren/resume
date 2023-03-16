@@ -3,8 +3,10 @@ import { Resume } from '@/model/resume'
 import { Stack } from '@/resume-view/base-components'
 import { Header } from '@/resume-view/templates/default/Header'
 import { defaultTheme } from '@/resume-view/Theme'
-import { createStyles, View } from '@/resume-view/primitives'
+import { createStyles } from '@/resume-view/primitives'
 import { SectionView } from '@/resume-view/templates/default/SectionView'
+import { Page } from '@/resume-view/primitives/Page'
+import { PageCount } from '@/resume-view/templates/default/PageCount'
 
 const styles = createStyles({
   page: {
@@ -21,7 +23,7 @@ const styles = createStyles({
 export const DefaultTemplate: FunctionComponent<{
   resume: Resume
 }> = (props) => (
-  <View style={styles.page}>
+  <Page style={styles.page}>
     <Stack gap={4}>
       <Header resume={props.resume} />
       {props.resume.sections.map((section, index) => (
@@ -31,5 +33,6 @@ export const DefaultTemplate: FunctionComponent<{
         />
       ))}
     </Stack>
-  </View>
+    <PageCount />
+  </Page>
 )

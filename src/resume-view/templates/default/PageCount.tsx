@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react'
-import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { defaultTheme } from '@/resume-view/Theme'
+import { createStyles, Text, View } from '@/resume-view/primitives'
 
-const styles = StyleSheet.create({
+const styles = createStyles({
   view: {
     position: 'absolute',
     bottom: 0,
