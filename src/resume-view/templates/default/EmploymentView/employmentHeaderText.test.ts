@@ -57,11 +57,14 @@ describe('employmentHeaderText', () => {
   })
   it('handles only location', () => {
     expect(
-      employmentHeaderText({
-        jobTitle: '',
-        employer: '',
-        location,
-      }),
+      employmentHeaderText(
+        {
+          jobTitle: '',
+          employer: '',
+          location,
+        },
+        defaultLocale,
+      ),
     ).toBe('Cairo')
   })
   it('handles only jobTitle and employer', () => {
