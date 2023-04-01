@@ -5,6 +5,7 @@ import { defaultTheme } from '@/resume-view/Theme'
 import { Stack } from '@/resume-view/base-components'
 import { employmentHeaderText } from '@/resume-view/templates/default/EmploymentView/employmentHeaderText'
 import { employmentSubHeaderText } from '@/resume-view/templates/default/EmploymentView/EmploymentSubHeaderText'
+import { useRouter } from 'next/compat/router'
 
 const styles = createStyles({
   header: {
@@ -66,14 +67,15 @@ export const EmploymentView: FunctionComponent<{
 
 export const EmploymentHeader: FunctionComponent<
   Pick<Employment, 'jobTitle' | 'employer' | 'location'>
-> = (props) =>
-  employmentHeaderText(props) ? (
-    <Text style={styles.header}>{employmentHeaderText(props)}</Text>
-  ) : null
-
+> = (props) => {
+  const router = useRouter()
+  const text = employmentHeaderText(props, router?.locale)
+  return text ? <Text style={styles.header}>{text}</Text> : null
+}
 export const EmploymentSubHeader: FunctionComponent<
   Pick<Employment, 'startDate' | 'endDate'>
-> = (props) =>
-  employmentSubHeaderText(props) ? (
-    <Text style={styles.date}>{employmentSubHeaderText(props)}</Text>
-  ) : null
+> = (props) => {
+  const router = useRouter()
+  const text = employmentSubHeaderText(props, router?.locale)
+  return text ? <Text style={styles.date}>{text}</Text> : null
+}

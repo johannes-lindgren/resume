@@ -1,7 +1,14 @@
 import { Employment } from '@/model/resume'
 
+export const preposition = (locale: string | undefined): string =>
+  ({
+    sv: 'vid',
+    'en-US': 'at',
+  }[locale ?? 'en-US'] ?? preposition('en-US'))
+
 export const employmentHeaderText = (
   employment: Pick<Employment, 'jobTitle' | 'employer' | 'location'>,
+  locale: string | undefined,
 ): string | undefined => {
   const { employer, location, jobTitle } = employment
   if (employer === '' && location === '' && jobTitle === '') {
@@ -14,6 +21,6 @@ export const employmentHeaderText = (
         : employer
       : employer === ''
       ? jobTitle
-      : `${jobTitle} at ${employer}`
+      : `${jobTitle} ${preposition(locale)} ${employer}`
   return start ? (location ? `${start}, ${location}` : start) : location
 }
