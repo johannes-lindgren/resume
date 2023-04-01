@@ -97,7 +97,7 @@ const RearrangeableEmploymentForm: FunctionComponent<
       >
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Stack>
-            <Typography>{employmentHeaderText(employment)}</Typography>
+            <Typography>{employmentHeaderText(employment, 'en-US')}</Typography>
             <Typography
               variant="body2"
               sx={{ color: 'text.secondary' }}

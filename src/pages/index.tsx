@@ -22,6 +22,7 @@ import { useRouter } from 'next/router'
 import { Resume } from '@/model/resume'
 import { DomResume } from '@/resume-view/DomResume'
 import { DefaultTemplate } from '@/resume-view/templates/default/DefaultTemplate'
+import Link from 'next/link'
 
 export const LandingPage: FunctionComponent<
   Pick<AppActions, 'newResume'> & {
@@ -131,7 +132,7 @@ const Hero: FunctionComponent<
                   variant="contained"
                   color="primary"
                   size="large"
-                  component="a"
+                  component={Link}
                   href="/editor"
                   disableElevation={false}
                   endIcon={<NavigateNext />}
