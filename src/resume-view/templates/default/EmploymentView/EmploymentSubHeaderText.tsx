@@ -1,15 +1,16 @@
 import { Employment } from '@/model/resume'
+import { defaultLocale } from '@/resume-view/templates/default/EmploymentView/defaultLocale'
 
 export const until = (locale: string | undefined): string =>
   ({
     sv: 'Fram tills',
     'en-US': 'Until',
-  }[locale ?? 'en-US'] ?? until('en-US'))
+  }[locale ?? defaultLocale] ?? until(defaultLocale))
 export const present = (locale: string | undefined): string =>
   ({
     sv: 'Idag',
     'en-US': 'Present',
-  }[locale ?? 'en-US'] ?? present('en-US'))
+  }[locale ?? defaultLocale] ?? present(defaultLocale))
 
 export const employmentSubHeaderText = (
   employment: Pick<Employment, 'startDate' | 'endDate'>,
