@@ -1,8 +1,4 @@
-export const swap = <T,>(
-  items: T[],
-  indexA: number,
-  indexB: number,
-): T[] => {
+export const swap = <T>(items: T[], indexA: number, indexB: number): T[] => {
   if (
     indexA < 0 ||
     indexB < 0 ||
@@ -19,8 +15,8 @@ export const swap = <T,>(
   const leftIndex = Math.min(indexA, indexB)
   const rightIndex = Math.max(indexA, indexB)
 
-  const leftValue = items[leftIndex] as T
-  const rightValue = items[rightIndex] as T
+  const leftValue = items[leftIndex]
+  const rightValue = items[rightIndex]
 
   return [
     ...items.slice(0, leftIndex),
