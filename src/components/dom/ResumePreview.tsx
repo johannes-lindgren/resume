@@ -13,19 +13,15 @@ export const ResumePreview: FunctionComponent<{
 }> = (props) => {
   const { resume, previewTarget, doc } = props
 
-  return (
-    <>
-      {previewTarget === 'dom' ? (
-        <DomResume
-          sx={{
-            overflow: 'auto',
-          }}
-        >
-          <DefaultTemplate resume={resume} />
-        </DomResume>
-      ) : (
-        <PdfRoot showToolbar={false}>{doc}</PdfRoot>
-      )}
-    </>
+  return previewTarget === 'dom' ? (
+    <DomResume
+      sx={{
+        overflow: 'auto',
+      }}
+    >
+      <DefaultTemplate resume={resume} />
+    </DomResume>
+  ) : (
+    <PdfRoot showToolbar={false}>{doc}</PdfRoot>
   )
 }

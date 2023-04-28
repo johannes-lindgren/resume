@@ -1,10 +1,11 @@
 import { Employment } from '@/model/resume'
+import { defaultLocale } from '@/resume-view/templates/default/EmploymentView/defaultLocale'
 
 export const preposition = (locale: string | undefined): string =>
   ({
     sv: 'vid',
     'en-US': 'at',
-  }[locale ?? 'en-US'] ?? preposition('en-US'))
+  }[locale ?? defaultLocale] ?? preposition(defaultLocale))
 
 export const employmentHeaderText = (
   employment: Pick<Employment, 'jobTitle' | 'employer' | 'location'>,
