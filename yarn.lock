@@ -1091,7 +1091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/system@npm:^5.11.4":
+"@mui/system@npm:5.11.4, @mui/system@npm:^5.11.4":
   version: 5.11.4
   resolution: "@mui/system@npm:5.11.4"
   dependencies:
@@ -1734,6 +1734,15 @@ __metadata:
   dependencies:
     "@types/react": "npm:*"
   checksum: 10c0/839382b66b2b2e3023647f5ba0c382ddc6aa01c1bc9f64608f82bbc871a905ba9b988838619914d8348c2a511717c6bd3701cb866bb9e4abfabdbe544efb695b
+  languageName: node
+  linkType: hard
+
+"@types/react-transition-group@npm:4.4.12":
+  version: 4.4.12
+  resolution: "@types/react-transition-group@npm:4.4.12"
+  peerDependencies:
+    "@types/react": "*"
+  checksum: 10c0/0441b8b47c69312c89ec0760ba477ba1a0808a10ceef8dc1c64b1013ed78517332c30f18681b0ec0b53542731f1ed015169fed1d127cc91222638ed955478ec7
   languageName: node
   linkType: hard
 
@@ -5907,13 +5916,17 @@ __metadata:
     "@fontsource/roboto": "npm:4.5.8"
     "@mui/icons-material": "npm:5.11.0"
     "@mui/material": "npm:5.11.4"
+    "@mui/system": "npm:5.11.4"
     "@next/font": "npm:13.1.6"
     "@react-pdf/renderer": "npm:3.1.1"
+    "@react-pdf/types": "npm:^2.2.0"
+    "@react-spring/core": "npm:~9.6.1"
     "@react-spring/web": "npm:9.6.1"
     "@types/jest": "npm:29.0.3"
     "@types/node": "npm:18.11.18"
     "@types/react": "npm:18.0.26"
     "@types/react-dom": "npm:18.0.10"
+    "@types/react-transition-group": "npm:4.4.12"
     "@typescript-eslint/eslint-plugin": "npm:5.50.0"
     "@typescript-eslint/parser": "npm:5.50.0"
     eslint: "npm:8.31.0"

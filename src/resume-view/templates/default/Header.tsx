@@ -33,7 +33,9 @@ const styles = createStyles({
     ...defaultTheme.typography.header1,
     fontSize: defaultTheme.typography.header1.fontSize
       ?.toString()
-      .replace(/^(-?\d+\.?\d*)/, (_, n) => String(Math.round(Number(n) * 1.4))),
+      .replace(/^(-?\d+\.?\d*)/, (_, n: unknown) =>
+        String(Math.round(Number(n) * 1.4)),
+      ),
   },
   title: {
     ...defaultTheme.typography.body,
