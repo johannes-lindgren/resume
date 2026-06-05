@@ -1,3 +1,7 @@
+export type ResumeTemplate = {
+  imageSize: 'small' | 'large'
+}
+
 export type Resume = {
   image: string | undefined
   name: string
@@ -7,6 +11,7 @@ export type Resume = {
   emailAddress: string
   phoneNumber: string
   sections: ResumeSection[]
+  template?: ResumeTemplate
 }
 
 export type ResumeSection =

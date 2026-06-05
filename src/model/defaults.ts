@@ -3,10 +3,15 @@ import {
   Employment,
   EmploymentHistorySection,
   Resume,
+  ResumeTemplate,
   SkillCategory,
   SkillSection,
 } from '@/model/resume'
 import { uid } from '@/utils/uid'
+
+export const defaultTemplate = (): ResumeTemplate => ({
+  imageSize: 'small',
+})
 
 export const newSkillCategory = (): SkillCategory => ({
   // TODO generate
@@ -24,6 +29,7 @@ export const blankResume = (): Resume => ({
   phoneNumber: '',
   nationality: '',
   sections: [],
+  template: defaultTemplate(),
 })
 
 export const resumeTemplate = (): Resume => ({
@@ -34,6 +40,7 @@ export const resumeTemplate = (): Resume => ({
   location: '',
   phoneNumber: '',
   nationality: '',
+  template: defaultTemplate(),
   sections: [
     {
       uid: uid(),

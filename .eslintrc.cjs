@@ -1,14 +1,7 @@
 module.exports = {
   root: true,
-  extends: [
-    'next/core-web-vitals',
-    'next',
-    'prettier',
-    'eslint:recommended',
-  ],
-  plugins: [
-    'prettier',
-  ],
+  extends: ['next/core-web-vitals', 'next', 'prettier', 'eslint:recommended'],
+  plugins: ['prettier'],
   parser: '@typescript-eslint/parser',
   rules: {
     'prettier/prettier': 'warn',
@@ -26,9 +19,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
-      plugins: [
-        '@typescript-eslint',
-      ],
+      plugins: ['@typescript-eslint'],
       parserOptions: {
         project: ['./tsconfig.json'], // Specify it only for TypeScript files
       },
@@ -36,20 +27,23 @@ module.exports = {
         '@typescript-eslint/restrict-plus-operands': 'error',
         '@typescript-eslint/no-misused-promises': 'off',
         '@typescript-eslint/no-explicit-any': 'error',
-        '@typescript-eslint/no-unused-vars': ['warn', {
-          args: "none",
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_'
-        }],
+        '@typescript-eslint/no-unused-vars': [
+          'warn',
+          {
+            args: 'none',
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^_',
+            caughtErrorsIgnorePattern: '^_',
+          },
+        ],
       },
     },
     {
-      files: ["*.test.ts", '*.test.tsx'],
+      files: ['*.test.ts', '*.test.tsx'],
       env: {
         jest: true,
         node: true,
-      }
-    }
+      },
+    },
   ],
 }
