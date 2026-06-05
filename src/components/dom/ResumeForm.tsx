@@ -18,6 +18,26 @@ import * as React from 'react'
 import { Flipped, Flipper } from 'react-flip-toolkit'
 import { Rearrangeable } from '@/components/dom/Rearrangable'
 import { TransitionGroup } from 'react-transition-group'
+import { TemplateForm } from '@/components/dom/TemplateForm'
+
+const SectionDivider: FunctionComponent<{ label: string }> = ({ label }) => (
+  <Divider>
+    <Box
+      sx={{
+        px: 2,
+        py: 0.5,
+        borderRadius: 99,
+        border: '1px solid',
+        borderColor: 'divider',
+        color: 'text.secondary',
+        typography: 'overline',
+        lineHeight: 1.5,
+      }}
+    >
+      {label}
+    </Box>
+  </Divider>
+)
 
 export const ResumeForm: FunctionComponent<{
   resume: Resume
@@ -29,6 +49,18 @@ export const ResumeForm: FunctionComponent<{
       component={TransitionGroup}
       sx={{ bgColor: 'background.paper' }}
     >
+      <Collapse>
+        <SectionDivider label="Template" />
+      </Collapse>
+      <Collapse>
+        <TemplateForm
+          resume={props.resume}
+          setResume={props.setResume}
+        />
+      </Collapse>
+      <Collapse>
+        <SectionDivider label="Content" />
+      </Collapse>
       <Flipped flipId="personalDetails">
         <PersonalDetailsForm
           resume={props.resume}
