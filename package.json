@@ -2,6 +2,7 @@
   "name": "resume",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@4.14.0",
   "type": "module",
   "engines": {
     "yarn": ">=1.22",
