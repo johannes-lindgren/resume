@@ -13,7 +13,9 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "jest",
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "format": "prettier --write .",
+    "check:format": "prettier --check ."
   },
   "dependencies": {
     "@emotion/cache": "11.10.5",
