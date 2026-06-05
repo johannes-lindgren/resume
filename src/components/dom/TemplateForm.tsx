@@ -54,4 +54,3 @@ export const TemplateForm: FunctionComponent<{
     </Stack>
   )
 }
-

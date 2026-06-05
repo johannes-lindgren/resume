@@ -6,9 +6,8 @@ import { createStyles, View, Image, Text } from '@/resume-view/primitives'
 
 const largeImageWidth = '100px'
 // 3:4 portrait ratio (width:height)
-const largeImageHeight = largeImageWidth.replace(
-  /^(-?\d+\.?\d*)/,
-  (_, n) => String(Math.round((Number(n) * 4) / 3)),
+const largeImageHeight = largeImageWidth.replace(/^(-?\d+\.?\d*)/, (_, n) =>
+  String(Math.round((Number(n) * 4) / 3)),
 )
 
 const imageSizeMap = {

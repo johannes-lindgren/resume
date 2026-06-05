@@ -30,4 +30,3 @@ jobs:
 
       - name: Format check
         run: yarn check:format
-
