@@ -115,6 +115,7 @@ export const useResumeApp = (
   useEffect(() => {
     const storedValue = readFromLocalStorage()
     if (typeof storedValue === 'undefined') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       dispatch({
         type: 'unsetResume',
       })

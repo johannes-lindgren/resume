@@ -2,6 +2,7 @@ import {
   transformToDomUnits,
   transformToPdfUnits,
 } from '@/resume-view/primitives/Styles'
+import { expect, describe, it } from 'vitest'
 
 describe('unit transformation', () => {
   describe('transformToDomUnits', () => {

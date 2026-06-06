@@ -1,4 +1,5 @@
 import { employmentSubHeaderText } from '@/resume-view/templates/default/EmploymentView/EmploymentSubHeaderText'
+import { expect, describe, it } from 'vitest'
 
 const defaultLocale = 'en-US'
 describe('employmentSubHeaderLabel', () => {

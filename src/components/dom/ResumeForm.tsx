@@ -98,6 +98,7 @@ export const RearrangeableSectionForm: FunctionComponent<
 > = (props) => {
   const { resume, setResume, section, ...boxProps } = props
   const setSection = useCallback<Setter<ResumeSection>>(
+    // eslint-disable-next-line react-hooks/use-memo
     arraySetter(section.uid, setResume, 'sections'),
     [section.uid, setResume],
   )
