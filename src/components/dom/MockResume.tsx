@@ -1,13 +1,6 @@
 import { Children, FunctionComponent, ReactNode } from 'react'
 import { useTrail } from '@react-spring/core'
-import {
-  Box,
-  BoxProps,
-  Skeleton,
-  styled,
-  StyledComponentProps,
-  Typography,
-} from '@mui/material'
+import { Box, BoxProps, Skeleton, styled, Typography } from '@mui/material'
 import { Embossed } from '@/components/dom/Embossed'
 import { AnimatedProps } from '@react-spring/web/dist/declarations/src/animated'
 import { AnimatedBox } from '@/components/dom/AnimatedBox'

@@ -24,13 +24,13 @@ import {
 } from '@mui/icons-material'
 import { DeleteResumeDialog } from '@/components/dom/DeleteResumeDialog'
 import { OpenResumeDialog } from '@/components/dom/OpenResumeDialog'
-import ReactPDF from '@react-pdf/renderer'
 import { useDownloadablePdf } from '@/useDownloadablePdf'
+import { DocumentProps } from '@react-pdf/renderer'
 
 export const ActionsButton: FunctionComponent<
   {
     resume: Resume
-    resumeDocument: ReactElement<ReactPDF.DocumentProps>
+    resumeDocument: ReactElement<DocumentProps>
   } & Pick<AppActions, 'removeResume' | 'newResume'>
 > = (props) => {
   const { resumeDocument } = props

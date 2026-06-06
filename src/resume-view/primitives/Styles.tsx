@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Style as PdfStyle } from '@react-pdf/types'
 
-export const createStyles = <T extends Styles | undefined>(styles: T): T =>
-  styles
+export const createStyles = <T extends Styles>(styles: T): T => styles
 export type Styles = Record<string, Style>
 export type Style = {
   // Flexbox
@@ -187,9 +186,6 @@ export const transformUnits = (
   transformUnit: UnitTransformer,
 ): Style =>
   Object.keys(style).reduce((previousValue, currentValue) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument
     previousValue[currentValue] = transformUnit(style[currentValue])
     return previousValue
   }, {} as Style)
@@ -202,9 +198,6 @@ export const pdfStyles = (styles: Style | undefined): PdfStyle | undefined =>
 export const domStyles = (
   styles: Style | undefined,
 ): React.CSSProperties | undefined =>
-  // TODO
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   typeof styles === 'undefined'
     ? styles
     : transformUnits(styles, transformToDomUnits)

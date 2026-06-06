@@ -5,7 +5,7 @@ export const preposition = (locale: string | undefined): string =>
   ({
     sv: 'vid',
     'en-US': 'at',
-  }[locale ?? defaultLocale] ?? preposition(defaultLocale))
+  })[locale ?? defaultLocale] ?? preposition(defaultLocale)
 
 export const employmentHeaderText = (
   employment: Pick<Employment, 'jobTitle' | 'employer' | 'location'>,
@@ -21,7 +21,7 @@ export const employmentHeaderText = (
         ? undefined
         : employer
       : employer === ''
-      ? jobTitle
-      : `${jobTitle} ${preposition(locale)} ${employer}`
+        ? jobTitle
+        : `${jobTitle} ${preposition(locale)} ${employer}`
   return start ? (location ? `${start}, ${location}` : start) : location
 }

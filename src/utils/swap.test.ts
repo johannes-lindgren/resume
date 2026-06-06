@@ -1,4 +1,5 @@
 import { swap } from './swap'
+import { expect, describe, it } from 'vitest'
 
 describe('swap', () => {
   it('does not mutate the input', () => {

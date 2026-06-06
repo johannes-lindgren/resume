@@ -1,4 +1,5 @@
 import { employmentHeaderText } from '@/resume-view/templates/default/EmploymentView/employmentHeaderText'
+import { expect, describe, it } from 'vitest'
 
 const employer = 'Evil Corporation'
 const jobTitle = 'Slave'

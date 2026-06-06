@@ -5,12 +5,12 @@ export const until = (locale: string | undefined): string =>
   ({
     sv: 'Fram tills',
     'en-US': 'Until',
-  }[locale ?? defaultLocale] ?? until(defaultLocale))
+  })[locale ?? defaultLocale] ?? until(defaultLocale)
 export const present = (locale: string | undefined): string =>
   ({
     sv: 'Idag',
     'en-US': 'Present',
-  }[locale ?? defaultLocale] ?? present(defaultLocale))
+  })[locale ?? defaultLocale] ?? present(defaultLocale)
 
 export const employmentSubHeaderText = (
   employment: Pick<Employment, 'startDate' | 'endDate'>,

@@ -80,6 +80,7 @@ const RearrangeableEmploymentForm: FunctionComponent<
 > = (props) => {
   const { employment, section, setSection, ...boxProps } = props
   const setEmployment = useCallback<Setter<Employment>>(
+    // eslint-disable-next-line react-hooks/use-memo
     arraySetter(employment.uid, setSection, 'employments'),
     [employment.uid, setSection],
   )
